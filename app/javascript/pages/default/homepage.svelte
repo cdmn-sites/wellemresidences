@@ -5,8 +5,8 @@
   import Cycler from '~/components/cycler.svelte'
   export let tenant
   export let spina
+  export let categories
   
-  let categories = $store.categories
   let scrollY
   
   let searchLink = `https://direct-book.com/properties/intownresidencesdirect/?locale=${$store.locale}&items[0][infants]=0&currency=EUR&trackPage=yes`
@@ -20,7 +20,7 @@
 <div class="top_image_wrapper">
   <div class="header_image relative">
     <Cycler let:current>
-      {#each spina.gallery.images as img, i}
+      {#each spina.header_images?.images as img, i}
         <img alt={img.alt} class:active={current == i} class="cycle_image w-full min-w-600px bottom-0 absolute left-1/2" src="/rails/active_storage/blobs/{img.signed_blob_id}/{img.filename}" style="transform: translateX(-50%) translateY({scrollY/2}px) scale({1 + scrollY/5000}) " />
       {/each}
       {current}

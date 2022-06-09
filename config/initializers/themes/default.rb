@@ -25,16 +25,17 @@ Spina::Theme.register do |theme|
     {name: 'favicon', title: 'Favicon', part_type: "Spina::Parts::Image"},
     {name: 'tagline1', title: 'Tagline 1', part_type: "Spina::Parts::Line"},
     {name: 'tagline2', title: 'Tagline 2', part_type: "Spina::Parts::Line"},
-    {name: 'gallery', title: 'Gallery', part_type: "Spina::Parts::ImageCollection"},
+    {name: 'header_images', title: 'Header Images', part_type: "Spina::Parts::ImageCollection"},
     {name: 'text',  title: "Body", hint: "Your main content", part_type: "Spina::Parts::Text"}
   ]
   
   # View templates
   # Every page has a svelte template assigned
-  # you can find it in app/javascript/pages/cms/[theme]/*
+  # you can find it in app/javascript/pages/[theme]/*
   # You define which parts you want to enable for every view template
   # by referencing them from the theme.parts configuration above.
   theme.view_templates = [
+    {name: 'homepage', title: 'Homepage'},
     {name: 'show', title: 'Page', parts: %w(text)}
   ]
   
@@ -56,7 +57,7 @@ Spina::Theme.register do |theme|
   # You can create global content that doesn't belong to one specific page. We call these layout parts.
   # You only have to reference the name of the parts you want to have here.
   theme.layout_parts = [
-    'logo', 'tagline1', 'tagline2', 'gallery'
+    'logo', 'tagline1', 'tagline2', 'header_images'
   ]
   
   # Resources (optional)

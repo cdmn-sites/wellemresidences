@@ -2,11 +2,10 @@ class ApplicationController < ActionController::Base
   helper_method :current_tenant
 
   inertia_share do 
-    main_nav = Spina::MenuPresenter.new(Spina::Page.all)
     {
       tenant: current_tenant,
       spina: spina_content,
-      main_nav: main_nav
+      menu: Spina::Navigation.first.navigation_items.map { |i| {path: i.materialized_path, label: i.menu_title}}
     } 
   end
 
@@ -19,6 +18,7 @@ class ApplicationController < ActionController::Base
   end
 
   def current_tenant
-    Spina::Account.first
+    # TODO: use domain or subdomain to fetch account
+    @tenant ||= Spina::Account.first
   end
 end

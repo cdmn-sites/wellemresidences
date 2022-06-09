@@ -1,7 +1,5 @@
 import axios from 'axios'
 
-import Layout from '../pages/_layout.svelte'
-
 import { createInertiaApp } from '@inertiajs/inertia-svelte'
 import { InertiaProgress } from '@inertiajs/progress'
 
@@ -13,6 +11,10 @@ const csrfToken = document.querySelector('meta[name=csrf-token]').content
 axios.defaults.headers.common['X-CSRF-Token'] = csrfToken
 
 InertiaProgress.init()
+
+
+import Layout from '../pages/default/_layout.svelte'
+
 
 createInertiaApp({ 
   resolve: async name => {

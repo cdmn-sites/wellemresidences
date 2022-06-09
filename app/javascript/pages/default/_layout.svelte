@@ -1,6 +1,8 @@
 <script>
+  import { inertia } from '@inertiajs/inertia-svelte'
   export let tenant
   export let spina
+  export let menu
   
   import store from '~/lib/store'
 
@@ -19,7 +21,9 @@
 
 <header>
   <div class="hidden md:block desktop_menu">
-    Desktop Menu here
+    {#each menu as menuItem}
+      <a use:inertia href={menuItem.path}>{menuItem.label}</a>
+    {/each}
   </div>
 </header>
 
@@ -27,29 +31,16 @@
 <img class="logo" src="/rails/active_storage/blobs/{spina.logo.signed_blob_id}/{spina.logo.filename}" alt={tenant.name} style="transform: translate(-50%, {-moveLogo/3.4}px) scale({1 - moveLogo / 500})">
 
 <div class="md:hidden menu_toggle" on:click={() => menuOpen = !menuOpen}>
-  HAMBURGER
+  MENU
 </div>
 
 <nav class="mobile" class:open={menuOpen}>
   <ul>
-    <li>
-      <a href="/">About us</a>
-    </li>
-    <li>
-      <a href="/">Residences</a>
-    </li>
-    <li>
-      <a href="/">Culinary</a>
-    </li>
-    <li>
-      <a href="/">Events</a>
-    </li>
-    <li>
-      <a href="/">Contact</a>
-    </li>
-    <li>
-      <a href="/">FAQ</a>
-    </li>
+    {#each menu as menuItem}
+      <li>
+        <a use:inertia href={menuItem.path}>{menuItem.label}</a>
+      </li>
+    {/each}
   </ul>
   <div class="locale uppercase with-popup">
     {$store.locale}
@@ -145,6 +136,9 @@
     z-index: 10;
     width: 100%;
     background-color: #f9fafe;
+  }
+  header a {
+    padding: 12px;
   }
 
   .logo {
