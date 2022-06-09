@@ -5,7 +5,7 @@
   import Cycler from '~/components/cycler.svelte'
   export let tenant
   export let spina
-  export let categories
+  export let room_types
   
   let scrollY
   
@@ -49,8 +49,8 @@
   </div>
 
   <div class="container">
-    <div class="categories md:grid-cols-2 2xl:grid-cols-3">
-      {#each categories as category}
+    <div class="room_types md:grid-cols-2 2xl:grid-cols-3">
+      {#each room_types as category}
         <div class="category flex mb-8 flex-col bg-white p-6 shadow-sm">
           <div class="overflow-hidden mb-6 shadow-md z-1 relative -m-6">
             <div class="placeholder image" style="background-image:url({category.image_url})"></div>
@@ -172,7 +172,7 @@
   section {
     text-align: center;
   }
-  .categories {
+  .room_types {
     display: grid;
     /* @apply grid; */
     grid-gap: 1.2rem;

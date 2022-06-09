@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  before_action :set_active_storage
   helper_method :current_tenant
 
   inertia_share do 
@@ -21,4 +22,9 @@ class ApplicationController < ActionController::Base
     # TODO: use domain or subdomain to fetch account
     @tenant ||= Spina::Account.first
   end
+
+  def set_active_storage
+    ActiveStorage::Current.url_options= { host: request.host_with_port }
+  end
+
 end
