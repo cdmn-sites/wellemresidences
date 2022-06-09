@@ -77,7 +77,7 @@
           <p class="flex-1 mb-4">
             {category.description}
           </p>
-          <a class="btn text-center uppercase" href="{searchLink}#{category.smid}" target="_blank">
+          <a class="btn text-center uppercase" href="{searchLink}&roomTypeId={category.id}" target="_blank">
             {$store.t('Check Availability')}
           </a>
         </div>
