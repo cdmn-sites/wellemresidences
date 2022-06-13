@@ -26,15 +26,22 @@ Spina::Theme.register do |theme|
     {name: 'tagline1', title: 'Tagline 1', part_type: "Spina::Parts::Line"},
     {name: 'tagline2', title: 'Tagline 2', part_type: "Spina::Parts::Line"},
     {name: 'header_images', title: 'Header Images', part_type: "Spina::Parts::ImageCollection"},
-    {name: 'text',  title: "Text", hint: "Your main content", part_type: "Spina::Parts::Text"},
+    {name: 'text',  title: "Text", part_type: "Spina::Parts::Text"},
     {name: 'images', title: 'Images', part_type: "Spina::Parts::ImageCollection"},
     {name: 'title', title: 'Title', part_type: "Spina::Parts::Line"},
     {
+      name: "style",
+      title: "Style",
+      options: ["plain", "parallax", "mosaic"],
+      part_type: "Spina::Parts::Option"
+    },
+    {
       name: "sections",
       title: "Sections",
-      parts: %w(title images text),
+      parts: %w(title images text style),
       part_type: "Spina::Parts::Repeater"
     }
+    
   ]
   
   # View templates

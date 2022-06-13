@@ -8,10 +8,10 @@
 <svelte:window bind:scrollY />
 
 
-<div class="header_image relative pb-400px md:pb-1/2 2xl:pb-2/5 overflow-hidden">
+<div class="header_image relative h-full overflow-hidden">
   <Cycler let:current>
     {#each images as img, i}
-      <img alt={img.alt} class:active={current == i} class:top-0={true} class:bottom-0={bottom} class="cycle_image w-full min-w-700px absolute left-1/2" src="/rails/active_storage/blobs/{img.signed_blob_id}/{img.filename}" style="transform: translateX(-50%) translateY({scrollY/2}px) scale({1 + scrollY/5000}) " />
+      <img alt={img.alt} class:active={current == i} class:bottom-0={bottom} class="cycle_image w-full min-w-700px absolute left-1/2" src="/rails/active_storage/blobs/{img.signed_blob_id}/{img.filename}" style="transform: translateX(-50%) translateY({scrollY/2}px) scale({1 + scrollY/5000}) " />
     {/each}
   </Cycler>
   <div class="gradient" />
@@ -38,8 +38,8 @@
   }
   .header_image {
     width: 100%;
-    height: 100%;
-    max-height: max(60vw, 400px);
+    /* height: 100%; */
+    /* max-height: max(60vw, 400px); */
     
     background-position: bottom;
   }

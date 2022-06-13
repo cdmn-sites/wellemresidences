@@ -1,65 +1,99 @@
 <script>
   import HeroImages from "../../components/hero_images.svelte";
   import Cycler from "../../components/cycler.svelte";
+  import Paralax from "../../components/paralax.svelte";
   export let spina
   export let tenant
 </script>
 
-{#if spina.header_images?.length}
+{#if spina.header_images.images?.length}
+<div class="h-300px md:h-430px mb-20">
   {#key spina.page_title}
   
-    <HeroImages height={300} images={spina.header_images.images}/>
+    <HeroImages height={200} images={spina.header_images.images}/>
   
+
   {/key}
+</div>
 {:else}
-  <div class="h-100px"></div>
+  <div class="h-200px"></div>
 {/if}
 
-<!-- <div class="relative">
-  <div class="title" bg-light>
-    <h1>{spina.page_title}</h1>
-  </div>
-</div> -->
   
   <main class="container">
     <div class="tagline2">
 
     </div>
   
-  {#each spina.sections?.content || [] as section, i}
-    {@const title = section.parts[0].content}
-    {@const images = section.parts[1].images}
-    {@const text = section.parts[2].content}
-    <section relative class="spina">
+
+{#each spina.sections?.content || [] as section, i}
+  {@const title = section.parts[0].content}
+  {@const images = section.parts[1].images}
+  {@const text = section.parts[2].content}
+  {@const style = section.parts[3]?.value}
+
+  {#if style == 'plain'}
+    <section relative mb-20 class:odd={i % 2 == 1}>
       <h1>{title}</h1>
-
-      <div class="w-full md:w-7/10 md:min-w-600px h-600px relative overflow-hidden">
-        <Cycler let:current>
-          {#each images as img, i}
-            <img alt={img.alt} class:active={current == i} class="object-cover absolute w-full h-full cycle_image" src="/rails/active_storage/blobs/{img.signed_blob_id}/{img.filename}" />
-          {/each}
-        </Cycler>
+      <div class="md:flex gap-4" class:flex-row-reverse={i % 2 == 1}>
+        {#if images?.length}
+          <div class="flex-1">
+            <Cycler let:current>
+              {#each images as img, i}
+                <img alt={img.alt} class:active={current == i} class="w-full cycle_image" src="/rails/active_storage/blobs/{img.signed_blob_id}/{img.filename}" />
+              {/each}
+            </Cycler>
+          </div>
+        {/if}
+        {#if text?.length}
+          <div class="flex-1">
+            {@html text}
+          </div>
+        {/if}
       </div>
-      <div class="w-7/10 text-size-lg">
-        {@html text}
-      </div>
-
     </section>
   {:else}
-  <section>
-    Under construction :)
-  </section>
-  {/each}
+    <section relative class:odd={i % 2 == 1} class="spina mb-20 lg:h-140 xl:h-180">
+      <h1>{title}</h1>
+      {#if images?.length}
+        
+        <div class:right-0={i % 2 == 1} class="relative lg:absolute aspect-video lg:w-7/10  overflow-hidden">
+          <Paralax scale={1.05} y={120}>
+            <Cycler let:current>
+              {#each images as img, i}
+                <img alt={img.alt} class:active={current == i} class="lg:absolute object-cover w-full h-full cycle_image" src="/rails/active_storage/blobs/{img.signed_blob_id}/{img.filename}" />
+              {/each}
+            </Cycler>
+          </Paralax>
+        </div>
+      {/if}
+
+    
+      <Paralax y={-100}>
+        <div class:right-0={i % 2 == 0} class="nice relative -top-70px lg:text-size-lg xl:text-size-xl xl:w-12/10 lg:max-w-500px xl:max-w-700px shadow-2xl bg-light/90 p-6 lg:absolute lg:top-140px xl:top-300px">
+          {@html text}
+        </div>
+      </Paralax>
+    </section>
+  {/if}
+{:else}
+<section>
+  Under construction :)
+</section>
+{/each}
 </main>
 
 
 <style>
+.nice {
+  line-height: 1.8rem;
+  font-weight: 100;
+}
 h1 {
   font-size: 2rem;
 }
 section {
-  margin-top: 100px;
-  margin-bottom: 200px;
+
 }
 section h1 {
   text-align: center;

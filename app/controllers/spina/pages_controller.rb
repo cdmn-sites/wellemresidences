@@ -40,15 +40,4 @@ class Spina::PagesController < Spina::ApplicationController
       raise ActiveRecord::RecordNotFound unless page.live? || logged_in?
     end
 
-    def page_by_locale(locale)
-      I18n.with_locale(locale) do
-        Spina::Page.i18n.find_by!(materialized_path: spina_request_path)
-      end
-    end
-
-    def spina_request_path
-      segments = [Spina.mounted_at, params[:id]].compact
-      File.join(*segments)
-    end
-
 end

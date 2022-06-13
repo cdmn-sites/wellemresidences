@@ -82,15 +82,15 @@ p {
 }
 
 #app {
-  --footer-height: 180px;
+  /* --footer-height: 180px; */
   min-height: 100vh;
   position: relative;
-  padding-bottom: var(--footer-height);
+  /* padding-bottom: var(--footer-height); */
 }
 footer {
   position: absolute;
-  height: var(--footer-height);
-  bottom: 0;
+  /* height: var(--footer-height); */
+  /* bottom: 0; */
   width: 100%;
   padding-bottom: 40px;
   padding-top: 40px;

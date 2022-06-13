@@ -14,8 +14,9 @@
 </script>
 
 
+<!-- {#if spina.header_images?.length} -->
 <HeroImages bottom images={spina.header_images.images} />
-
+<!-- {/if} -->
 
 <section relative md:h-24>
   <div class="datespanel" bg-light>
@@ -44,7 +45,7 @@
           <h3 class="name">
             {category.name}
           </h3>
-          <div class="amenities relative min-h-10">
+          <div class="amenities relative min-h-8">
             <div class="amenity">
               <!-- <span class="i-material-symbols-person text-size-lg"></span> -->
               <span class="text-size-sm">{$store.t('sleeps')} {sleeps(category)}</span>
@@ -60,7 +61,7 @@
               </div> {#if i < Object.entries(category.amenities).length -1} | {/if}
             {/each}
           </div>
-          <p class="flex-1 mb-4">
+          <p class="flex-1 mb-4 leading-6">
             {category.description}
           </p>
           <a class="btn text-center uppercase" href="{searchLink}&roomTypeId={category.id}" target="_blank">

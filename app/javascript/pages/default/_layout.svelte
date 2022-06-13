@@ -88,6 +88,9 @@
   .active {
     border-top: 4px solid rgb(158, 132, 76);
   }
+  footer {
+    margin-top: 100px;
+  }
   nav.mobile {
     position: fixed;
     width: 100%;
@@ -114,7 +117,8 @@
     
     top: 50px;
     z-index: 1;
-    background: rgba(255, 255, 255, 0.5);
+    
+    background: #f9fafe88;
   }
   .with-popup {
     position: relative;
