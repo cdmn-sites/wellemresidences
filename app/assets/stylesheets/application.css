@@ -17,8 +17,12 @@ h1, h2, h3, h4, h5 {
 h1 {
   font-size: 1.5rem;
 }
-li {
+ul {
   list-style: none;
+}
+.spina ul {
+  list-style: disc;
+  margin-left: 30px;
 }
 p {
   color:rgb(51, 55, 59);

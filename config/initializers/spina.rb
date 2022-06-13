@@ -2,7 +2,7 @@ Spina.configure do |config|
   # Locales
   # ===============
   # All locales your content should be available in.
-  # config.locales = [I18n.default_locale]
+  config.locales = [:en, :de, :es]
 
   # Backend path
   # ===============

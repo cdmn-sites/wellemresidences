@@ -6,7 +6,8 @@ class ApplicationController < ActionController::Base
     {
       tenant: current_tenant,
       spina: spina_content,
-      menu: Spina::Navigation.first.navigation_items.map { |i| {path: i.materialized_path, label: i.menu_title}}
+      header_menu: Spina::Navigation.find_by(name: 'header')&.navigation_items&.map { |i| {path: i.materialized_path, label: i.menu_title}} || [],
+      footer_menu: Spina::Navigation.find_by(name: 'footer')&.navigation_items&.map { |i| {path: i.materialized_path, label: i.menu_title}} || [],
     } 
   end
 
@@ -15,6 +16,9 @@ class ApplicationController < ActionController::Base
       for part in current_tenant.json_attributes['en_content']
         content[part.attributes['name']] ||= part.attributes
       end
+      for part in current_tenant.json_attributes["#{I18n.locale}_content"]
+        content[part.attributes['name']] ||= part.attributes
+      end unless I18n.locale == 'en'
     }
   end
 

@@ -1,13 +1,17 @@
 <script>
-  import { inertia } from '@inertiajs/inertia-svelte'
+  import { inertia, page } from '@inertiajs/inertia-svelte'
+  import store from '~/lib/store'
+
   export let tenant
   export let spina
-  export let menu
+  export let header_menu
   
-  import store from '~/lib/store'
+  const leftMenu = header_menu.slice(0, Math.floor(header_menu.length / 2))
+  const rightMenu = header_menu.slice(Math.floor(header_menu.length / 2))
 
   let menuOpen = false
   let scrollY
+
   $: moveLogo = Math.min(scrollY, 240)
 </script>
 
@@ -20,13 +24,21 @@
 </svelte:head>
 
 <header>
-  <div class="hidden md:block desktop_menu">
-    {#each menu as menuItem}
-      <a use:inertia href={menuItem.path}>{menuItem.label}</a>
-    {/each}
+  <div class="hidden md:flex desktop_menu justify-between">
+    <div class="left_menu">
+      {#each leftMenu as menuItem}
+        <a use:inertia class:active={$page.url == menuItem.path} href={menuItem.path}>{menuItem.label}</a>
+      {/each}
+    </div>
+    <div class="right_menu">
+      {#each rightMenu as menuItem}
+        <a use:inertia class:active={$page.url == menuItem.path} href={menuItem.path}>{menuItem.label}</a>
+      {/each}
+    </div>
   </div>
 </header>
 
+<div class="h-40px"></div>
 <div class="shade"></div>
 <img class="logo" src="/rails/active_storage/blobs/{spina.logo.signed_blob_id}/{spina.logo.filename}" alt={tenant.name} style="transform: translate(-50%, {-moveLogo/3.4}px) scale({1 - moveLogo / 500})">
 
@@ -36,7 +48,7 @@
 
 <nav class="mobile" class:open={menuOpen}>
   <ul>
-    {#each menu as menuItem}
+    {#each header_menu as menuItem}
       <li>
         <a use:inertia href={menuItem.path}>{menuItem.label}</a>
       </li>
@@ -73,6 +85,9 @@
 </footer>
 
 <style>
+  .active {
+    border-top: 4px solid rgb(158, 132, 76);
+  }
   nav.mobile {
     position: fixed;
     width: 100%;

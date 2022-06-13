@@ -2,33 +2,19 @@
 <script>
   import store from '~/lib/store'
   import DatesPanel from '~/components/datespanel.svelte'
-  import Cycler from '~/components/cycler.svelte'
+  import HeroImages from '~/components/hero_images.svelte'
   export let tenant
   export let spina
   export let room_types
-  
-  let scrollY
-  
+
   let searchLink = `https://direct-book.com/properties/intownresidencesdirect/?locale=${$store.locale}&items[0][infants]=0&currency=EUR&trackPage=yes`
   function sleeps(category) {
     return (~~category.amenities.queen_size_bed * 2) +( ~~category.amenities.single_bed) + (~~category.amenities.sofa_bed) + (~~category.amenities.king_size_bed * 2)
   }
 </script>
 
-<svelte:window bind:scrollY />
 
-<div class="top_image_wrapper">
-  <div class="header_image relative">
-    <Cycler let:current>
-      {#each spina.header_images?.images as img, i}
-        <img alt={img.alt} class:active={current == i} class="cycle_image w-full min-w-600px bottom-0 absolute left-1/2" src="/rails/active_storage/blobs/{img.signed_blob_id}/{img.filename}" style="transform: translateX(-50%) translateY({scrollY/2}px) scale({1 + scrollY/5000}) " />
-      {/each}
-      {current}
-    </Cycler>
-  </div>
-  <div class="gradient" />
-  <div class="shade"/>
-</div>
+<HeroImages bottom images={spina.header_images.images} />
 
 
 <section relative md:h-24>
@@ -87,13 +73,7 @@
 </section>
 
 <style>
-  .cycle_image {
-    opacity: 0;
-    transition: opacity 2s ease-in-out;
-  }
-  .cycle_image.active {
-    opacity: 1;
-  }
+
   .datespanel {
     position: fixed;
     left: 0;
@@ -140,35 +120,7 @@
     margin-bottom: 0.7rem;
   }
 
-  .top_image_wrapper {
-    position: relative;
-    overflow: hidden;
-  }
-  .gradient { 
-    position: absolute;
-    width: 100%;
-    
-    height: 160px;
-    bottom: 0;
-    background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.3) 100%);
-  }
-  .header_image {
-    width: 100%;
-    height: 700px;
-    max-height: max(60vw, 400px);
-    
-    background-position: bottom;
-  }
-  .top_image_wrapper {
-    overflow: hidden;
-  }
-  .shade {
-    height: 20px;
-    width: 100%;
-    position: absolute;
-    bottom: 0;
-    background-color: rgba(255,255,255,0.5);
-  }
+
   section {
     text-align: center;
   }

@@ -26,7 +26,15 @@ Spina::Theme.register do |theme|
     {name: 'tagline1', title: 'Tagline 1', part_type: "Spina::Parts::Line"},
     {name: 'tagline2', title: 'Tagline 2', part_type: "Spina::Parts::Line"},
     {name: 'header_images', title: 'Header Images', part_type: "Spina::Parts::ImageCollection"},
-    {name: 'text',  title: "Body", hint: "Your main content", part_type: "Spina::Parts::Text"}
+    {name: 'text',  title: "Text", hint: "Your main content", part_type: "Spina::Parts::Text"},
+    {name: 'images', title: 'Images', part_type: "Spina::Parts::ImageCollection"},
+    {name: 'title', title: 'Title', part_type: "Spina::Parts::Line"},
+    {
+      name: "sections",
+      title: "Sections",
+      parts: %w(title images text),
+      part_type: "Spina::Parts::Repeater"
+    }
   ]
   
   # View templates
@@ -35,8 +43,8 @@ Spina::Theme.register do |theme|
   # You define which parts you want to enable for every view template
   # by referencing them from the theme.parts configuration above.
   theme.view_templates = [
-    {name: 'homepage', title: 'Homepage'},
-    {name: 'show', title: 'Page', parts: %w(text)}
+    {name: 'homepage', title: 'with Residences', parts: %w(header_images tagline1 tagline2)},
+    {name: 'show', title: 'with Sections', parts: %w(header_images tagline1 tagline2 sections)}
   ]
   
   # Custom pages
@@ -50,14 +58,15 @@ Spina::Theme.register do |theme|
   # If your tenant has multiple navigations, it can be useful to configure multiple
   # navigations.
   theme.navigations = [
-    {name: 'main', label: 'Main navigation'}
+    {name: 'header', label: 'Header Navigation'},
+    {name: 'footer', label: 'Footer Navigation'}
   ]
   
   # Layout parts (optional)
   # You can create global content that doesn't belong to one specific page. We call these layout parts.
   # You only have to reference the name of the parts you want to have here.
   theme.layout_parts = [
-    'logo', 'tagline1', 'tagline2', 'header_images'
+    'logo',
   ]
   
   # Resources (optional)
