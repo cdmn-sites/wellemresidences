@@ -3,7 +3,6 @@
   import store from '~/lib/store'
   import DatesPanel from '~/components/datespanel.svelte'
   import HeroImages from '~/components/hero_images.svelte'
-  export let tenant
   export let spina
   export let room_types
 
@@ -15,10 +14,12 @@
 
 
 <!-- {#if spina.header_images?.length} -->
+<div class="h-400px md:h-500px lg:h-600px xl:h-650px">
 <HeroImages bottom images={spina.header_images.images} />
+</div>
 <!-- {/if} -->
 
-<section relative md:h-24>
+<section relative md:h-24 z-15>
   <div class="datespanel" bg-light>
     <!-- <div id="avantio-form" class="horizontal"></div>{@html avantioHtml}     -->
     <DatesPanel bind:searchLink/>

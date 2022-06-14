@@ -11,15 +11,11 @@ class Spina::PagesController < Spina::ApplicationController
       redirect_to Spina::Current.page.link_url and return
     end
 
-    template = page.view_template
-    theme = current_tenant.preferences[:theme]
-    render inertia: "#{theme}/#{template}"
+    render inertia: page.view_template
   end
 
   def homepage
-    template = page.view_template
-    theme = current_tenant.preferences[:theme]
-    render inertia: "#{theme}/homepage", props: {
+    render inertia: template = page.view_template, props: {
       room_types: RoomType.all.as_json(methods: [:image_url])
     }
   end

@@ -56,7 +56,7 @@
 <div class="booking">
   <div class="dates">
     <div class="options" on:click={() => showDatepickers = !showDatepickers}>
-      <label>{$store.t('Checkin')} / {$store.t('Checkout')}</label>
+      <label class="!hidden !md:block">{$store.t('Checkin')} / {$store.t('Checkout')}</label>
         <div class="btn">
         {#if checkin && checkout}
           {formattedDate1} - {formattedDate2}
@@ -140,6 +140,7 @@
     display: block;
     
   }
+  
   .booking .dates .btn, .booking .search .btn {
     width: 100%;
   }

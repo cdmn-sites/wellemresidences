@@ -12,13 +12,13 @@ axios.defaults.headers.common['X-CSRF-Token'] = csrfToken
 
 InertiaProgress.init()
 
-
+// TODO: somehow take theme frome current_account (selected in Spina Admin UI)
+const theme = 'default'
 import Layout from '../pages/default/_layout.svelte'
-
 
 createInertiaApp({ 
   resolve: async name => {
-    const page = await pages[`../pages/${name}.svelte`]()
+    const page = await pages[`../pages/${theme}/${name}.svelte`]()
     return Object.assign({layout: Layout}, page)
   },
   setup({ el, App, props }) {

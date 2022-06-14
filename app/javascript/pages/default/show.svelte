@@ -3,84 +3,106 @@
   import Cycler from "../../components/cycler.svelte";
   import Paralax from "../../components/paralax.svelte";
   export let spina
-  export let tenant
 </script>
 
 {#if spina.header_images.images?.length}
-<div class="h-300px md:h-430px mb-20">
-  {#key spina.page_title}
-  
-    <HeroImages height={200} images={spina.header_images.images}/>
-  
-
-  {/key}
-</div>
+  <div class="h-300px md:h-430px mb-20">
+    {#key spina.page_title}
+      <HeroImages height={200} images={spina.header_images.images}/>
+    {/key}
+  </div>
 {:else}
   <div class="h-200px"></div>
 {/if}
 
   
-  <main class="container">
-    <div class="tagline2">
+<main class="container">
+  <div class="tagline2">
 
-    </div>
+  </div>
   
 
-{#each spina.sections?.content || [] as section, i}
-  {@const title = section.parts[0].content}
-  {@const images = section.parts[1].images}
-  {@const text = section.parts[2].content}
-  {@const style = section.parts[3]?.value}
+  {#each spina.sections?.content || [] as section, i}
+    {@const title = section.parts[0].content}
+    {@const images = section.parts[1].images}
+    {@const text = section.parts[2].content}
+    {@const style = section.parts[3]?.value}
 
-  {#if style == 'plain'}
-    <section relative mb-20 class:odd={i % 2 == 1}>
-      <h1>{title}</h1>
-      <div class="md:flex gap-4" class:flex-row-reverse={i % 2 == 1}>
+    {#if style == 'parallax'}
+      <section relative class:odd={i % 2 == 1} class="spina mb-20 lg:h-140 xl:h-180">
+        <h1>{title}</h1>
         {#if images?.length}
-          <div class="flex-1">
-            <Cycler let:current>
-              {#each images as img, i}
-                <img alt={img.alt} class:active={current == i} class="w-full cycle_image" src="/rails/active_storage/blobs/{img.signed_blob_id}/{img.filename}" />
-              {/each}
-            </Cycler>
+          <div class:right-0={i % 2 == 1} class="relative lg:absolute aspect-video lg:w-7/10  overflow-hidden">
+            <Paralax scale={1.05} y={120}>
+              <Cycler let:current>
+                {#each images as img, i}
+                  <img alt={img.alt} class:active={current == i} class="lg:absolute object-cover w-full h-full cycle_image" src="/rails/active_storage/blobs/{img.signed_blob_id}/{img.filename}" />
+                {/each}
+              </Cycler>
+            </Paralax>
           </div>
         {/if}
-        {#if text?.length}
-          <div class="flex-1">
+        <Paralax y={-100}>
+          <div class:right-0={i % 2 == 0} class="nice relative -top-70px lg:text-size-lg xl:text-size-xl xl:w-12/10 lg:max-w-500px xl:max-w-700px shadow-2xl bg-light/90 p-6 lg:absolute lg:top-140px xl:top-300px">
             {@html text}
           </div>
-        {/if}
-      </div>
-    </section>
+        </Paralax>
+      </section>
+    {:else if style == 'mosaic'}
+      <section mb-28>
+          <h1>{title}</h1>
+          <div class="md:grid gap-4 grid-cols-3">
+            {#if images[0]}
+              <img alt={images[0].alt}  class="object-cover w-full h-full" src="/rails/active_storage/blobs/{images[0].signed_blob_id}/{images[0].filename}" />
+            {/if}
+            {#if text}
+            <div class="py-5 md:p-4 md:bg-white md:shadow leading-6 tracking-wide lg:text-size-4 2xl:text-size-5 2xl:leading-7">
+              {@html text}
+            </div>
+            {/if}
+            {#if images[1]}
+              <img alt={images[1].alt}  class="object-cover w-full h-full" src="/rails/active_storage/blobs/{images[1].signed_blob_id}/{images[1].filename}" />
+            {/if}
+            {#if images[2]}
+              <img alt={images[2].alt}  class="object-cover w-full h-full" src="/rails/active_storage/blobs/{images[2].signed_blob_id}/{images[2].filename}" />
+            {/if}
+            {#if images[3]}
+              <img alt={images[3].alt}  class="object-cover w-full h-full" src="/rails/active_storage/blobs/{images[3].signed_blob_id}/{images[3].filename}" />
+            {/if}
+            {#if images[4]}
+              <img alt={images[4].alt}  class="object-cover w-full h-full" src="/rails/active_storage/blobs/{images[4].signed_blob_id}/{images[4].filename}" />
+            {/if}
+            {#if images[5]}
+              <img alt={images[5].alt}  class="object-cover w-full h-full" src="/rails/active_storage/blobs/{images[5].signed_blob_id}/{images[5].filename}" />
+            {/if}
+          </div>
+      </section>
+    {:else}
+      <section relative mb-20 class:odd={i % 2 == 1}>
+        <h1>{title}</h1>
+        <div class="md:flex gap-4" class:flex-row-reverse={i % 2 == 1}>
+          {#if images?.length}
+            <div class="flex-1">
+              <Cycler let:current>
+                {#each images as img, i}
+                  <img alt={img.alt} class:active={current == i} class="w-full cycle_image" src="/rails/active_storage/blobs/{img.signed_blob_id}/{img.filename}" />
+                {/each}
+              </Cycler>
+            </div>
+          {/if}
+          {#if text?.length}
+            <div class="flex-1">
+              {@html text}
+            </div>
+          {/if}
+        </div>
+      </section>
+    {/if}
   {:else}
-    <section relative class:odd={i % 2 == 1} class="spina mb-20 lg:h-140 xl:h-180">
-      <h1>{title}</h1>
-      {#if images?.length}
-        
-        <div class:right-0={i % 2 == 1} class="relative lg:absolute aspect-video lg:w-7/10  overflow-hidden">
-          <Paralax scale={1.05} y={120}>
-            <Cycler let:current>
-              {#each images as img, i}
-                <img alt={img.alt} class:active={current == i} class="lg:absolute object-cover w-full h-full cycle_image" src="/rails/active_storage/blobs/{img.signed_blob_id}/{img.filename}" />
-              {/each}
-            </Cycler>
-          </Paralax>
-        </div>
-      {/if}
-
-    
-      <Paralax y={-100}>
-        <div class:right-0={i % 2 == 0} class="nice relative -top-70px lg:text-size-lg xl:text-size-xl xl:w-12/10 lg:max-w-500px xl:max-w-700px shadow-2xl bg-light/90 p-6 lg:absolute lg:top-140px xl:top-300px">
-          {@html text}
-        </div>
-      </Paralax>
+    <section>
+      Under construction :)
     </section>
-  {/if}
-{:else}
-<section>
-  Under construction :)
-</section>
-{/each}
+  {/each}
 </main>
 
 

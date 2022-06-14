@@ -22,7 +22,7 @@ Spina::Theme.register do |theme|
   # - Repeater
   theme.parts = [
     {name: 'logo', title: 'Logo', part_type: "Spina::Parts::Image"},
-    {name: 'favicon', title: 'Favicon', part_type: "Spina::Parts::Image"},
+    {name: 'favicon', title: 'Favicon', hint: 'The icon that appears in the browser tab', part_type: "Spina::Parts::Image"},
     {name: 'tagline1', title: 'Tagline 1', part_type: "Spina::Parts::Line"},
     {name: 'tagline2', title: 'Tagline 2', part_type: "Spina::Parts::Line"},
     {name: 'header_images', title: 'Header Images', part_type: "Spina::Parts::ImageCollection"},
@@ -73,7 +73,7 @@ Spina::Theme.register do |theme|
   # You can create global content that doesn't belong to one specific page. We call these layout parts.
   # You only have to reference the name of the parts you want to have here.
   theme.layout_parts = [
-    'logo',
+    'logo', 'favicon'
   ]
   
   # Resources (optional)

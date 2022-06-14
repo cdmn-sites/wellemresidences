@@ -1,8 +1,9 @@
 <script>
   import { inertia, page } from '@inertiajs/inertia-svelte'
+  import { Inertia } from '@inertiajs/inertia'
   import store from '~/lib/store'
 
-  export let tenant
+  export let account
   export let spina
   export let header_menu
   
@@ -13,6 +14,18 @@
   let scrollY
 
   $: moveLogo = Math.min(scrollY, 240)
+
+  
+  let bar
+
+  Inertia.on('navigate', () => {
+    const activeA = document.querySelector('a.active')
+    const rect = activeA.getBoundingClientRect()
+    bar.style.left = `${rect.left}px`
+    bar.style.width = `${rect.width}px`
+    menuOpen = false
+  })
+  
 </script>
 
 <svelte:window bind:scrollY />
@@ -24,6 +37,7 @@
 </svelte:head>
 
 <header>
+  <div class="hidden md:block active_bar" bind:this={bar}></div>
   <div class="hidden md:flex desktop_menu justify-between">
     <div class="left_menu">
       {#each leftMenu as menuItem}
@@ -40,7 +54,7 @@
 
 <div class="h-40px"></div>
 <div class="shade"></div>
-<img class="logo" src="/rails/active_storage/blobs/{spina.logo.signed_blob_id}/{spina.logo.filename}" alt={tenant.name} style="transform: translate(-50%, {-moveLogo/3.4}px) scale({1 - moveLogo / 500})">
+<img class="logo" src="/rails/active_storage/blobs/{spina.logo.signed_blob_id}/{spina.logo.filename}" alt={account.name} style="transform: translate(-50%, {-moveLogo/3.4}px) scale({1 - moveLogo / 500})">
 
 <div class="md:hidden menu_toggle" on:click={() => menuOpen = !menuOpen}>
   MENU
@@ -64,11 +78,11 @@
 
   <div class="address">
     <span class="i-gg-pin-alt"></span>
-    {tenant.address}, {tenant.postal_code} {tenant.city}
+    {account.address}, {account.postal_code} {account.city}
   </div>
   <div class="phone">
     <span class="i-gg-phone"></span>
-    <a href="tel:{tenant.phone}">{tenant.phone}</a> 
+    <a href="tel:{account.phone}">{account.phone}</a> 
   </div>
   
 </nav>
@@ -77,16 +91,54 @@
 
 <footer>
   <div class="container">
-    {tenant.name}<br>
-    {tenant.address}<br>
-    {tenant.postal_code} {tenant.city}<br>
-    {tenant.phone}
+    <div class="flex">
+      <ul class="flex-1">
+        <li>
+          <a href="/en">English</a>
+        </li>
+        <li>
+          <a href="/de">Deutsch</a>
+        </li>
+        <li>
+          <a href="/es">Español</a>
+        </li>
+      </ul>
+      <ul class="flex-1">
+        {#each leftMenu as menuItem}
+        <li>
+          <a use:inertia href={menuItem.path}>{menuItem.label}</a>
+        </li>
+        {/each}
+      </ul>
+      <ul class="flex-1">
+        {#each rightMenu as menuItem}
+        <li>
+          <a use:inertia href={menuItem.path}>{menuItem.label}</a>
+        </li>
+        {/each}
+      </ul>
+      <div class="flex-1">
+        {account.name}<br>
+        {account.address}<br>
+        {account.postal_code} {account.city}<br>
+        {account.phone}
+      </div>
+    </div>
   </div>
 </footer>
 
 <style>
   .active {
-    border-top: 4px solid rgb(158, 132, 76);
+    /* border-top: 4px solid rgb(158, 132, 76); */
+    /* font-weight: bold; */
+  }
+  .active_bar {
+    height: 2px;
+    background: #162866;
+    /* top: 48px; */
+    top: 0;
+    position: absolute;
+    transition: all 0.3s ease-in-out;
   }
   footer {
     margin-top: 100px;
