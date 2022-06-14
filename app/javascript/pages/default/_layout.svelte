@@ -18,17 +18,19 @@
   
   let bar
 
-  Inertia.on('navigate', () => {
+
+  function updateBar() {
     const activeA = document.querySelector('a.active')
     const rect = activeA.getBoundingClientRect()
     bar.style.left = `${rect.left}px`
     bar.style.width = `${rect.width}px`
     menuOpen = false
-  })
+  }
+  Inertia.on('navigate', updateBar)
   
 </script>
 
-<svelte:window bind:scrollY />
+<svelte:window bind:scrollY on:resize={updateBar}/>
 
 <svelte:head>
   {#if spina.page_title}
