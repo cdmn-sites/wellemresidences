@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="<%= I18n.locale %>">
   <head>
-    <title><%= @page.try(:seo_title) || current_account.name %></title>
+    <title><%= @page.try(:seo_title) || Current.account.name %></title>
     <% if @page.try(:description) %>
       <meta name="description" content="<%= @page.description %>">
     <% end%>

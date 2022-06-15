@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_09_162114) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_14_161955) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -62,11 +62,17 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_09_162114) do
     t.datetime "updated_at", precision: nil, null: false
     t.boolean "robots_allowed", default: false
     t.jsonb "json_attributes"
+    t.string "domain"
+    t.string "subdomain"
+    t.index ["domain"], name: "index_spina_accounts_on_domain"
+    t.index ["subdomain"], name: "index_spina_accounts_on_subdomain"
   end
 
   create_table "spina_attachment_collections", id: :serial, force: :cascade do |t|
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
+    t.integer "account_id"
+    t.index ["account_id"], name: "index_spina_attachment_collections_on_account_id"
   end
 
   create_table "spina_attachment_collections_attachments", id: :serial, force: :cascade do |t|
@@ -83,6 +89,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_09_162114) do
   create_table "spina_image_collections", force: :cascade do |t|
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
+    t.integer "account_id"
+    t.index ["account_id"], name: "index_spina_image_collections_on_account_id"
   end
 
   create_table "spina_image_collections_images", id: :serial, force: :cascade do |t|
@@ -97,6 +105,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_09_162114) do
     t.integer "media_folder_id"
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
+    t.integer "account_id"
+    t.index ["account_id"], name: "index_spina_images_on_account_id"
     t.index ["media_folder_id"], name: "index_spina_images_on_media_folder_id"
   end
 
@@ -129,6 +139,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_09_162114) do
     t.string "name"
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
+    t.integer "account_id"
+    t.index ["account_id"], name: "index_spina_media_folders_on_account_id"
   end
 
   create_table "spina_navigation_items", id: :serial, force: :cascade do |t|
@@ -138,6 +150,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_09_162114) do
     t.string "ancestry"
     t.datetime "created_at", precision: nil
     t.datetime "updated_at", precision: nil
+    t.integer "account_id"
+    t.index ["account_id"], name: "index_spina_navigation_items_on_account_id"
     t.index ["page_id", "navigation_id"], name: "index_spina_navigation_items_on_page_id_and_navigation_id", unique: true
   end
 
@@ -148,6 +162,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_09_162114) do
     t.integer "position", default: 0, null: false
     t.datetime "created_at", precision: nil
     t.datetime "updated_at", precision: nil
+    t.integer "account_id"
+    t.index ["account_id"], name: "index_spina_navigations_on_account_id"
     t.index ["name"], name: "index_spina_navigations_on_name", unique: true
   end
 
@@ -165,6 +181,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_09_162114) do
     t.integer "page_id"
     t.integer "page_partable_id"
     t.string "page_partable_type"
+    t.integer "account_id"
+    t.index ["account_id"], name: "index_spina_page_parts_on_account_id"
   end
 
   create_table "spina_page_translations", id: :serial, force: :cascade do |t|
@@ -199,6 +217,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_09_162114) do
     t.boolean "active", default: true
     t.integer "resource_id"
     t.jsonb "json_attributes"
+    t.integer "account_id"
+    t.index ["account_id"], name: "index_spina_pages_on_account_id"
     t.index ["resource_id"], name: "index_spina_pages_on_resource_id"
   end
 
@@ -217,6 +237,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_09_162114) do
     t.string "new_path"
     t.datetime "created_at", precision: nil
     t.datetime "updated_at", precision: nil
+    t.integer "account_id"
+    t.index ["account_id"], name: "index_spina_rewrite_rules_on_account_id"
   end
 
   create_table "spina_settings", id: :serial, force: :cascade do |t|
@@ -224,6 +246,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_09_162114) do
     t.jsonb "preferences", default: {}
     t.datetime "created_at", precision: nil, null: false
     t.datetime "updated_at", precision: nil, null: false
+    t.integer "account_id"
+    t.index ["account_id"], name: "index_spina_settings_on_account_id"
     t.index ["plugin"], name: "index_spina_settings_on_plugin"
   end
 
@@ -277,6 +301,8 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_09_162114) do
     t.datetime "last_logged_in", precision: nil
     t.string "password_reset_token"
     t.datetime "password_reset_sent_at", precision: nil
+    t.integer "account_id"
+    t.index ["account_id"], name: "index_spina_users_on_account_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
