@@ -9,7 +9,7 @@
   
   const leftMenu = header_menu.slice(0, Math.floor(header_menu.length / 2))
   const rightMenu = header_menu.slice(Math.floor(header_menu.length / 2))
-
+  
   let menuOpen = false
   let scrollY
 

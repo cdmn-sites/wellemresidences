@@ -14,12 +14,13 @@ InertiaProgress.init()
 
 // TODO: somehow take theme frome current_account (selected in Spina Admin UI)
 const theme = 'default'
-import Layout from '../themes/default/_layout.svelte'
+
 
 createInertiaApp({ 
   resolve: async name => {
-    const page = await templates[`../themes/${theme}/${name}.svelte`]()
-    return Object.assign({layout: Layout}, page)
+    const layout = (await templates[`../themes/${theme}/_layout.svelte`]()).default
+    const page = await templates[`../themes/${theme}/${name}.svelte`]()    
+    return Object.assign({layout}, page)
   },
   setup({ el, App, props }) {
     new App({ target: el, props })

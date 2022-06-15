@@ -5,7 +5,7 @@
   export let spina
 </script>
 
-{#if spina.header_images.images?.length}
+{#if spina.header_images?.images?.length}
   <div class="h-300px md:h-430px mb-20">
     {#key spina.page_title}
       <HeroImages height={200} images={spina.header_images.images}/>
