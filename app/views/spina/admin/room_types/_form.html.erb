@@ -30,7 +30,23 @@
 
         <%= f.text_area :description, class: 'form-input block w-full sm:text-sm sm:leading-5' %>
       </div>
-      
+
+      <div class="col-span-2">
+        <div class="col-span-1">
+          <label class="mt-4 block text-sm font-medium leading-5 text-gray-700 flex items-center">
+            Images
+          </label>
+        </div>
+
+        <% @room_type.images.each do |i| %>
+          <%= hidden_field_tag 'room_type[images][]', i.signed_id %>
+          <%= image_tag main_app.url_for(i.variant(:thumb)) %>
+        <% end %>
+        <div class="mt-4">
+          Add Images:
+          <%= f.file_field :images, multiple: true %>
+        </div>
+      </div>
     <% end %>
     <%= submit_tag 'Save Room Type', class: 'btn mt-4 btn-primary' %>
   <% end %>
