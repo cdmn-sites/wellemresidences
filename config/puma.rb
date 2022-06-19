@@ -58,7 +58,7 @@ else
   environment rails_env
   
   # Set up socket location
-  bind "unix:///home/cdmn.sock"
+  bind "unix://#{shared_dir}/sockets/puma.sock"
   
   # Logging
   stdout_redirect "#{shared_dir}/log/puma.stdout.log", "#{shared_dir}/log/puma.stderr.log", true
