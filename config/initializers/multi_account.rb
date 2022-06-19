@@ -1,6 +1,7 @@
 class ActiveRecord::Base
   default_scope do
-    attribute_names.include?('account_id') ? where(account_id: Current.account.try(:id)) : all
+    current_account_id = Current.account.try(:id)
+    attribute_names.include?('account_id') && current_account_id ? where(account_id: current_account_id) : all
   end
 
   before_create do

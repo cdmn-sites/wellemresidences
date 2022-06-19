@@ -24,14 +24,14 @@ class AddAccountIds < ActiveRecord::Migration[7.0]
     add_index :spina_accounts, :domain
     add_index :spina_accounts, :subdomain
 
-    Spina::User.update_all ['account_id = ?', Spina::Account.first.id]
-    Spina::Page.update_all ['account_id = ?', Spina::Account.first.id]
-    Spina::Image.update_all ['account_id = ?', Spina::Account.first.id]
-    Spina::MediaFolder.update_all ['account_id = ?', Spina::Account.first.id]
-    Spina::Navigation.update_all ['account_id = ?', Spina::Account.first.id]
-    Spina::NavigationItem.update_all ['account_id = ?', Spina::Account.first.id]
-    Spina::Setting.update_all ['account_id = ?', Spina::Account.first.id]
-    Spina::RewriteRule.update_all ['account_id = ?', Spina::Account.first.id]
-    RoomType.update_all ['account_id = ?', Spina::Account.first.id]
+    # Spina::User.update_all ['account_id = ?', Spina::Account.first.id]
+    # Spina::Page.update_all ['account_id = ?', Spina::Account.first.id]
+    # Spina::Image.update_all ['account_id = ?', Spina::Account.first.id]
+    # Spina::MediaFolder.update_all ['account_id = ?', Spina::Account.first.id]
+    # Spina::Navigation.update_all ['account_id = ?', Spina::Account.first.id]
+    # Spina::NavigationItem.update_all ['account_id = ?', Spina::Account.first.id]
+    # Spina::Setting.update_all ['account_id = ?', Spina::Account.first.id]
+    # Spina::RewriteRule.update_all ['account_id = ?', Spina::Account.first.id]
+    # RoomType.update_all ['account_id = ?', Spina::Account.first.id]
   end
 end
