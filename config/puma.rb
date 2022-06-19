@@ -45,10 +45,10 @@ if ENV.fetch("RAILS_ENV") == "development"
   # Allow puma to be restarted by `bin/rails restart` command.
   plugin :tmp_restart
 else 
-  workers 4
+  workers 3
 
   # Min and Max threads per worker
-  threads 1, 4
+  threads 1, 3
   
   app_dir = File.expand_path("../..", __FILE__)
   shared_dir = "#{app_dir}/shared"
@@ -68,10 +68,10 @@ else
   state_path "#{shared_dir}/pids/puma.state"
   activate_control_app
   
-  on_worker_boot do
-    require "active_record"
-    ActiveRecord::Base.connection.disconnect! rescue ActiveRecord::ConnectionNotEstablished
-    ActiveRecord::Base.establish_connection(YAML.load_file("#{app_dir}/config/database.yml")[rails_env])
-  end
+  # on_worker_boot do
+  #   require "active_record"
+  #   ActiveRecord::Base.connection.disconnect! rescue ActiveRecord::ConnectionNotEstablished
+  #   ActiveRecord::Base.establish_connection(YAML.load_file("#{app_dir}/config/database.yml")[rails_env])
+  # end
 
 end
