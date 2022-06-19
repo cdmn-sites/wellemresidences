@@ -22,6 +22,19 @@ const translations = {
     'queen_size_bed': 'Queen size bed',
     'single_bed': 'Single bed',
     'bathtub': 'Bathtub',
+  },
+  es: {
+    'checkin': 'Check-in',
+    'checkout': 'Check-out',
+    'adults': 'Adultos',
+    'children': 'Niños',
+    'check_availability': 'Comprobar disponibilidad',
+    'sleeps': 'Dormitorios',
+    'king_size_bed': 'King size bed',
+    'queen_size_bed': 'Queen size bed',
+    'single_bed': 'Single bed',
+    'bathtub': 'Bathtub',
+    'select_dates': 'Seleccionar fechas'
   }
 }
 const t = function(key) {

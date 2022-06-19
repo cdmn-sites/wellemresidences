@@ -17,6 +17,11 @@
       monthNames: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
       dayNames: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
       firstDayOfWeek: 0,
+    },
+    es: {
+      monthNames: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"],
+      dayNames: ["Dom", "Lun", "Mar", "Mie", "Jue", "Vie", "Sab"],
+      firstDayOfWeek: 1,
     }
   }
   
