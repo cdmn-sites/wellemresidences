@@ -16,9 +16,9 @@ class ApplicationController < ActionController::Base
       I18n.locale = params[:locale]
       cookies[:locale] = params[:locale]
     elsif cookies[:locale].present?
-      I18n.locale = params[:locale] = cookies[:locale]
+      I18n.locale = cookies[:locale]
     else
-      I18n.locale = params[:locale] = request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first
+      I18n.locale = request.env['HTTP_ACCEPT_LANGUAGE'].scan(/^[a-z]{2}/).first
     end
   end
 
