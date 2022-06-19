@@ -21,9 +21,14 @@
 
   function updateBar() {
     const activeA = document.querySelector('a.active')
+    if (!activeA) {
+      bar.style.display = 'none'
+      return
+    }
     const rect = activeA.getBoundingClientRect()
     bar.style.left = `${rect.left}px`
     bar.style.width = `${rect.width}px`
+    bar.style.display = 'block'
     menuOpen = false
   }
   Inertia.on('navigate', updateBar)

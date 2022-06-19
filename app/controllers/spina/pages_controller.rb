@@ -15,7 +15,7 @@ class Spina::PagesController < Spina::ApplicationController
   end
 
   def homepage
-    render inertia: template = page.view_template, props: {
+    render inertia: page.view_template, props: {
       room_types: RoomType.all.as_json(methods: [:image_url])
     }
   end
