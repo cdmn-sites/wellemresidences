@@ -39,8 +39,11 @@
         </div>
 
         <% @room_type.images.each do |i| %>
-          <%= hidden_field_tag 'room_type[images][]', i.signed_id %>
-          <%= image_tag main_app.url_for(i.variant(:thumb)) %>
+          <div id="<%= i.signed_id %>" class="mb-4">
+            <%= hidden_field_tag 'room_type[images][]', i.signed_id %>
+            <%= image_tag main_app.url_for(i.variant(:thumb)) %>
+            <span class="cursor-pointer" onclick="javascript:document.getElementById('<%= i.signed_id %>').remove()">Remove</span>
+          </div>
         <% end %>
         <div class="mt-4">
           Add Images:
