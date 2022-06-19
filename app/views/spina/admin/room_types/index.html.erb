@@ -34,29 +34,18 @@
 <% end %>
 
 <div class="my-8 border-t border-gray-200">
-  <% if @media_folder.present? %>
-    <div class="flex items-center h-12 hover:bg-white border-b border-gray-200 px-8">
-      <%= link_to spina.admin_images_path, class: 'flex h-full items-center flex-1' do %>
-        <div class="w-8 mr-4 flex justify-center">
-          <%= heroicon("collection", style: :solid, class: "w-7 h-7 text-spina") %>
-        </div>
-        <div class="font-medium text-spina flex-1 text-sm">
-          <%=t 'spina.media_library.back_to_all' %>
-        </div>
-      <% end %>
-    </div>
-  <% else %>
-    <%= render @room_types %>
-  <% end %>
+
+  <%= render @room_types %>
+
   
   <div data-controller="infinite-scroll">
-    <%= turbo_frame_tag "images" do %>
-      <%= turbo_frame_tag "images-#{@images.current_page}" do %>
-        <%= render @images %>
+    <%= turbo_frame_tag "room_types" do %>
+      <%= turbo_frame_tag "room_types-#{@room_types.current_page}" do %>
+        <%= render @room_types %>
         
-        <% if @images.next_page %>
-          <%= turbo_frame_tag "images-#{@images.next_page}", data: {action: "turbo:frame-load->infinite-scroll#load"} do %>
-            <%= link_to t('spina.ui.load_more'), path_to_next_page(@images), class: "btn btn-default", data: {infinite_scroll_target: "button"} %>
+        <% if @room_types.next_page %>
+          <%= turbo_frame_tag "room_types-#{@room_types.next_page}", data: {action: "turbo:frame-load->infinite-scroll#load"} do %>
+            <%= link_to t('spina.ui.load_more'), path_to_next_page(@room_types), class: "btn btn-default", data: {infinite_scroll_target: "button"} %>
           <% end %>
         <% end %>
       <% end %>

@@ -1,83 +1,23 @@
-<%= turbo_frame_tag dom_id(room_type) do %>
+<%#= turbo_frame_tag dom_id(room_type) do %>
   <div class="flex items-center h-12 border-b border-gray-200 px-8 hover:bg-white group">
     <div class="w-8 mr-4 h-12 flex justify-center">
-      <%= link_to @_routes.admin_room_type_path(room_type), class: "flex items-center cursor-zoom-in", data: {turbo_frame: "modal"} do %>
-        <%= room_type_tag thumbnail_url(room_type), class: "object-contain" %>
-      <% end %>
+        <%# <%= room_type_tag thumbnail_url(room_type), class: "object-contain" %>
     </div>
     
-    <turbo-frame id="<%= dom_id(room_type) %>_filename" class="font-medium text-gray-800 h-full flex-1 w-56 text-sm flex items-center relative">
-      <span class="truncate"><%= room_type.file.filename %></span>
+    <div id="<%= dom_id(room_type) %>" class="font-medium text-gray-800 h-full flex-1 w-56 text-sm flex items-center relative">
+      <%= link_to Rails.application.routes.url_helpers.edit_admin_room_type_path(room_type), class: "flex items-center" do %>
+        <span class="truncate"><%= room_type.name %></span>
+      <% end %>
     
       <div class="absolute h-full opacity-0 group-hover:opacity-100 flex items-center right-0 pr-3 top-0">
-        
-        <%= form_with model: room_type, url: spina.admin_room_type_path(room_type), data: {turbo_frame: dom_id(room_type), controller: "form loading-button", loading_message: t('spina.media_library.uploading'), action: "turbo:submit-end->loading-button#doneLoading"} do |f| %>          
-          <%= f.file_field :file, accept: "room_type/*", id: "room_type_#{room_type.id}_file_field", class: 'hidden', data: {action: "loading-button#loading form#requestSubmit"} %>
-          
-          <button type="button" class="btn btn-default h-7 px-2 mr-2 text-xs" data-controller="delegate-click" data-action="delegate-click#click" data-loading-button-target="button" data-delegate-click-target="#room_type_<%= room_type.id %>_file_field">
-            <%= heroicon("upload", style: :solid, class: "w-4 h-4 mr-1 text-gray-600") %>
-            <%=t 'spina.ui.replace' %>
-          </button>
-        <% end %>
-        
-        <%= link_to spina.edit_admin_room_type_path(room_type), class: "btn btn-default h-7 px-2 mr-2 text-xs" do %>
-          <%= heroicon('pencil', style: :solid, class: 'w-4 h-4 mr-1 text-gray-600') %>
-          <%=t 'spina.ui.rename' %>
-        <% end %>
-        
-        <% if @media_folders.present? %>
-          <%= render Spina::UserInterface::DropdownComponent.new do |dropdown| %>
-            <% dropdown.button(classes: 'btn btn-default h-7 px-2 text-xs') do %>
-              <%= heroicon('folder', style: :solid, class: 'w-4 h-4 mr-1 text-gray-600') %>
-              <%=t 'spina.ui.move_to' %>
-              <%= heroicon('chevron-down', style: :solid, class: 'w-4 h-4') %>
-            <% end %>
-            
-            <% dropdown.menu do %>
-              <% if room_type.media_folder_id.present? %>
-                <%= form_with model: room_type, url: admin_room_type_path(room_type) do |f| %>
-                  <%= f.hidden_field :media_folder_id, value: nil %>
-                  <%= render Spina::UserInterface::DropdownButtonComponent.new do %>
-                    <%=t 'spina.media_library.no_folder' %>
-                  <% end %>
-                <% end %>
-              <% end %>
-              <% @media_folders.each do |media_folder| %>
-                <% if media_folder.id == room_type.media_folder_id %>
-                  <%= render Spina::UserInterface::DropdownButtonComponent.new(disabled: true) do %>
-                    <%= media_folder.name %>
-                  <% end %>
-                <% else %>
-                  <%= form_with model: room_type, url: spina.admin_room_type_path(room_type) do |f| %>
-                    <%= f.hidden_field :media_folder_id, value: media_folder.id %>
-                    
-                    <%= render Spina::UserInterface::DropdownButtonComponent.new do %>
-                      <%= media_folder.name %>
-                    <% end %>
-                  <% end %>
-                <% end %>
-              <% end %>
-            <% end %>
-          <% end %>
-        <% end %>
-      </div>
-    </turbo-frame>
-    
-    <div class="text-gray-500 text-sm whitespace-nowrap flex items-center">
-      <%= number_to_human_size room_type.file.byte_size %>
-      <div class="uppercase ml-2 h-5 flex items-center rounded-md <%= content_type_color(room_type) %> text-white font-semibold px-1 text-xs">
-        <%= content_type(room_type) %>
+
       </div>
     </div>
-    <div class="text-gray-500 text-xs w-32 text-right whitespace-nowrap"><%=l room_type.created_at, format: :short %></div>
+    
+    
     <div class="flex items-center ml-2">
-      <%= link_to original_url(room_type), class: "block py-3 px-2 text-gray-500 hover:text-gray-900", download: room_type.file.filename do %>
-        <%= heroicon('download', class: 'w-5 h-5') %>
-      <% end %>
       
-      <%= button_to spina.admin_room_type_path(room_type), method: :delete, class: "block py-3 px-2 text-gray-500 hover:text-gray-900", form: {data: {controller: "confirm", confirm_message: t('spina.room_types.delete_confirmation_html')}} do %>
-        <%= heroicon('trash', class: "w-5 h-5") %>
-      <% end %>
+
     </div>
   </div>
-<% end %>
+<%# end %>
