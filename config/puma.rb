@@ -48,7 +48,7 @@ else
   workers 4
 
   # Min and Max threads per worker
-  threads 1, 6
+  threads 1, 4
   
   app_dir = File.expand_path("../..", __FILE__)
   shared_dir = "#{app_dir}/shared"
@@ -58,7 +58,7 @@ else
   environment rails_env
   
   # Set up socket location
-  bind "unix://#{shared_dir}/sockets/puma.sock"
+  bind "unix:///home/cdmn.sock"
   
   # Logging
   stdout_redirect "#{shared_dir}/log/puma.stdout.log", "#{shared_dir}/log/puma.stderr.log", true
