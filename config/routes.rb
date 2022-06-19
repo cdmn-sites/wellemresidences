@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   
   class AccountDomain  
     def self.matches?(request)
-      Current.account = Spina::Account.find_by(domain: request.host) || Spina::Account.find_by(subdomain: request.subdomain)
+      ActiveRecord::Base.connection_pool.with_connection do
+        Current.account = Spina::Account.find_by(domain: request.host) || Spina::Account.find_by(subdomain: request.subdomain)
+      end
     end
   end
 
