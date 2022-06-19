@@ -6,7 +6,7 @@ class ActiveRecord::Base
 
   before_create do
     if respond_to?(:account_id)
-      self.account_id ||= Current.account.id || Spina::Account.first.id
+      self.account_id ||= Current.account.try(:id) || Spina::Account.first.try(:id)
     end
   end
 end
