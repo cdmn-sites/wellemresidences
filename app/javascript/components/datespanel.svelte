@@ -170,6 +170,7 @@
     gap: 4rem;
     /* justify-content: space-evenly; */
   }
+
   .booking label {
     display: block;
     margin-bottom: 0.3rem;
@@ -177,6 +178,11 @@
   .booking .options {
     display: block;
     margin-bottom: 12px;
+  }
+  @media (max-width: 768px) {
+    .people .btn {
+      padding: 7px 18px;
+    }
   }
   @media (min-width: 768px) {
     .booking > div {

@@ -3,12 +3,29 @@
   import store from '~/lib/store'
   import DatesPanel from '~/components/datespanel.svelte'
   import HeroImages from '~/components/hero_images.svelte'
+  import glightbox from 'glightbox'
+  import 'glightbox/dist/css/glightbox.min.css'
+
   export let spina
   export let room_types
 
   let searchLink = `https://direct-book.com/properties/intownresidencesdirect/?locale=${$store.locale}&items[0][infants]=0&currency=EUR&trackPage=yes`
-  function sleeps(category) {
-    return (~~category.amenities.queen_size_bed * 2) +( ~~category.amenities.single_bed) + (~~category.amenities.sofa_bed) + (~~category.amenities.king_size_bed * 2)
+  function sleeps(room_type) {
+    return (~~room_type.amenities.queen_size_bed * 2) +( ~~room_type.amenities.single_bed) + (~~room_type.amenities.sofa_bed) + (~~room_type.amenities.king_size_bed * 2)
+  }
+  function lightbox(room_type) {
+    const gallery = glightbox({
+      elements: room_type.images_prop.map(image => ({
+        href: image.url,
+        // title: image.title,
+        // description: `<a class="btn text-center uppercase" href="${searchLink}&roomTypeId=${room_type.id}" target="_blank">
+        //     ${$store.t('Check Availability')}
+        //   </a>`,
+        type: 'image'
+
+      })),
+    })
+    gallery.open()
   }
 </script>
 
@@ -38,20 +55,22 @@
 
   <div class="container">
     <div class="room_types md:grid-cols-2 2xl:grid-cols-3">
-      {#each room_types as category}
-        <div class="category flex mb-8 flex-col bg-white p-6 shadow-sm">
-          <div class="overflow-hidden mb-6 shadow-md z-1 relative -m-6">
-            <div class="placeholder image" style="background-image:url({category.image_url})"></div>
+      {#each room_types as room_type}
+        <div on:click={() => lightbox(room_type)} class="room_type flex mb-8 flex-col bg-white p-6 shadow-sm">
+          <div class="cursor-pointer overflow-hidden mb-6 shadow-md z-1 relative -m-6">
+            <!-- {#each room_type.images_prop as image} -->
+              <div class="placeholder image" style="background-image:url({room_type.thumbnail_url})"></div>
+            <!-- {/each} -->
           </div>
           <h3 class="name">
-            {category.name}
+            {room_type.name}
           </h3>
           <div class="amenities relative min-h-8">
             <div class="amenity">
               <!-- <span class="i-material-symbols-person text-size-lg"></span> -->
-              <span class="text-size-sm">{$store.t('sleeps')} {sleeps(category)}</span>
+              <span class="text-size-sm">{$store.t('sleeps')} {sleeps(room_type)}</span>
             </div>  | 
-            {#each Object.entries(category.amenities) as [amenity, value], i}
+            {#each Object.entries(room_type.amenities) as [amenity, value], i}
               <div class="amenity">
                 
                 <!-- {#if value > 1} -->
@@ -59,13 +78,13 @@
                 <!-- {:else} -->
                   <!-- <span class="text-size-sm">{$store.t(amenity)}</span> -->
                 <!-- {/if} -->
-              </div> {#if i < Object.entries(category.amenities).length -1} | {/if}
+              </div> {#if i < Object.entries(room_type.amenities).length -1} | {/if}
             {/each}
           </div>
           <p class="flex-1 mb-4 leading-6">
-            {category.description}
+            {room_type.description}
           </p>
-          <a class="btn text-center uppercase" href="{searchLink}&roomTypeId={category.id}" target="_blank">
+          <a class="btn text-center uppercase" href="{searchLink}&roomTypeId={room_type.id}" target="_blank">
             {$store.t('Check Availability')}
           </a>
         </div>
@@ -109,6 +128,9 @@
 
     /* border: 1px solid black; */
   }
+  .amenity:first-of-type {
+    padding-left: 0;
+  }
   h1 {
     font-size: 2.5rem;
     margin-top: 4rem;
@@ -131,14 +153,14 @@
     /* @apply grid; */
     grid-gap: 1.2rem;
   }
-  .category .image {
+  .room_type .image {
     transition: all 1s;
     aspect-ratio: calc(16 / 9);
   }
-  .category {
+  .room_type {
     text-align: left;
   }
-  .category:hover .image {
+  .room_type:hover .image {
     transform: scale(1.1);
   }
   @media (min-width: 768px) {

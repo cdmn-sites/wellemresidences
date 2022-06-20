@@ -63,27 +63,44 @@
 <div class="shade"></div>
 <img class="logo" src="/rails/active_storage/blobs/{spina.logo.signed_blob_id}/{spina.logo.filename}" alt={account.name} style="transform: translate(-50%, {-moveLogo/3.4}px) scale({1 - moveLogo / 500})">
 
-<div class="md:hidden menu_toggle" on:click={() => menuOpen = !menuOpen}>
-  MENU
+<div  class:menuOpen class="md:hidden menu_toggle" on:click={() => menuOpen = !menuOpen}>
+  <div class="hamburger-icon" id="icon">
+    <div class="icon-1" id="a"></div>
+    <div class="icon-2" id="b"></div>
+    <div class="icon-3" id="c"></div>
+    <div class="clear"></div>
+  </div>
 </div>
 
-<nav class="mobile" class:open={menuOpen}>
-  <ul>
+<nav class="mobile text-size-xl leading-8" class:open={menuOpen}>
+  <ul class="uppercase ">
     {#each header_menu as menuItem}
       <li>
-        <a use:inertia href={menuItem.path}>{menuItem.label}</a>
+        <a use:inertia class:active={$page.url == menuItem.path} href={menuItem.path}>{menuItem.label}</a>
       </li>
     {/each}
   </ul>
-  <div class="locale uppercase with-popup">
-    {$store.locale}
-    <div class="popup">
-      <a href="/en" sveltekit:reload>English</a>
-      <a href="/de" sveltekit:reload>Deutsch</a>
-    </div>
-  </div>
+  <ul class=" uppercase mt-6">
+    
+      {#if $store.locale != 'en'}
+        <li>
+          <a href="/en">English</a>
+        </li>
+      {/if}
+      {#if $store.locale != 'de'}
+        <li>
+          <a href="/de">Deutsch</a>
+        </li>
+      {/if}
+      {#if $store.locale != 'es'}
+        <li>
+          <a href="/es">Español</a>
+        </li>
+      {/if}
+    
+  </ul>
 
-  <div class="address">
+  <div class="mt-6 address">
     <span class="i-gg-pin-alt"></span>
     {account.address}, {account.postal_code} {account.city}
   </div>
@@ -139,11 +156,17 @@
     /* border-top: 4px solid rgb(158, 132, 76); */
     /* font-weight: bold; */
   }
+  .mobile .active {
+    border-left: 4px solid rgb(158, 132, 76);
+    padding-left: 3px; 
+    font-weight: bold;
+  }
   .active_bar {
-    height: 2px;
-    background: #162866;
+    height: 3px;
+    background: rgb(158, 132, 76);
     /* top: 48px; */
-    top: 0;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+    top: 47px;
     position: absolute;
     transition: all 0.3s ease-in-out;
   }
@@ -166,8 +189,8 @@
   .menu_toggle {
     position: fixed;
     z-index: 16;
-    right: 16px;
-    top: 16px;
+    right: 0px;
+    top: 0px;
   }
   .shade {
     height: 20px;
@@ -233,4 +256,65 @@
   @media (min-width: 1167px) {
 
   }
+
+.icon-1, .icon-2, .icon-3 {
+  position: absolute;
+  left: 25%;
+  top: 50%;
+  width: 32px;
+  height: 3px;
+  background-color: black;
+  transition: all 400ms cubic-bezier(.84,.06,.52,1.8);
+}
+
+.icon-1 {
+  transform: translateY(-8px);
+  animation-delay: 100ms;
+}
+
+.icon-3 {
+  transform: translateY(8px);
+  animation-delay: 250ms;
+}
+
+.hamburger-icon {
+  position: absolute;
+  height: 48px;
+  width: 48px;
+  top: 0px;
+  right: 12px;
+  z-index: 1000;
+  cursor: pointer;
+  
+  transition: all 0.2s ease-in-out;
+  
+}
+.hamburger-icon:hover {
+  /* transform: scale(1.2);
+  box-shadow: 0px 0px 30px rgba(0,0,0,0.1); */
+}
+
+.menuOpen .icon-1 {
+  transform: rotate(40deg);
+}
+.menuOpen .icon-3 {
+  transform: rotate(-40deg);
+}
+.menuOpen .icon-2 {
+  opacity: 0;
+}
+
+@keyframes slideIn {
+  0% {
+    width: 0%;
+   
+    opacity: 0;
+  }
+  
+  100% {
+    width: 50%;
+   
+    opacity: 1;
+  }
+}
 </style>
