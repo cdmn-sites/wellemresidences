@@ -3,6 +3,8 @@ import axios from 'axios'
 import { createInertiaApp } from '@inertiajs/inertia-svelte'
 import { InertiaProgress } from '@inertiajs/progress'
 
+import 'glightbox/dist/css/glightbox.min.css'
+
 import 'virtual:uno.css'
 
 const templates = import.meta.glob('../themes/**/*.svelte')

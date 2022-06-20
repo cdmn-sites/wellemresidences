@@ -2,7 +2,13 @@
   import HeroImages from "../../components/hero_images.svelte";
   import Cycler from "../../components/cycler.svelte";
   import Paralax from "../../components/paralax.svelte";
+  import glightbox from 'glightbox'
+  import { onMount } from "svelte";
   export let spina
+
+  onMount(() => {
+    glightbox()
+  })
 </script>
 
 {#if spina.header_images?.images?.length}
@@ -85,8 +91,10 @@
             <div class="flex-1">
               <div class="overflow-hidden w-full aspect-square relative">
                 <Cycler let:current>
-                  {#each images as img, i}
-                    <img alt={img.alt} class:active={current == i} class="w-full absolute cycle_image" src="/rails/active_storage/blobs/{img.signed_blob_id}/{img.filename}" />
+                  {#each images as img, j}
+                    <a href="/rails/active_storage/blobs/{img.signed_blob_id}/{img.filename}" class="glightbox" data-gallery="section-{i}">
+                      <img alt={img.alt} class:active={current == j} class="w-full absolute cycle_image" src="/rails/active_storage/blobs/{img.signed_blob_id}/{img.filename}" />
+                    </a>
                   {/each}
                 </Cycler>
               </div>

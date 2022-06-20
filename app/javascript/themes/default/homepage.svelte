@@ -4,7 +4,6 @@
   import DatesPanel from '~/components/datespanel.svelte'
   import HeroImages from '~/components/hero_images.svelte'
   import glightbox from 'glightbox'
-  import 'glightbox/dist/css/glightbox.min.css'
 
   export let spina
   export let room_types
