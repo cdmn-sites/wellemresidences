@@ -83,11 +83,13 @@
         <div class="md:flex gap-4" class:flex-row-reverse={i % 2 == 1}>
           {#if images?.length}
             <div class="flex-1">
-              <Cycler let:current>
-                {#each images as img, i}
-                  <img alt={img.alt} class:active={current == i} class="w-full cycle_image" src="/rails/active_storage/blobs/{img.signed_blob_id}/{img.filename}" />
-                {/each}
-              </Cycler>
+              <div class="overflow-hidden w-full aspect-square relative">
+                <Cycler let:current>
+                  {#each images as img, i}
+                    <img alt={img.alt} class:active={current == i} class="w-full absolute cycle_image" src="/rails/active_storage/blobs/{img.signed_blob_id}/{img.filename}" />
+                  {/each}
+                </Cycler>
+              </div>
             </div>
           {/if}
           {#if text?.length}
