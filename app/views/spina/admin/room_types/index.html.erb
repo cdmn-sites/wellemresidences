@@ -35,20 +35,6 @@
 
 <div class="my-8 border-t border-gray-200">
 
-  <%= render @room_types %>
-
+   <%= render @room_types %>
   
-  <div data-controller="infinite-scroll">
-    <%= turbo_frame_tag "room_types" do %>
-      <%= turbo_frame_tag "room_types-#{@room_types.current_page}" do %>
-        <%= render @room_types %>
-        
-        <% if @room_types.next_page %>
-          <%= turbo_frame_tag "room_types-#{@room_types.next_page}", data: {action: "turbo:frame-load->infinite-scroll#load"} do %>
-            <%= link_to t('spina.ui.load_more'), path_to_next_page(@room_types), class: "btn btn-default", data: {infinite_scroll_target: "button"} %>
-          <% end %>
-        <% end %>
-      <% end %>
-    <% end %>
-  </div>
 </div>
