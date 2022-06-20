@@ -75,3 +75,7 @@ group :test do
   gem "webdrivers"
   gem 'minitest-ci'
 end
+
+
+
+gem "globalize", "~> 6.2"

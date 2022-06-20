@@ -15,6 +15,7 @@ module Spina::Admin
     end
 
     def update
+      I18n.locale = params[:locale]
       if @room_type.update(room_type_params)
         # redirect_to spina.edit_admin_layout_path(locale: @locale), flash: {success: t('spina.layout.saved')}
         redirect_back fallback_location: spina.edit_admin_layout_path(locale: @locale), flash: {success: 'Room Type Saved'}
@@ -40,7 +41,7 @@ module Spina::Admin
       end
 
       def set_locale
-        @locale = params[:locale] || I18n.default_locale
+        @locale = params[:locale] || I18n.locale
       end
 
   end

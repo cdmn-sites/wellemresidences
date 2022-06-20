@@ -8,9 +8,15 @@
   <% end %>
 <% end %>
 <div class="p-4 md:p-8">
-  <%= form_with model: @room_type, url: Rails.application.routes.url_helpers.admin_room_type_path(@room_type), id: dom_id(@room_type) do |f| %>
-    <%#= hidden_field_tag :locale, @locale %>
-    <% Mobility.with_locale(@locale) do %>
+  <%= form_with model: @room_type, url: main_app.admin_room_type_path(@room_type), id: dom_id(@room_type) do |f| %>
+    <%= hidden_field_tag :locale, @locale %>
+    <div class="locales">
+    <% ['de', 'en', 'es'].each do |locale| %>
+    
+      <%= link_to locale, main_app.edit_admin_room_type_path(locale: locale), class: ('active' if @locale.to_s == locale.to_s) %>
+    <% end %>
+    </div>
+    <% I18n.with_locale(@locale) do %>
       <div class="col-span-2">
         <div class="col-span-1">
           <label class="block text-sm font-medium leading-5 text-gray-700 flex items-center">
@@ -54,3 +60,16 @@
     <%= submit_tag 'Save Room Type', class: 'btn mt-4 btn-primary' %>
   <% end %>
 </div>
+
+<style>
+.locales a {
+  border: 1px solid #ccc;
+  padding: 5px;
+}
+.locales a.active {
+  border: 1px solid #000;
+  background-color: #000;
+  color: #fff;
+}
+
+</style>

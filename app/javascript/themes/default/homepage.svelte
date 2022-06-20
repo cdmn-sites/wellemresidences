@@ -82,7 +82,7 @@
             {/each}
           </div>
           <p class="flex-1 mb-4 leading-6">
-            {room_type.description}
+            {room_type.description || ''}
           </p>
           <a class="btn text-center uppercase" href="{searchLink}&roomTypeId={room_type.id}" target="_blank">
             {$store.t('Check Availability')}

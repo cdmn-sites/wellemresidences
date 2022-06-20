@@ -1,4 +1,6 @@
-class RoomType < ApplicationRecord  
+class RoomType < ApplicationRecord
+  translates :description
+
   has_many_attached :images do |attachment|
     attachment.variant :thumb, resize_to_limit: [600,600]
     attachment.variant :preview, resize_to_limit: [1920,1080]
