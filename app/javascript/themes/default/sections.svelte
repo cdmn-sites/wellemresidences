@@ -56,7 +56,7 @@
               <img alt={images[0].alt}  class="object-cover w-full h-full" src="/rails/active_storage/blobs/{images[0].signed_blob_id}/{images[0].filename}" />
             {/if}
             {#if text}
-            <div class="py-5 md:p-4 lg:p-6 md:bg-white md:shadow leading-6 tracking-wide lg:text-size-4 2xl:text-size-lg 2xl:leading-7">
+            <div class="spina py-5 md:p-4 lg:p-6 md:bg-white md:shadow leading-6 tracking-wide lg:text-size-4 2xl:text-size-lg 2xl:leading-7">
               {@html text}
             </div>
             {/if}
@@ -93,7 +93,7 @@
             </div>
           {/if}
           {#if text?.length}
-            <div class="flex-1 text-size-lg leading-6.5">
+            <div class="flex-1 lg:text-size-xl leading-6.5 spina nice">
               {@html text}
             </div>
           {/if}
