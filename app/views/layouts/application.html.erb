@@ -6,6 +6,9 @@
       <meta name="description" content="<%= @page.description %>">
     <% end%>
     <meta name="viewport" content="width=device-width,initial-scale=1">
+    <% if current_account.content(:favicon) %>
+      <link rel="icon" href="<%= main_app.url_for(current_account.content(:favicon)) %>">
+    <% end %>
 
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
