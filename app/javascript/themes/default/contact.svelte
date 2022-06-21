@@ -2,7 +2,7 @@
   import store from '~/lib/store';
   import { useForm } from '@inertiajs/inertia-svelte'
   import { onMount } from 'svelte';
-  
+  export let spina
   const form = useForm('contact', {text: '', email: '', name: '', not_a_bot: false})
   export let flash = {}
   onMount(() => {
@@ -10,9 +10,21 @@
       $form.not_a_bot = true
     }, 3000)
   })
+  import HeroImages from "~/components/hero_images.svelte";
 </script>
 
-<main class="container mt-50">
+{#if spina.header_images?.images?.length}
+  <div class="h-300px md:h-430px mb-20">
+    {#key spina.page_title}
+      <HeroImages height={200} images={spina.header_images.images}/>
+    {/key}
+  </div>
+{:else}
+  <div class="h-200px"></div>
+{/if}
+
+
+<main class="container">
   <h1>{$store.t('Your message to us')}</h1>
   {#if flash.success}
     <div class="alert alert-success">
@@ -58,4 +70,13 @@
     color: #3c763d;
     padding: 1rem;
   }
+  
+ h1 {
+  text-align: center;
+  letter-spacing: 0.3em;
+  margin-bottom: 3rem;
+  font-size: 2rem;
+  text-transform: uppercase;
+}
+
 </style>
