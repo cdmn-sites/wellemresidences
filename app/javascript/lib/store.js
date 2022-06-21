@@ -14,7 +14,13 @@ const translations = {
     'queen_size_bed': 'Doppelbett',
     'bathtub': 'Badewanne',
     'single_bed': 'Einzelbett',
-    'select_dates': 'Termine auswählen'
+    'select_dates': 'Termine auswählen',
+    'your_message_to_us': 'Ihre Nachricht an uns',
+    'your_name': 'Ihr Name',
+    'your_email': 'Ihre E-Mail',
+    'your_message': 'Ihre Nachricht',
+    'thank_you,_your_message_has_been_sent': 'Vielen Dank, Ihre Nachricht wurde gesendet',
+    'send': 'Abschicken'
   },
   en: {
     'sleeps': 'Sleeps',
@@ -34,7 +40,12 @@ const translations = {
     'queen_size_bed': 'Queen size bed',
     'single_bed': 'Single bed',
     'bathtub': 'Bathtub',
-    'select_dates': 'Seleccionar fechas'
+    'select_dates': 'Seleccionar fechas',
+    'your_message_to_us': 'Su mensaje a nosotros',
+    'your_name': 'Su nombre',
+    'your_email': 'Su correo electrónico',
+    'your_message': 'Su mensaje',
+    'thank_you,_your_message_has_been_sent': 'Gracias, su mensaje ha sido enviado',
   }
 }
 const t = function(key) {
