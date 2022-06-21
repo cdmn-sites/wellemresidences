@@ -4,6 +4,7 @@ class ApplicationController < ActionController::Base
 
   inertia_share do 
     {
+      flash: flash.to_h,
       account: Current.account,
       spina: spina_content,
       header_menu: Spina::Navigation.find_by(name: 'header')&.navigation_items&.map { |i| {path: i.materialized_path, label: i.menu_title || "[#{I18n.locale.to_s.upcase} MISSING]"}} || [],

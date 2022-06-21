@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  # root "categories#index"
+  
   
   class AccountDomain  
     def self.matches?(request)
@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   end
 
   constraints AccountDomain do
+    resources :forms
     scope module: 'spina' do
       namespace :admin, path: Spina.config.backend_path do
         resources :room_types
