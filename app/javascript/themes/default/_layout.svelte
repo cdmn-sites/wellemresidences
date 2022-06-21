@@ -21,6 +21,7 @@
 
   function updateBar() {
     const activeA = document.querySelector('a.active')
+    if (!bar) return
     if (!activeA) {
       bar.style.display = 'none'
       return
@@ -113,7 +114,18 @@
 
 <slot />
 
-<footer>
+<footer md:hidden>
+  <div class="container">
+    <div class="flex-1 mt-5">
+      {account.name}<br>
+      {account.address}<br>
+      {account.postal_code} {account.city}<br>
+      Tel: <a href="tel:{account.phone}">{account.phone}</a>
+    </div>
+  </div>
+</footer>
+
+<footer hidden md:block>
   <div class="container">
     <div class="flex">
       <ul class="flex-1">
@@ -145,7 +157,7 @@
         {account.name}<br>
         {account.address}<br>
         {account.postal_code} {account.city}<br>
-        {account.phone}
+        Tel: <a href="tel:{account.phone}">{account.phone}</a>
       </div>
     </div>
   </div>
