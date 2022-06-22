@@ -128,7 +128,9 @@
 
   <div class="mt-6 address">
     <span class="i-gg-pin-alt"></span>
-    {account.address}, {account.postal_code} {account.city}
+    <a href="https://www.google.com/maps/place/{account.address} {account.postal_code} {account.city}" target="_blank">
+      {account.address}, {account.postal_code} {account.city}
+    </a>
   </div>
   <div class="phone">
     <span class="i-gg-phone"></span>
@@ -142,9 +144,10 @@
 <footer md:hidden>
   <div class="container">
     <div class="flex-1 mt-5">
+      <a href="https://www.google.com/maps/place/{account.address} {account.postal_code} {account.city}" target="_blank">
       {account.name}<br>
       {account.address}<br>
-      {account.postal_code} {account.city}<br>
+      {account.postal_code} {account.city}</a><br>
       Tel: <a href="tel:{account.phone}">{account.phone}</a>
     </div>
   </div>
@@ -179,9 +182,11 @@
         {/each}
       </ul>
       <div class="flex-1">
+        
         {account.name}<br>
         {account.address}<br>
         {account.postal_code} {account.city}<br>
+        <a href="https://www.google.com/maps/place/{account.address} {account.postal_code} {account.city}" target="_blank">Find on Map</a><br>
         Tel: <a href="tel:{account.phone}">{account.phone}</a>
       </div>
     </div>
@@ -209,6 +214,12 @@
   }
   footer {
     margin-top: 100px;
+    padding-bottom: 150px;
+    background: #162866;
+    color: white;
+    line-height: 1.6rem;
+    font-weight: 100;
+    font-size: 18px;
   }
   nav.mobile {
     position: fixed;
@@ -217,8 +228,10 @@
     background: #f9fafe;
     z-index: 15;
     left: 100%;
+    top: 0;
     transition: all 0.3s;
-    padding: 16px;
+    padding: 32px;
+    padding-top: 64px;
   }
   nav.mobile.open {
     left: 0;
