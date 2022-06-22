@@ -24,6 +24,9 @@ h1 {
 ul {
   list-style: none;
 }
+.spina p {
+  margin-bottom: 0.5em;
+}
 .spina ul {
   list-style: disc;
   margin-left: 30px;

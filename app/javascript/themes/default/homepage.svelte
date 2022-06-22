@@ -55,10 +55,10 @@
 
   <div class="container">
     <div class="room_types md:grid-cols-2 2xl:grid-cols-3">
-      <div class="md:pl-10 md:col-span-2 md:text-size-5 text-left bg-white p-6 leading-8">
+      <div class="md:pl-10 md:pr-50 md:col-span-2 md:text-size-5 text-left bg-white p-6 leading-7.5">
         <h4 uppercase class="text-golden mb-2">{spina.page_title}</h4>
         <h3 uppercase>{@html spina.welcome?.content}</h3>
-        <p class="serif">
+        <p class="serif spina">
           {@html spina.intro?.content}
         </p>
 
@@ -102,6 +102,7 @@
 </section>
 
 <style>
+  
   .bg-golden {
     background-color: #d8d6cf;
   }
