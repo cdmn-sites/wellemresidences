@@ -45,10 +45,10 @@ if ENV.fetch("RAILS_ENV") == "development"
   # Allow puma to be restarted by `bin/rails restart` command.
   plugin :tmp_restart
 else 
-  workers 2
+  workers 1
 
   # Min and Max threads per worker
-  threads 1, 2
+  threads 1, 3
   
   app_dir = File.expand_path("../..", __FILE__)
   shared_dir = "#{app_dir}/shared"
