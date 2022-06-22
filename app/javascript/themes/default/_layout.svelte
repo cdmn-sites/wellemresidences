@@ -141,20 +141,39 @@
 
 <slot />
 
-<footer md:hidden>
-  <div class="container">
-    <div class="flex-1 mt-5">
-      <a href="https://www.google.com/maps/place/{account.address} {account.postal_code} {account.city}" target="_blank">
-      {account.name}<br>
-      {account.address}<br>
-      {account.postal_code} {account.city}</a><br>
-      Tel: <a href="tel:{account.phone}">{account.phone}</a>
+
+
+
+  
+<footer class="bottom mt-24 relative p-24 bg-cover bg-top" style="background-image:url('/rails/active_storage/blobs/{spina.footer_image.signed_blob_id}/{spina.footer_image.filename})">
+  <div class="absolute w-full h-full bg-black/75 top-0 right-0"></div>
+  <div class="relative text-center text-white text-size-5">
+    <div class="uppercase tracking-widest font-100 md:text-size-8">
+      {spina.bottom_line?.content}
+    </div>
+    <div class="serif mt-5 leading-8">
+      <div class="font-bold tracking-widest">
+        {spina.page_title}
+      </div>
+      <div class="tracking-wider font-100 text-size-4 leading-6">
+        {spina.contact_person?.content}<br>
+        <a href="tel:{account.phone}">{account.phone}</a><br>
+        <a href="mailto:{account.email}">{account.email}</a>
+      </div>
     </div>
   </div>
-</footer>
 
-<footer hidden md:block>
-  <div class="container">
+  <!-- <div class="md:hidden relative container">
+    <div class="flex-1 mt-5">
+      <a href="https://www.google.com/maps/place/{account.address} {account.postal_code} {account.city}" target="_blank">
+        {account.name}<br>
+        {account.address}<br>
+        {account.postal_code} {account.city}
+      </a><br>
+      Tel: <a href="tel:{account.phone}">{account.phone}</a>
+    </div>
+  </div> -->
+  <div class="hidden md:block relative container mt-20">
     <div class="flex">
       <ul class="flex-1">
         <li>
@@ -191,7 +210,12 @@
       </div>
     </div>
   </div>
+
+
 </footer>
+  
+
+
 
 <style>
   .active {
@@ -213,9 +237,9 @@
     transition: all 0.3s ease-in-out;
   }
   footer {
-    margin-top: 100px;
+
     padding-bottom: 150px;
-    background: #162866;
+    
     color: white;
     line-height: 1.6rem;
     font-weight: 100;

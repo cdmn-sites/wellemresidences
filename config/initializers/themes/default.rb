@@ -33,6 +33,9 @@ Spina::Theme.register do |theme|
     {name: 'answer',  title: "Answer", part_type: "Spina::Parts::Text"},
     {name: 'images', title: 'Images', part_type: "Spina::Parts::ImageCollection"},
     {name: 'title', title: 'Title', part_type: "Spina::Parts::Line"},
+    {name: 'footer_image', title: 'Footer Image', part_type: "Spina::Parts::Image"},
+    {name: 'bottom_line', title: 'Bottom Line', part_type: "Spina::Parts::Line"},
+    {name: 'contact_person', title: 'Contact Person', part_type: "Spina::Parts::Line"},
     {
       name: "style",
       title: "Style",
@@ -85,7 +88,7 @@ Spina::Theme.register do |theme|
   # You can create global content that doesn't belong to one specific page. We call these layout parts.
   # You only have to reference the name of the parts you want to have here.
   theme.layout_parts = [
-    'logo', 'favicon'
+    'logo', 'favicon', 'bottom_line', 'contact_person', 'footer_image'
   ]
   
   # Resources (optional)
