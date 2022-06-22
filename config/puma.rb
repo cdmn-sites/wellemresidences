@@ -45,7 +45,7 @@ if ENV.fetch("RAILS_ENV") == "development"
   # Allow puma to be restarted by `bin/rails restart` command.
   plugin :tmp_restart
 else 
-  workers 1
+  # workers 1
 
   # Min and Max threads per worker
   threads 1, 3
