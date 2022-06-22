@@ -75,7 +75,7 @@
   {#if showDatepickers}
     <div class="!md:hidden mobile overflow-hidden">
       <div class="nav">
-        <div class="prev btn" on:click={prevMonth}>
+        <div class="prev btn left-0" on:click={prevMonth}>
           <span class="i-gg-chevron-left"></span>
         </div>
         <div class="next btn" on:click={nextMonth}>
@@ -89,7 +89,7 @@
       </div>
     </div>
   {/if}
-  <div class="people">
+  <div class="people hidden lg:flex" class:flex={showDatepickers}>
     <div class="adults">
       <div class="options">
         <label>{$store.t('adults')}</label>
@@ -108,14 +108,14 @@
       {#if checkin && checkout}
         <a href={searchLink} target="_blank" class="btn primary">{$store.t('Check Availability')}</a>
       {:else}
-      <div class="btn disabled" >{$store.t('Check Availability')}</div>
+        <div class="btn disabled" >{$store.t('Check Availability')}</div>
       {/if}
     </div>
   </div>
   {#if showDatepickers}
     <div class="!hidden !md:block desktop overflow-hidden">
       <div class="nav">
-        <div class="prev btn" on:click={prevMonth}>
+        <div class="prev btn left-0" on:click={prevMonth}>
           <span class="i-gg-chevron-left"></span>
         </div>
         <div class="next btn" on:click={nextMonth}>
@@ -137,7 +137,7 @@
 
 <style>
   .booking > div {
-    display: block;
+    /* display: block; */
     
   }
   
@@ -166,7 +166,7 @@
   
   .booking .people {
     width: 100%;
-    display: flex;
+    /* display: flex; */
     gap: 4rem;
     /* justify-content: space-evenly; */
   }

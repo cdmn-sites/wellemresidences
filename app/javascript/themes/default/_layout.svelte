@@ -1,6 +1,8 @@
 <script>
   import { inertia, page } from '@inertiajs/inertia-svelte'
   import { Inertia } from '@inertiajs/inertia'
+  import { tick } from 'svelte'
+  import DatesPanel from '../../components/datespanel.svelte';
   import store from '~/lib/store'
   import glightbox from 'glightbox'
 
@@ -33,9 +35,25 @@
     bar.style.display = 'block'
     menuOpen = false
   }
+
   Inertia.on('navigate', updateBar)
   Inertia.on('navigate', glightbox)
-  
+
+  let searchLink = `https://direct-book.com/properties/intownresidencesdirect/?locale=${$store.locale}&items[0][infants]=0&currency=EUR&trackPage=yes`
+  let placed
+  let datespanel
+  Inertia.on('navigate', function() {
+    const target = document.getElementById('datespanel')
+    if (target) {
+      target.appendChild(datespanel)
+      placed = true
+    }
+    else {
+      document.body.appendChild(datespanel)
+      placed = false
+    }
+  })
+
 </script>
 
 <svelte:window bind:scrollY on:resize={updateBar}/>
@@ -45,6 +63,11 @@
     <title>{spina.page_title}</title>
   {/if}
 </svelte:head>
+
+<div class="datespanel" bg-light class:placed bind:this={datespanel}>
+  <!-- <div id="avantio-form" class="horizontal"></div>{@html avantioHtml}     -->
+  <DatesPanel bind:searchLink/>
+</div>
 
 <header>
   <div class="hidden md:block active_bar" bind:this={bar}></div>
@@ -331,4 +354,30 @@
     opacity: 1;
   }
 }
+.datespanel {
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    display: inline-block;    
+    border-radius: 8px;
+    padding: 13px 20px 3px;
+    text-align: center;
+    text-transform: uppercase;
+    box-shadow: 0px -4px 20px rgba(0, 0, 0, 0.35);
+    z-index: 5;
+  }
+  @media (min-width: 768px) {
+    .datespanel.placed {
+      white-space: nowrap;
+      position: absolute;      
+      bottom: 0px;
+      width: auto;
+      left: 50%;
+      padding: 24px 70px;
+      transform: translateX(-50%);
+      box-shadow: 0px 0px 20px rgba(0,0,0,0.2);
+      min-width: 700px;
+    }
+  }
 </style>

@@ -35,11 +35,8 @@
 </div>
 <!-- {/if} -->
 
-<section relative md:h-24 z-15>
-  <div class="datespanel" bg-light>
-    <!-- <div id="avantio-form" class="horizontal"></div>{@html avantioHtml}     -->
-    <DatesPanel bind:searchLink/>
-  </div>
+<section relative md:h-24 z-15 id="datespanel">
+
 </section>
 
 
@@ -94,19 +91,7 @@
 
 <style>
 
-  .datespanel {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    display: inline-block;    
-    border-radius: 8px;
-    padding: 20px 20px 10px;
-    text-align: left;
-    text-transform: uppercase;
-    box-shadow: 0px -4px 20px rgba(0, 0, 0, 0.35);
-    z-index: 5;
-  }
+
   .amenities {
     /* display: flex;
     flex-wrap: wrap;
@@ -162,18 +147,6 @@
   .room_type:hover .image {
     transform: scale(1.1);
   }
-  @media (min-width: 768px) {
-    .datespanel {
-      white-space: nowrap;
-      position: absolute;      
-      bottom: 0px;
-      width: auto;
-      left: 50%;
-      padding: 24px 70px;
-      transform: translateX(-50%);
-      box-shadow: 0px 0px 20px rgba(0,0,0,0.2);
-      min-width: 700px;
-    }
-  }
+
 
 </style>
