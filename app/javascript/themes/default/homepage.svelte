@@ -55,11 +55,11 @@
 
   <div class="container">
     <div class="room_types md:grid-cols-2 2xl:grid-cols-3">
-      <div class="md:col-span-2 md:text-size-5.5 text-left bg-white p-4">
+      <div class="md:pl-10 md:col-span-2 md:text-size-5 text-left bg-white p-6 leading-8">
         <h4 uppercase class="text-golden mb-2">{spina.page_title}</h4>
-        <h3 uppercase>{spina.welcome?.content}</h3>
+        <h3 uppercase>{@html spina.welcome?.content}</h3>
         <p class="serif">
-          {spina.intro?.content}
+          {@html spina.intro?.content}
         </p>
 
       </div>
