@@ -2,13 +2,11 @@
   import HeroImages from "../../components/hero_images.svelte";
   import Cycler from "../../components/cycler.svelte";
   import Paralax from "../../components/paralax.svelte";
-  import glightbox from 'glightbox'
-  import { onMount } from "svelte";
-  export let spina
+  
 
-  onMount(() => {
-    glightbox()
-  })
+  export let spina
+  
+  
 </script>
 
 {#if spina.header_images?.images?.length}
@@ -42,7 +40,9 @@
             <!-- <Paralax scale={1.05} y={120}> -->
               <Cycler let:current>
                 {#each images as img, i}
+                
                   <img alt={img.alt} class:active={current == i} class="lg:absolute object-cover w-full h-full cycle_image" src="/rails/active_storage/blobs/{img.signed_blob_id}/{img.filename}" />
+                
                 {/each}
               </Cycler>
             <!-- </Paralax> -->
@@ -59,7 +59,7 @@
           <h1>{title}</h1>
           <div class="md:grid gap-4 grid-cols-3">
             {#if images[0]}
-              <img alt={images[0].alt}  class="object-cover w-full h-full" src="/rails/active_storage/blobs/{images[0].signed_blob_id}/{images[0].filename}" />
+              <img alt={images[0].alt} data-gallery="section{i}"  class="glightbox object-cover w-full h-full" src="/rails/active_storage/blobs/{images[0].signed_blob_id}/{images[0].filename}" />
             {/if}
             {#if text}
             <div class="spina py-5 md:p-0 text-justify nice leading-6 tracking-wide lg:text-size-4.5 2xl:text-size-lg 2xl:leading-7">
@@ -67,19 +67,19 @@
             </div>
             {/if}
             {#if images[1]}
-              <img alt={images[1].alt}  class="object-cover w-full h-full" src="/rails/active_storage/blobs/{images[1].signed_blob_id}/{images[1].filename}" />
+              <img alt={images[1].alt} data-gallery="section{i}"  class="glightbox object-cover w-full h-full" src="/rails/active_storage/blobs/{images[1].signed_blob_id}/{images[1].filename}" />
             {/if}
             {#if images[2]}
-              <img alt={images[2].alt}  class="hidden md:block object-cover w-full h-full" src="/rails/active_storage/blobs/{images[2].signed_blob_id}/{images[2].filename}" />
+              <img alt={images[2].alt} data-gallery="section{i}"  class="glightbox hidden md:block object-cover w-full h-full" src="/rails/active_storage/blobs/{images[2].signed_blob_id}/{images[2].filename}" />
             {/if}
             {#if images[3]}
-              <img alt={images[3].alt}  class="hidden md:block object-cover w-full h-full" src="/rails/active_storage/blobs/{images[3].signed_blob_id}/{images[3].filename}" />
+              <img alt={images[3].alt} data-gallery="section{i}"  class="glightbox hidden md:block object-cover w-full h-full" src="/rails/active_storage/blobs/{images[3].signed_blob_id}/{images[3].filename}" />
             {/if}
             {#if images[4]}
-              <img alt={images[4].alt}  class="hidden md:block object-cover w-full h-full" src="/rails/active_storage/blobs/{images[4].signed_blob_id}/{images[4].filename}" />
+              <img alt={images[4].alt} data-gallery="section{i}"  class="glightbox hidden md:block object-cover w-full h-full" src="/rails/active_storage/blobs/{images[4].signed_blob_id}/{images[4].filename}" />
             {/if}
             {#if images[5]}
-              <img alt={images[5].alt}  class="hidden md:block object-cover w-full h-full" src="/rails/active_storage/blobs/{images[5].signed_blob_id}/{images[5].filename}" />
+              <img alt={images[5].alt} data-gallery="section{i}"  class="glightbox hidden md:block object-cover w-full h-full" src="/rails/active_storage/blobs/{images[5].signed_blob_id}/{images[5].filename}" />
             {/if}
           </div>
       </section>

@@ -2,6 +2,7 @@
   import { inertia, page } from '@inertiajs/inertia-svelte'
   import { Inertia } from '@inertiajs/inertia'
   import store from '~/lib/store'
+  import glightbox from 'glightbox'
 
   export let account
   export let spina
@@ -33,6 +34,7 @@
     menuOpen = false
   }
   Inertia.on('navigate', updateBar)
+  Inertia.on('navigate', glightbox)
   
 </script>
 
