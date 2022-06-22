@@ -55,7 +55,7 @@
 
   <div class="container">
     <div class="room_types md:grid-cols-2 2xl:grid-cols-3">
-      <div class="md:pl-10 md:pr-50 md:col-span-2 md:text-size-5 text-left bg-white p-6 leading-7.5">
+      <div class="md:pl-10 md:pr-50 md:col-span-2 md:text-size-5 text-left bg-light p-6 leading-7.5">
         <h4 uppercase class="text-golden mb-2">{spina.page_title}</h4>
         <h3 uppercase>{@html spina.welcome?.content}</h3>
         <p class="serif spina">
@@ -64,7 +64,7 @@
 
       </div>
       {#each room_types as room_type}
-        <div on:click={() => lightbox(room_type)} class="room_type flex flex-col bg-white p-6 shadow-sm">
+        <div on:click={() => lightbox(room_type)} class="room_type flex flex-col bg-light p-6 shadow-sm">
           <div class="cursor-pointer overflow-hidden mb-6 shadow z-1 relative -m-2">
             <!-- {#each room_type.images_prop as image} -->
               <div class="placeholder image" style="background-image:url({room_type.thumbnail_url})"></div>
@@ -154,7 +154,7 @@
   .room_types {
     display: grid;
     /* @apply grid; */
-    grid-gap: 1.2rem 0;
+    grid-gap: 2rem 0;
 
   }
   .room_type .image {
