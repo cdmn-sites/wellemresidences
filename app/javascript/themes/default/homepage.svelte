@@ -138,7 +138,7 @@
     margin-top: 4rem;
   }
   h2 {
-    font-size: 1.7em;
+    font-size: 1.5em;
     margin-bottom: 7rem;
     margin-top: 1rem;
   }
