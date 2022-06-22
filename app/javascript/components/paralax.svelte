@@ -18,7 +18,7 @@
 
 <svelte:window bind:scrollY bind:innerHeight/>
 
-<div bind:this={el} style="transform: scale({1 + ratio * (scale-1)}) translateY({ratio * y - y}px)">
+<div bind:this={el} style="transform: scale({1 + ratio * (scale-1)}) translateY({ratio * y - 2 * y}px)">
   <slot />
 </div>
 

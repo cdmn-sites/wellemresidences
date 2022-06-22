@@ -39,13 +39,13 @@
         <h1>{title}</h1>
         {#if images?.length}
           <div class:right-0={i % 2 == 1} class="relative lg:absolute aspect-video lg:w-7/10  overflow-hidden">
-            <Paralax scale={1.05} y={120}>
+            <!-- <Paralax scale={1.05} y={120}> -->
               <Cycler let:current>
                 {#each images as img, i}
                   <img alt={img.alt} class:active={current == i} class="lg:absolute object-cover w-full h-full cycle_image" src="/rails/active_storage/blobs/{img.signed_blob_id}/{img.filename}" />
                 {/each}
               </Cycler>
-            </Paralax>
+            <!-- </Paralax> -->
           </div>
         {/if}
         <Paralax y={-100}>
@@ -62,7 +62,7 @@
               <img alt={images[0].alt}  class="object-cover w-full h-full" src="/rails/active_storage/blobs/{images[0].signed_blob_id}/{images[0].filename}" />
             {/if}
             {#if text}
-            <div class="spina py-5 md:p-4 lg:p-6 md:bg-white md:shadow leading-6 tracking-wide lg:text-size-4 2xl:text-size-lg 2xl:leading-7">
+            <div class="spina py-5 md:p-0 text-justify nice leading-6 tracking-wide lg:text-size-4.5 2xl:text-size-lg 2xl:leading-7">
               {@html text}
             </div>
             {/if}
@@ -70,16 +70,16 @@
               <img alt={images[1].alt}  class="object-cover w-full h-full" src="/rails/active_storage/blobs/{images[1].signed_blob_id}/{images[1].filename}" />
             {/if}
             {#if images[2]}
-              <img alt={images[2].alt}  class="object-cover w-full h-full" src="/rails/active_storage/blobs/{images[2].signed_blob_id}/{images[2].filename}" />
+              <img alt={images[2].alt}  class="hidden md:block object-cover w-full h-full" src="/rails/active_storage/blobs/{images[2].signed_blob_id}/{images[2].filename}" />
             {/if}
             {#if images[3]}
-              <img alt={images[3].alt}  class="object-cover w-full h-full" src="/rails/active_storage/blobs/{images[3].signed_blob_id}/{images[3].filename}" />
+              <img alt={images[3].alt}  class="hidden md:block object-cover w-full h-full" src="/rails/active_storage/blobs/{images[3].signed_blob_id}/{images[3].filename}" />
             {/if}
             {#if images[4]}
-              <img alt={images[4].alt}  class="object-cover w-full h-full" src="/rails/active_storage/blobs/{images[4].signed_blob_id}/{images[4].filename}" />
+              <img alt={images[4].alt}  class="hidden md:block object-cover w-full h-full" src="/rails/active_storage/blobs/{images[4].signed_blob_id}/{images[4].filename}" />
             {/if}
             {#if images[5]}
-              <img alt={images[5].alt}  class="object-cover w-full h-full" src="/rails/active_storage/blobs/{images[5].signed_blob_id}/{images[5].filename}" />
+              <img alt={images[5].alt}  class="hidden md:block object-cover w-full h-full" src="/rails/active_storage/blobs/{images[5].signed_blob_id}/{images[5].filename}" />
             {/if}
           </div>
       </section>
@@ -89,7 +89,7 @@
         <div class="md:flex gap-4" class:flex-row-reverse={i % 2 == 1}>
           {#if images?.length}
             <div class="flex-1">
-              <div class="overflow-hidden w-full aspect-square relative">
+              <div class="overflow-hidden mb-4 w-full aspect-video md:aspect-square relative">
                 <Cycler let:current>
                   {#each images as img, j}
                     <a href="/rails/active_storage/blobs/{img.signed_blob_id}/{img.filename}" class="glightbox" data-gallery="section-{i}">
@@ -101,7 +101,7 @@
             </div>
           {/if}
           {#if text?.length}
-            <div class="flex-1 lg:text-size-xl leading-6.5 spina nice">
+            <div class="flex-1 nice xl:text-size-xl leading-6 xl:leading-7 spina ">
               {@html text}
             </div>
           {/if}
@@ -118,7 +118,7 @@
 
 <style>
 .nice {
-  line-height: 1.8rem;
+  /* line-height: 1.6rem; */
   font-weight: 100;
 }
 h1 {
