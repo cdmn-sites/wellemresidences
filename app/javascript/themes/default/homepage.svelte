@@ -55,11 +55,11 @@
 
   <div class="container">
     <div class="room_types md:grid-cols-2 2xl:grid-cols-3">
-      <div class="md:col-span-2 text-left bg-white p-4">
+      <div class="md:col-span-2 md:text-size-5.5 text-left bg-white p-4">
         <h4 uppercase class="text-golden mb-2">{spina.page_title}</h4>
-        <h3 uppercase>{spina.welcome}</h3>
+        <h3 uppercase>{spina.welcome?.content}</h3>
         <p class="serif">
-          {spina.intro}
+          {spina.intro?.content}
         </p>
 
       </div>
@@ -103,10 +103,10 @@
 
 <style>
   .bg-golden {
-    background-color: #ddd9cd;
+    background-color: #d8d6cf;
   }
   .text-golden {
-    color: #978755;
+    color: #948a6b;
   }
 
   .amenities {
