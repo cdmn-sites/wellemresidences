@@ -2,6 +2,7 @@
 <script>
   import store from '~/lib/store'
   import DatesPanel from '~/components/datespanel.svelte'
+  import Paralax from '~/components/paralax.svelte'
   import HeroImages from '~/components/hero_images.svelte'
   import glightbox from 'glightbox'
 
@@ -31,7 +32,17 @@
 
 <!-- {#if spina.header_images?.length} -->
 <div class="h-400px md:h-500px lg:h-600px xl:h-650px">
-<HeroImages bottom images={spina.header_images.images} />
+  <HeroImages bottom images={spina.header_images.images} >
+    <div class="absolute w-full h-full bg-black/45"></div>
+    <Paralax y={-50}>
+    <div class="serif text-center text-size-2.5 md:text-size-3 px-12 lg:text-size-5 taglines text-white absolute w-full flex items-center flex-col justify-center h-full">
+      <h1>
+        {spina.tagline1.content}
+      </h1>
+      <h2>{spina.tagline2.content}</h2>
+    </div>
+  </Paralax>
+  </HeroImages>
 </div>
 <!-- {/if} -->
 
@@ -40,28 +51,29 @@
 </section>
 
 
-<section>
-  <h1 class="tagline">
-    {spina.tagline1.content}
-  </h1>
-  <h2>{spina.tagline2.content}</h2>
-  <div class="grid grid-cols-4 grid-flow-col w-full gap-4 auto-cols-fr">
-
-  </div>
+<section mt-8 class="bg-golden py-12">
 
   <div class="container">
     <div class="room_types md:grid-cols-2 2xl:grid-cols-3">
+      <div class="md:col-span-2 text-left bg-white p-4">
+        <h4 uppercase class="text-golden mb-2">{spina.page_title}</h4>
+        <h3 uppercase>{spina.welcome}</h3>
+        <p class="serif">
+          {spina.intro}
+        </p>
+
+      </div>
       {#each room_types as room_type}
-        <div on:click={() => lightbox(room_type)} class="room_type flex mb-8 flex-col bg-white p-6 shadow-sm">
-          <div class="cursor-pointer overflow-hidden mb-6 shadow-md z-1 relative -m-6">
+        <div on:click={() => lightbox(room_type)} class="room_type flex flex-col bg-white p-6 shadow-sm">
+          <div class="cursor-pointer overflow-hidden mb-6 shadow z-1 relative -m-2">
             <!-- {#each room_type.images_prop as image} -->
               <div class="placeholder image" style="background-image:url({room_type.thumbnail_url})"></div>
             <!-- {/each} -->
           </div>
-          <h3 class="name">
+          <h3 class="text-golden uppercase">
             {room_type.name}
           </h3>
-          <div class="amenities relative min-h-8">
+          <div class="serif italic amenities relative min-h-8">
             <div class="amenity">
               <!-- <span class="i-material-symbols-person text-size-lg"></span> -->
               <span class="text-size-sm">{$store.t('sleeps')} {sleeps(room_type)}</span>
@@ -77,10 +89,10 @@
               </div> {#if i < Object.entries(room_type.amenities).length -1} | {/if}
             {/each}
           </div>
-          <p class="flex-1 mb-4 leading-6">
+          <!-- <p class="flex-1 mb-4 leading-6">
             {room_type.description || ''}
-          </p>
-          <a class="btn text-center uppercase" href="{searchLink}&roomTypeId={room_type.id}" target="_blank">
+          </p> -->
+          <a class="btn serif text-center uppercase" href="{searchLink}&roomTypeId={room_type.id}" target="_blank">
             {$store.t('Check Availability')}
           </a>
         </div>
@@ -90,7 +102,12 @@
 </section>
 
 <style>
-
+  .bg-golden {
+    background-color: #ddd9cd;
+  }
+  .text-golden {
+    color: #978755;
+  }
 
   .amenities {
     /* display: flex;
@@ -116,10 +133,11 @@
     padding-left: 0;
   }
   h1 {
-    font-size: 2.5rem;
+    font-size: 2.5em;
     margin-top: 4rem;
   }
   h2 {
+    font-size: 1.7em;
     margin-bottom: 7rem;
     margin-top: 1rem;
   }
@@ -135,13 +153,16 @@
   .room_types {
     display: grid;
     /* @apply grid; */
-    grid-gap: 1.2rem;
+    grid-gap: 1.2rem 0;
+
   }
   .room_type .image {
+    /* margin: 12px; */
     transition: all 1s;
     aspect-ratio: calc(16 / 9);
   }
   .room_type {
+    
     text-align: left;
   }
   .room_type:hover .image {

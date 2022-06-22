@@ -16,6 +16,7 @@
   </Cycler>
   <div class="gradient" />
   <div class="shade"/>
+  <slot />
 </div>
 
 

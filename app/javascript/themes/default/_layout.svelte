@@ -373,7 +373,7 @@
     bottom: 0;
     width: 100%;
     display: inline-block;    
-    border-radius: 8px;
+    /* border-radius: 8px; */
     padding: 13px 20px 3px;
     text-align: center;
     text-transform: uppercase;

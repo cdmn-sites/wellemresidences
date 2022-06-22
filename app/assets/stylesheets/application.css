@@ -1,13 +1,17 @@
 * {
-  font-family: 'Lato', sans-serif;
   padding: 0;
   margin: 0;
   box-sizing: border-box;
 }
 
 body {
+  font-family: 'Lato', sans-serif;
   background-color: #f9fafe;
   color: rgb(42, 44, 46);
+}
+
+.serif {
+  font-family: 'Times New Roman', Times, serif;
 }
 
 h1, h2, h3, h4, h5 {
@@ -15,7 +19,7 @@ h1, h2, h3, h4, h5 {
 }
 
 h1 {
-  font-size: 1.5rem;
+  /* font-size: 1.5rem; */
 }
 ul {
   list-style: none;
