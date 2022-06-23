@@ -102,7 +102,7 @@
 </section>
 
 <section class="container">
-  <div class="md:flex spina text-left">
+  <div class="md:flex spina text-left xl:text-size-4.5">
     <div class="flex-1  my-16">
       {@html spina.room_amenities?.content}
     </div>
