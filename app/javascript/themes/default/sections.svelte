@@ -87,13 +87,15 @@
         </section>
       {:else if style == 'mosaic'}
         <section mb-28 class="container">
-          <h3>{title}</h3>
-          <div class="md:grid gap-4 grid-cols-3">
+          {#if title}
+            <h3 class="uppercase mb-3 text-size-1.5rem md:text-size-1.8rem">{title}</h3>
+          {/if}
+          <div class="md:grid gap-4 grid-cols-2 xl:grid-cols-3">
             {#if images[0]}
               <img alt={images[0].alt} data-gallery="section{i}"  class="glightbox object-cover w-full h-full" src="/rails/active_storage/blobs/{images[0].signed_blob_id}/{images[0].filename}" />
             {/if}
             {#if text}
-            <div class="spina py-5 md:p-0 text-justify nice leading-6 tracking-wide lg:text-size-4.5 2xl:text-size-lg 2xl:leading-7">
+            <div class="spina serif md:bg-white md:shadow py-5 md:p-5 text-justify nice leading-6 tracking-wide lg:text-size-4.5 2xl:text-size-lg 2xl:leading-7">
               {@html text}
             </div>
             {/if}
