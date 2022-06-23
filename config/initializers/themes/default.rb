@@ -35,6 +35,8 @@ Spina::Theme.register do |theme|
     {name: 'title', title: 'Title', part_type: "Spina::Parts::Line"},
     {name: 'footer_image', title: 'Footer Image', part_type: "Spina::Parts::Image"},
     {name: 'bottom_line', title: 'Bottom Line', part_type: "Spina::Parts::Line"},
+    {name: 'group', title: 'Group', hint: 'which tab group should this section be in', part_type: "Spina::Parts::Option", options: ['top', 'middle', 'bottom']},
+    {name: 'color', title: 'Color', part_type: "Spina::Parts::Option", options: ['default', 'shaded']},
     {name: 'contact_person', title: 'Contact Person', part_type: "Spina::Parts::Line"},
     {
       name: "style",
@@ -45,7 +47,7 @@ Spina::Theme.register do |theme|
     {
       name: "sections",
       title: "Sections",
-      parts: %w(title images text style),
+      parts: %w(title images text style group color),
       part_type: "Spina::Parts::Repeater"
     },
     {

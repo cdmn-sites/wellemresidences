@@ -5,8 +5,20 @@
   
 
   export let spina
-  
-  
+  let tabbedSections = {}
+  let selectedTabs = {
+    top: 0,
+    middle: 0,
+    bottom: 0
+  }
+  $: if (spina.sections?.content) {
+    for (let i = 0; i < spina.sections.content.length; i++) {
+      const section = spina.sections.content[i]
+      const group = section.parts[4]?.value || 'top'
+      tabbedSections[group] ||= []
+      tabbedSections[group].push(section)
+    }
+  }
 </script>
 
 {#if spina.header_images?.images?.length}
@@ -20,43 +32,62 @@
 {/if}
 
   
-<main class="container">
-  <div class="tagline2">
-
-  </div>
+<main>
+  <section class="container">
+    <h1 uppercase>
+      {spina.tagline2.content}
+    </h1>
+    <h2 uppercase>
+      {spina.tagline2.content}
+    </h2>
+  </section>
   
-
-  {#each spina.sections?.content || [] as section, i}
-    {@const title = section.parts[0].content}
-    {@const images = section.parts[1].images}
-    {@const text = section.parts[2].content}
-    {@const style = section.parts[3]?.value}
-
-    {#if style == 'parallax'}
-      <section relative class:odd={i % 2 == 1} class="spina mb-20 lg:h-140 xl:h-180">
-        <h1>{title}</h1>
-        {#if images?.length}
-          <div class:right-0={i % 2 == 1} class="relative lg:absolute aspect-video lg:w-7/10  overflow-hidden">
-            <!-- <Paralax scale={1.05} y={120}> -->
-              <Cycler let:current>
-                {#each images as img, i}
-                
-                  <img alt={img.alt} class:active={current == i} class="lg:absolute object-cover w-full h-full cycle_image" src="/rails/active_storage/blobs/{img.signed_blob_id}/{img.filename}" />
-                
-                {/each}
-              </Cycler>
-            <!-- </Paralax> -->
+{#each Object.entries(tabbedSections) as [group, sections]}
+  {#if sections.length > 1}
+    <div class="container">
+      <div class="tabbar uppercase">
+        {#each sections as section, i}
+          <div class="tab inline-block text-gray" class:active={selectedTabs[group] == i} on:click={() => selectedTabs[group] = i}>
+            {section.parts[0].content}
           </div>
-        {/if}
-        <Paralax y={-100}>
-          <div class:right-0={i % 2 == 0} class="nice relative -top-70px lg:text-size-lg xl:text-size-xl xl:w-12/10 lg:max-w-500px xl:max-w-700px shadow-2xl bg-light/90 p-6 lg:absolute lg:top-140px xl:top-300px">
-            {@html text}
-          </div>
-        </Paralax>
-      </section>
-    {:else if style == 'mosaic'}
-      <section mb-28>
-          <h1>{title}</h1>
+        {/each}
+      </div>
+    </div>
+  {/if}
+
+  {#each sections as section, i}
+    {#if selectedTabs[group] == i}
+      {@const title = section.parts[0].content}
+      {@const images = section.parts[1].images}
+      {@const text = section.parts[2].content}
+      {@const style = section.parts[3]?.value}
+      {@const color = section.parts[5]?.value}
+
+      {#if style == 'parallax'}
+        <section relative class:odd={i % 2 == 1} class="container spina mb-20 lg:h-140 xl:h-180">
+          <h3>{title}</h3>
+          {#if images?.length}
+            <div class:right-0={i % 2 == 1} class="relative lg:absolute aspect-video lg:w-7/10  overflow-hidden">
+              <!-- <Paralax scale={1.05} y={120}> -->
+                <Cycler let:current>
+                  {#each images as img, i}
+                  
+                    <img alt={img.alt} class:active={current == i} class="lg:absolute object-cover w-full h-full cycle_image" src="/rails/active_storage/blobs/{img.signed_blob_id}/{img.filename}" />
+                  
+                  {/each}
+                </Cycler>
+              <!-- </Paralax> -->
+            </div>
+          {/if}
+          <Paralax y={-100}>
+            <div class:right-0={i % 2 == 0} class="nice relative -top-70px lg:text-size-lg xl:text-size-xl xl:w-12/10 lg:max-w-500px xl:max-w-700px shadow-2xl bg-light/90 p-6 lg:absolute lg:top-140px xl:top-300px">
+              {@html text}
+            </div>
+          </Paralax>
+        </section>
+      {:else if style == 'mosaic'}
+        <section mb-28 class="container">
+          <h3>{title}</h3>
           <div class="md:grid gap-4 grid-cols-3">
             {#if images[0]}
               <img alt={images[0].alt} data-gallery="section{i}"  class="glightbox object-cover w-full h-full" src="/rails/active_storage/blobs/{images[0].signed_blob_id}/{images[0].filename}" />
@@ -82,85 +113,78 @@
               <img alt={images[5].alt} data-gallery="section{i}"  class="glightbox hidden md:block object-cover w-full h-full" src="/rails/active_storage/blobs/{images[5].signed_blob_id}/{images[5].filename}" />
             {/if}
           </div>
-      </section>
-    {:else}
-      <section relative mb-20 class:odd={i % 2 == 1}>
-        <h1>{title}</h1>
-        <div class="md:flex gap-4" class:flex-row-reverse={i % 2 == 1}>
-          {#if images?.length}
-            <div class="flex-1">
-              <div class="overflow-hidden mb-4 w-full aspect-video md:aspect-square relative">
-                <Cycler let:current>
-                  {#each images as img, j}
-                    <a href="/rails/active_storage/blobs/{img.signed_blob_id}/{img.filename}" class="glightbox" data-gallery="section-{i}">
-                      <img alt={img.alt} class:active={current == j} class="w-full absolute cycle_image" src="/rails/active_storage/blobs/{img.signed_blob_id}/{img.filename}" />
-                    </a>
-                  {/each}
-                </Cycler>
+        </section>
+      {:else}
+        <section class:shaded={color == 'shaded'} relative py-6 mb-5 md:mb-15 class:odd={i % 2 == 1}>
+          <div class="container md:flex gap-4" class:flex-row-reverse={i % 2 == 1}>
+            {#if images?.length}
+              <div class="flex-1">
+                <div class="overflow-hidden mb-4 w-full aspect-video relative">
+                  <Cycler let:current>
+                    {#each images as img, j}
+                      <a href="/rails/active_storage/blobs/{img.signed_blob_id}/{img.filename}" class="glightbox" data-gallery="section-{i}">
+                        <img alt={img.alt} class:active={current == j} class="w-full absolute cycle_image" src="/rails/active_storage/blobs/{img.signed_blob_id}/{img.filename}" />
+                      </a>
+                    {/each}
+                  </Cycler>
+                </div>
               </div>
-            </div>
-          {/if}
-          {#if text?.length}
-            <div class="flex-1 nice xl:text-size-xl leading-6 xl:leading-7 spina ">
-              {@html text}
-            </div>
-          {/if}
-        </div>
-      </section>
+            {/if}
+            {#if text?.length}
+              <div class="flex-1 nice xl:text-size-xl leading-6 xl:leading-7 spina ">
+                {#if title}
+                  <h3 class="uppercase mb-3 text-size-1.5rem md:text-size-1.8rem">{title}</h3>
+                {/if}
+                <div class="serif font-100">
+                  {@html text}
+                </div>
+              </div>
+            {/if}
+          </div>
+        </section>
+      {/if}
     {/if}
-  {:else}
-    <section>
-      Under construction :)
-    </section>
   {/each}
+{/each}
 </main>
-
 
 <style>
 .nice {
   /* line-height: 1.6rem; */
   font-weight: 100;
 }
+
+.tabbar {
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 24px;
+}
+.tab {
+  padding: 12px;
+  cursor: pointer;
+}
+.tab.active {
+  color: black;
+}
+.tab:first-child {
+  padding-left: 0px;
+}
+section.shaded {
+  background-color: #d8d6cf;
+}
 h1 {
-  font-size: 2rem;
+  color: #948a6b;
+  margin-bottom: 0.1em;
+  font-size: 1.8rem;
 }
-section {
-
-}
-section h1 {
-  text-align: center;
-  letter-spacing: 0.3em;
-  margin-bottom: 3rem;
-  font-size: 2rem;
-}
-
-.title {
-  left: 0;
-  bottom: -20px;
-  width: 100%;
-  display: inline-block;    
-  border-radius: 8px;
-  text-align: center;
-  position: absolute;      
-  width: auto;
-  left: 50%;
-  padding: 24px 70px;
-  transform: translateX(-50%);
-  /* box-shadow: 0px 0px 20px rgba(0,0,0,0.2); */
-  width: 700px;
-  max-width: 100%;
-}
-.tagline2 {
-  text-align: center;
-}
-main {
-  /* padding-top: 110px; */
-}
-
-
 h2 {
-  margin-top: 1rem;
+  font-size: 1.4rem;
+  margin-bottom: 3rem;
 }
+section h3 {
+  color: #948a6b;
+  letter-spacing: 0.1em;
+}
+
 .cycle_image {
     opacity: 0;
     transition: opacity 2s ease-in-out;

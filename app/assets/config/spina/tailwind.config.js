@@ -1,10 +1,10 @@
 module.exports = {
   content: [
-    '/home/buhrmi/.rbenv/versions/3.0.2/lib/ruby/gems/3.0.0/gems/spina-2.10.0/app/views/**/*.*',
-'/home/buhrmi/.rbenv/versions/3.0.2/lib/ruby/gems/3.0.0/gems/spina-2.10.0/app/components/**/*.*',
-'/home/buhrmi/.rbenv/versions/3.0.2/lib/ruby/gems/3.0.0/gems/spina-2.10.0/app/helpers/**/*.*',
-'/home/buhrmi/.rbenv/versions/3.0.2/lib/ruby/gems/3.0.0/gems/spina-2.10.0/app/assets/javascripts/**/*.js',
-'/home/buhrmi/.rbenv/versions/3.0.2/lib/ruby/gems/3.0.0/gems/spina-2.10.0/app/**/application.tailwind.css'
+    '/root/.rbenv/versions/3.0.2/lib/ruby/gems/3.0.0/gems/spina-2.10.0/app/views/**/*.*',
+'/root/.rbenv/versions/3.0.2/lib/ruby/gems/3.0.0/gems/spina-2.10.0/app/components/**/*.*',
+'/root/.rbenv/versions/3.0.2/lib/ruby/gems/3.0.0/gems/spina-2.10.0/app/helpers/**/*.*',
+'/root/.rbenv/versions/3.0.2/lib/ruby/gems/3.0.0/gems/spina-2.10.0/app/assets/javascripts/**/*.js',
+'/root/.rbenv/versions/3.0.2/lib/ruby/gems/3.0.0/gems/spina-2.10.0/app/**/application.tailwind.css'
   ],  
   theme: {
     fontFamily: {

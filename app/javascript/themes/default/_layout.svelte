@@ -87,7 +87,10 @@
 
 <div class="h-40px"></div>
 <div class="shade"></div>
-<img class="logo" src="/rails/active_storage/blobs/{spina.logo.signed_blob_id}/{spina.logo.filename}" alt={account.name} style="transform: translate(-50%, {-moveLogo/3.4}px) scale({1 - moveLogo / 500})">
+<div class="logo p-3" style="transform: translate(-50%, {-moveLogo/3.4}px) scale({1 - moveLogo / 500})">
+  <img class="w-full" src="/rails/active_storage/blobs/{spina.logo.signed_blob_id}/{spina.logo.filename}" alt={account.name}>
+
+</div>
 
 <div  class:menuOpen class="md:hidden menu_toggle" on:click={() => menuOpen = !menuOpen}>
   <div class="hamburger-icon" id="icon">
