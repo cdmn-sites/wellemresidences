@@ -32,6 +32,8 @@ Spina::Theme.register do |theme|
     {name: 'question',  title: "Question", part_type: "Spina::Parts::Text"},
     {name: 'answer',  title: "Answer", part_type: "Spina::Parts::Text"},
     {name: 'footer_text',  title: "Footer Text", part_type: "Spina::Parts::Text"},
+    {name: 'room_amenities',  title: "Room Amenities", part_type: "Spina::Parts::Text"},
+    {name: 'bath_amenities',  title: "Bath Amenities", part_type: "Spina::Parts::Text"},
     {name: 'images', title: 'Images', part_type: "Spina::Parts::ImageCollection"},
     {name: 'title', title: 'Title', part_type: "Spina::Parts::Line"},
     {name: 'footer_image', title: 'Footer Image', part_type: "Spina::Parts::Image"},
@@ -64,7 +66,7 @@ Spina::Theme.register do |theme|
   # You define which parts you want to enable for every view template
   # by referencing them from the theme.parts configuration above.
   theme.view_templates = [
-    {name: 'homepage', title: 'with Accomodations', parts: %w(header_images tagline1 tagline2 welcome intro)},
+    {name: 'homepage', title: 'with Accomodations', parts: %w(header_images tagline1 tagline2 welcome intro room_amenities bath_amenities)},
     {name: 'sections', title: 'with Sections', parts: %w(header_images tagline1 tagline2 sections footer_text)},
     {name: 'faq', title: 'with FAQ', parts: %w(header_images tagline1 tagline2 faq)},
     {name: 'contact', title: 'with Contact Form', parts: %w(header_images tagline1 tagline2)}

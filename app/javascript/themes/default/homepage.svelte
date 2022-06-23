@@ -101,6 +101,18 @@
   </div>
 </section>
 
+<section class="container">
+  <div class="md:flex spina text-left">
+    <div class="flex-1  my-16">
+      {@html spina.room_amenities?.content}
+    </div>
+    <div class="flex-1  my-16">
+      {@html spina.bath_amenities?.content}
+    </div>
+  </div>
+
+</section>
+
 <style>
   
   .bg-golden {

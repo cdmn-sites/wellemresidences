@@ -27,9 +27,28 @@ ul {
 .spina p {
   margin-bottom: 0.5em;
 }
+.spina h1 {
+  text-transform: uppercase;
+  letter-spacing: 0.3rem;
+  line-height: 2rem;
+  margin-bottom: 32px;
+}
+.spina h2 {
+  text-transform: uppercase;
+  letter-spacing: 0.3rem;
+  color: #948a6b;
+  margin-bottom: 12px;
+}
 .spina ul {
-  list-style: disc;
   margin-left: 30px;
+}
+.spina ul li::before {
+  content: "\2022";  /* Add content: \2022 is the CSS Code/unicode for a bullet */
+  color: #948a6b; /* Change the color */
+  font-weight: bold; /* If you want it to be bold */
+  display: inline-block; /* Needed to add space between the bullet and the text */
+  width: 1em; /* Also needed for space (tweak if needed) */
+  margin-left: -1em; /* Also needed for space (tweak if needed) */
 }
 .spina ol {
   padding-left: 22px;

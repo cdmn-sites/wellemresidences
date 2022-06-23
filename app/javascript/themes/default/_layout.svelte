@@ -212,13 +212,6 @@
 
 
 <style>
-  :global(.spina h1) {
-    text-transform: uppercase;
-    letter-spacing: 0.3rem;
-    font-weight: 100;
-    line-height: 2rem;
-    margin-bottom: 32px;
-  }
   .active {
     /* border-top: 4px solid rgb(158, 132, 76); */
     /* font-weight: bold; */
