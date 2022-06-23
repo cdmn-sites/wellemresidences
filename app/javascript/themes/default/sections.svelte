@@ -117,11 +117,11 @@
           </div>
         </section>
       {:else}
-        <section class:shaded={color == 'shaded'} relative py-6 mb-5 md:mb-15 class:odd={i % 2 == 1}>
+        <section class:shaded={color == 'shaded'} relative mb-5 md:mb-15 class:odd={i % 2 == 1}>
           <div class="container md:flex gap-4" class:flex-row-reverse={i % 2 == 1}>
             {#if images?.length}
               <div class="flex-1">
-                <div class="overflow-hidden mb-4 w-full aspect-video relative">
+                <div class="overflow-hidden w-full aspect-video relative">
                   <Cycler let:current>
                     {#each images as img, j}
                       <a href="/rails/active_storage/blobs/{img.signed_blob_id}/{img.filename}" class="glightbox" data-gallery="section-{i}">
@@ -133,7 +133,7 @@
               </div>
             {/if}
             {#if text?.length}
-              <div class="flex-1 nice xl:text-size-xl leading-6 xl:leading-7 spina ">
+              <div class="flex-1 nice xl:text-size-xl leading-6 xl:leading-7 spina py-6">
                 {#if title}
                   <h3 class="uppercase mb-3 text-size-1.5rem md:text-size-1.8rem">{title}</h3>
                 {/if}

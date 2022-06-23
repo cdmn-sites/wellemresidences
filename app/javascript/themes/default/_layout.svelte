@@ -148,23 +148,14 @@
 
 
   
-<footer class="bottom mt-24 relative p-24 bg-cover bg-top" style="background-image:url('/rails/active_storage/blobs/{spina.footer_image.signed_blob_id}/{spina.footer_image.filename})">
+<footer class="bottom mt-24 relative bg-cover bg-top" style="background-image:url('/rails/active_storage/blobs/{spina.footer_image.signed_blob_id}/{spina.footer_image.filename})">
   <div class="absolute w-full h-full bg-black/75 top-0 right-0"></div>
-  <div class="relative text-center text-white text-size-5">
-    <div class="uppercase tracking-widest font-100 md:text-size-8">
-      {spina.bottom_line?.content}
+  {#if spina.footer_text?.content}
+    <div class="relative serif text-center text-white spina my-8">
+      {@html spina.footer_text?.content}
     </div>
-    <div class="serif mt-5 leading-8">
-      <div class="font-bold tracking-widest">
-        {spina.page_title}
-      </div>
-      <div class="tracking-wider font-100 text-size-4 leading-6">
-        {spina.contact_person?.content}<br>
-        <a href="tel:{account.phone}">{account.phone}</a><br>
-        <a href="mailto:{account.email}">{account.email}</a>
-      </div>
-    </div>
-  </div>
+  {/if}
+
 
   <!-- <div class="md:hidden relative container">
     <div class="flex-1 mt-5">
@@ -221,6 +212,12 @@
 
 
 <style>
+  :global(.spina h1) {
+    text-transform: uppercase;
+    letter-spacing: 0.3rem;
+    font-weight: 100;
+    margin-bottom: 32px;
+  }
   .active {
     /* border-top: 4px solid rgb(158, 132, 76); */
     /* font-weight: bold; */

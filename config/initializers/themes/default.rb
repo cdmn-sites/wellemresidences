@@ -31,13 +31,12 @@ Spina::Theme.register do |theme|
     {name: 'text',  title: "Text", part_type: "Spina::Parts::Text"},
     {name: 'question',  title: "Question", part_type: "Spina::Parts::Text"},
     {name: 'answer',  title: "Answer", part_type: "Spina::Parts::Text"},
+    {name: 'footer_text',  title: "Footer Text", part_type: "Spina::Parts::Text"},
     {name: 'images', title: 'Images', part_type: "Spina::Parts::ImageCollection"},
     {name: 'title', title: 'Title', part_type: "Spina::Parts::Line"},
     {name: 'footer_image', title: 'Footer Image', part_type: "Spina::Parts::Image"},
-    {name: 'bottom_line', title: 'Bottom Line', part_type: "Spina::Parts::Line"},
     {name: 'group', title: 'Group', hint: 'which tab group should this section be in', part_type: "Spina::Parts::Option", options: ['top', 'middle', 'bottom']},
-    {name: 'color', title: 'Color', part_type: "Spina::Parts::Option", options: ['default', 'shaded']},
-    {name: 'contact_person', title: 'Contact Person', part_type: "Spina::Parts::Line"},
+    {name: 'color', title: 'Background', part_type: "Spina::Parts::Option", options: ['default', 'shaded']},
     {
       name: "style",
       title: "Style",
@@ -66,7 +65,7 @@ Spina::Theme.register do |theme|
   # by referencing them from the theme.parts configuration above.
   theme.view_templates = [
     {name: 'homepage', title: 'with Accomodations', parts: %w(header_images tagline1 tagline2 welcome intro)},
-    {name: 'sections', title: 'with Sections', parts: %w(header_images tagline1 tagline2 sections)},
+    {name: 'sections', title: 'with Sections', parts: %w(header_images tagline1 tagline2 sections footer_text)},
     {name: 'faq', title: 'with FAQ', parts: %w(header_images tagline1 tagline2 faq)},
     {name: 'contact', title: 'with Contact Form', parts: %w(header_images tagline1 tagline2)}
   ]
@@ -90,7 +89,7 @@ Spina::Theme.register do |theme|
   # You can create global content that doesn't belong to one specific page. We call these layout parts.
   # You only have to reference the name of the parts you want to have here.
   theme.layout_parts = [
-    'logo', 'favicon', 'bottom_line', 'contact_person', 'footer_image'
+    'logo', 'favicon', 'footer_image'
   ]
   
   # Resources (optional)
