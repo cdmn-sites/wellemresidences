@@ -18,7 +18,10 @@ h1, h2, h3, h4, h5 {
   font-weight: 300;
   font-family: 'Lato', sans-serif;
 }
-
+.gap-8 {
+  grid-gap: 2rem;
+  gap: 2rem;
+}
 ul {
   list-style: none;
 }

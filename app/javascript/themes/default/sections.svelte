@@ -121,7 +121,7 @@
         </section>
       {:else}
         <section class:shaded={color == 'shaded'} relative mb-5 md:mb-15 class:odd={i % 2 == 1}>
-          <div class="container md:flex gap-8" class:flex-row-reverse={i % 2 == 1}>
+          <div class="container gap-8 md:flex" class:flex-row-reverse={i % 2 == 1}>
             {#if images?.length > 1}
               <div class="flex-1">
                 <div class="overflow-hidden aspect-video w-full text-size-0 relative">
