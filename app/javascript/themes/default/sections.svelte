@@ -36,7 +36,7 @@
 <main>
   <section class="container">
     <h1 uppercase>
-      {spina.tagline2.content}
+      {spina.tagline1.content}
     </h1>
     <h2 uppercase>
       {spina.tagline2.content}
@@ -166,6 +166,8 @@
 }
 .tab.active {
   color: black;
+  margin-bottom: -1px;
+  border-bottom: 1px solid black;
 }
 .tab:first-child {
   padding-left: 0px;

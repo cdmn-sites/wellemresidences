@@ -72,12 +72,12 @@
 <header>
   <div class="hidden md:block active_bar" bind:this={bar}></div>
   <div class="hidden md:flex desktop_menu justify-between">
-    <div class="left_menu">
+    <div class="left_menu uppercase">
       {#each leftMenu as menuItem}
         <a use:inertia class:active={$page.url == menuItem.path} href={menuItem.path}>{menuItem.label}</a>
       {/each}
     </div>
-    <div class="right_menu">
+    <div class="right_menu uppercase">
       {#each rightMenu as menuItem}
         <a use:inertia class:active={$page.url == menuItem.path} href={menuItem.path}>{menuItem.label}</a>
       {/each}
@@ -216,6 +216,7 @@
     text-transform: uppercase;
     letter-spacing: 0.3rem;
     font-weight: 100;
+    line-height: 2rem;
     margin-bottom: 32px;
   }
   .active {
