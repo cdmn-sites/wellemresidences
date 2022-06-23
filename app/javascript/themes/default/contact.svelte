@@ -57,8 +57,8 @@
       {#each spina.staff?.content || [] as staff, i}
       
 
-        {@const image = staff.parts[0]}
-        {@const overlay = staff.parts[1].content}
+        {@const overlay = staff.parts[0].content}
+        {@const image = staff.parts[1]}
         {@const text = staff.parts[2].content}
         
 

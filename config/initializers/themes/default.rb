@@ -64,7 +64,7 @@ Spina::Theme.register do |theme|
     {
       name: "staff",
       title: "Staff",
-      parts: %w(image image_text text),
+      parts: %w(image_text image text),
       part_type: "Spina::Parts::Repeater"
     },
     
