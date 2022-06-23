@@ -91,7 +91,7 @@
       {:else if style == 'mosaic'}
         <section mb-28 class="container">
           {#if title}
-            <h3 class="uppercase mb-3 text-size-1.5rem md:text-size-1.8rem">{title}</h3>
+            <h3 class="uppercase mb-5 text-size-1.5rem md:text-size-1.8rem">{title}</h3>
           {/if}
           <div class="md:grid gap-4 grid-cols-2 xl:grid-cols-3">
             {#if images[0]}
@@ -121,10 +121,10 @@
         </section>
       {:else}
         <section class:shaded={color == 'shaded'} relative mb-5 md:mb-15 class:odd={i % 2 == 1}>
-          <div class="container md:flex gap-4" class:flex-row-reverse={i % 2 == 1}>
-            {#if images?.length}
+          <div class="container md:flex gap-8" class:flex-row-reverse={i % 2 == 1}>
+            {#if images?.length > 1}
               <div class="flex-1">
-                <div class="overflow-hidden w-full aspect-video relative">
+                <div class="overflow-hidden aspect-video w-full text-size-0 relative">
                   <Cycler let:current>
                     {#each images as img, j}
                       <a href="/rails/active_storage/blobs/{img.signed_blob_id}/{img.filename}" class="glightbox" data-gallery="section-{i}">
@@ -134,11 +134,23 @@
                   </Cycler>
                 </div>
               </div>
+            {:else if images?.length == 1}
+              <div class="flex-1">
+                <div class="overflow-hidden w-full text-size-0 relative">
+                  {#each images as img, j}
+                    <a href="/rails/active_storage/blobs/{img.signed_blob_id}/{img.filename}" class="glightbox" data-gallery="section-{i}">
+                      <img alt={img.alt} class="w-full active cycle_image" src="/rails/active_storage/blobs/{img.signed_blob_id}/{img.filename}" />
+                    </a>
+                  {/each}
+                
+                </div>
+              </div>
+            
             {/if}
             {#if text?.length}
               <div class="flex-1  xl:text-size-xl leading-6 xl:leading-7 spina py-6">
                 {#if title}
-                  <h3 class="uppercase mb-3 text-size-1.5rem md:text-size-1.8rem">{title}</h3>
+                  <h3 class="uppercase mb-5 text-size-1.5rem md:text-size-1.8rem">{title}</h3>
                 {/if}
                 <div class="serif font-100">
                   {@html text}

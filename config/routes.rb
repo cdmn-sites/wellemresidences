@@ -1,6 +1,4 @@
 Rails.application.routes.draw do
-  
-  
   class AccountDomain  
     def self.matches?(request)
       ActiveRecord::Base.connection_pool.with_connection do
