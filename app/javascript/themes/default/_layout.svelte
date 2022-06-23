@@ -238,11 +238,10 @@
   }
   footer {
 
-    padding-bottom: 150px;
+    padding-bottom: 180px;
     
     color: white;
     line-height: 1.6rem;
-    font-weight: 100;
     font-size: 18px;
   }
   nav.mobile {

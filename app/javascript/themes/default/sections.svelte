@@ -12,6 +12,7 @@
     bottom: 0
   }
   $: if (spina.sections?.content) {
+    tabbedSections = {}
     for (let i = 0; i < spina.sections.content.length; i++) {
       const section = spina.sections.content[i]
       const group = section.parts[4]?.value || 'top'
@@ -65,7 +66,9 @@
 
       {#if style == 'parallax'}
         <section relative class:odd={i % 2 == 1} class="container spina mb-20 lg:h-140 xl:h-180">
-          <h3>{title}</h3>
+          {#if title}
+            <h3 class="uppercase mb-3 text-size-1.5rem md:text-size-1.8rem">{title}</h3>
+          {/if}
           {#if images?.length}
             <div class:right-0={i % 2 == 1} class="relative lg:absolute aspect-video lg:w-7/10  overflow-hidden">
               <!-- <Paralax scale={1.05} y={120}> -->
@@ -80,7 +83,7 @@
             </div>
           {/if}
           <Paralax y={-100}>
-            <div class:right-0={i % 2 == 0} class="nice relative -top-70px lg:text-size-lg xl:text-size-xl xl:w-12/10 lg:max-w-500px xl:max-w-700px shadow-2xl bg-light/90 p-6 lg:absolute lg:top-140px xl:top-300px">
+            <div class:right-0={i % 2 == 0} class="serif relative -top-70px lg:text-size-lg xl:text-size-xl xl:w-12/10 lg:max-w-500px xl:max-w-700px shadow-2xl bg-light/90 p-6 lg:absolute lg:top-140px xl:top-300px">
               {@html text}
             </div>
           </Paralax>
@@ -95,7 +98,7 @@
               <img alt={images[0].alt} data-gallery="section{i}"  class="glightbox object-cover w-full h-full" src="/rails/active_storage/blobs/{images[0].signed_blob_id}/{images[0].filename}" />
             {/if}
             {#if text}
-            <div class="spina serif md:bg-white md:shadow py-5 md:p-5 text-justify nice leading-6 tracking-wide lg:text-size-4.5 2xl:text-size-lg 2xl:leading-7">
+            <div class="spina serif md:bg-white md:shadow py-5 md:p-5 text-justify  leading-6 tracking-wide lg:text-size-4.5 2xl:text-size-lg 2xl:leading-7">
               {@html text}
             </div>
             {/if}
@@ -133,7 +136,7 @@
               </div>
             {/if}
             {#if text?.length}
-              <div class="flex-1 nice xl:text-size-xl leading-6 xl:leading-7 spina py-6">
+              <div class="flex-1  xl:text-size-xl leading-6 xl:leading-7 spina py-6">
                 {#if title}
                   <h3 class="uppercase mb-3 text-size-1.5rem md:text-size-1.8rem">{title}</h3>
                 {/if}
@@ -151,10 +154,7 @@
 </main>
 
 <style>
-.nice {
-  /* line-height: 1.6rem; */
-  font-weight: 100;
-}
+
 
 .tabbar {
   border-bottom: 1px solid #ccc;
