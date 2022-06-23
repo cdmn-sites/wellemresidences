@@ -35,11 +35,11 @@
   <HeroImages bottom images={spina.header_images.images} >
     <div class="absolute w-full h-full bg-black/45"></div>
     <Paralax y={-50}>
-    <div class="serif text-center text-size-2.5 md:text-size-3 px-12 lg:text-size-5 taglines text-white absolute w-full flex items-center flex-col justify-center h-full">
-      <h1>
+    <div class="text-center text-size-2.5 md:text-size-3 px-12 lg:text-size-5 taglines text-white absolute w-full flex items-center flex-col justify-center h-full">
+      <h1 class="serif">
         {spina.tagline1.content}
       </h1>
-      <h2>{spina.tagline2.content}</h2>
+      <h2 class="serif">{spina.tagline2.content}</h2>
     </div>
   </Paralax>
   </HeroImages>
