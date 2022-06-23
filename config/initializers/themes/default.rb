@@ -34,8 +34,12 @@ Spina::Theme.register do |theme|
     {name: 'footer_text',  title: "Footer Text", part_type: "Spina::Parts::Text"},
     {name: 'room_amenities',  title: "Room Amenities", part_type: "Spina::Parts::Text"},
     {name: 'bath_amenities',  title: "Bath Amenities", part_type: "Spina::Parts::Text"},
+    {name: 'staff_intro',  title: "Staff Intro", part_type: "Spina::Parts::Text"},
     {name: 'images', title: 'Images', part_type: "Spina::Parts::ImageCollection"},
-    {name: 'title', title: 'Title', part_type: "Spina::Parts::Line"},
+    {name: 'image_text', title: 'Overlay text', part_type: "Spina::Parts::Line"},
+    {name: 'image', title: 'Image', part_type: "Spina::Parts::Image"},
+    {name: 'map', title: 'Map', part_type: "Spina::Parts::Image"},
+    {name: 'map_link', title: 'Map Link', part_type: "Spina::Parts::Line"},
     {name: 'footer_image', title: 'Footer Image', part_type: "Spina::Parts::Image"},
     {name: 'group', title: 'Group', hint: 'which tab group should this section be in', part_type: "Spina::Parts::Option", options: ['top', 'middle', 'bottom']},
     {name: 'color', title: 'Background', part_type: "Spina::Parts::Option", options: ['default', 'shaded']},
@@ -56,7 +60,13 @@ Spina::Theme.register do |theme|
       title: "FAQ",
       parts: %w(question answer),
       part_type: "Spina::Parts::Repeater"
-    }
+    },
+    {
+      name: "staff",
+      title: "Staff",
+      parts: %w(image image_text text),
+      part_type: "Spina::Parts::Repeater"
+    },
     
   ]
   
@@ -69,7 +79,7 @@ Spina::Theme.register do |theme|
     {name: 'homepage', title: 'with Accomodations', parts: %w(header_images tagline1 tagline2 welcome intro room_amenities bath_amenities)},
     {name: 'sections', title: 'with Sections', parts: %w(header_images tagline1 tagline2 sections footer_text)},
     {name: 'faq', title: 'with FAQ', parts: %w(header_images tagline1 tagline2 faq)},
-    {name: 'contact', title: 'with Contact Form', parts: %w(header_images tagline1 tagline2)}
+    {name: 'contact', title: 'with Staff', parts: %w(header_images tagline1 tagline2 map map_link staff_intro staff)}
   ]
   
   # Custom pages

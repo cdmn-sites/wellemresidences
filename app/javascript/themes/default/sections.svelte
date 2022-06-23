@@ -57,12 +57,12 @@
   {/if}
 
   {#each sections as section, i}
-    {#if selectedTabs[group] == i}
-      {@const title = section.parts[0].content}
-      {@const images = section.parts[1].images}
-      {@const text = section.parts[2].content}
-      {@const style = section.parts[3]?.value}
-      {@const color = section.parts[5]?.value}
+    {@const title = section.parts[0].content}
+    {@const images = section.parts[1].images}
+    {@const text = section.parts[2].content}
+    {@const style = section.parts[3]?.value}
+    {@const color = section.parts[5]?.value}
+    <div class:!block={selectedTabs[group] == i} class="hidden" >
 
       {#if style == 'parallax'}
         <section relative class:odd={i % 2 == 1} class="container spina mb-20 lg:h-140 xl:h-180">
@@ -160,7 +160,7 @@
           </div>
         </section>
       {/if}
-    {/if}
+    </div>
   {/each}
 {/each}
 </main>

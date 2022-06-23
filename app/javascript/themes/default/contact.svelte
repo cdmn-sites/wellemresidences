@@ -1,16 +1,11 @@
 <script>
-  import store from '~/lib/store';
-  import { useForm } from '@inertiajs/inertia-svelte'
-  import { onMount } from 'svelte';
+  import HeroImages from "../../components/hero_images.svelte";
+  import Cycler from "../../components/cycler.svelte";
+  import Paralax from "../../components/paralax.svelte";
+  
+
   export let spina
-  const form = useForm('contact', {text: '', email: '', name: '', not_a_bot: false})
-  export let flash = {}
-  onMount(() => {
-    setTimeout(() => {
-      $form.not_a_bot = true
-    }, 3000)
-  })
-  import HeroImages from "~/components/hero_images.svelte";
+  export let account
 </script>
 
 {#if spina.header_images?.images?.length}
@@ -23,60 +18,80 @@
   <div class="h-200px"></div>
 {/if}
 
+  
+<main>
+  <section class="container">
+    <h1 uppercase>
+      {spina.tagline1.content}
+    </h1>
+    <h2 uppercase>
+      {spina.tagline2.content}
+    </h2>
+  </section>
 
-<main class="container">
-  <h1>{$store.t('Your message to us')}</h1>
-  {#if flash.success}
-    <div class="alert alert-success">
-      {$store.t('Thank you, your message has been sent')}
+  <section class="bg-gray/20 ">
+    <div class="flex container">
+      <div class="flex-1 text-size-0">
+      {#if spina.map}
+        <a href={spina.map_link?.content} target="_blank">
+          <img alt={spina.map.alt} class="w-full" src="/rails/active_storage/blobs/{spina.map.signed_blob_id}/{spina.map.filename}" />
+        </a>
+      {/if}
     </div>
-  {:else}
-    <form on:submit|preventDefault={() => $form.post('/forms')}>
-      <div class="flex flex-col mt-5">
-        <div class="flex-1">
-          <label class="block">
-            <span class="text-gray-700">{$store.t('Your name')}</span>
-            <input type="text" class="form-input mt-1 block w-full" bind:value={$form.name}>
-          </label>
-        </div>
-      <div class="flex flex-col mt-5">
-        <div class="flex-1">
-          <label class="block">
-            <span class="text-gray-700">{$store.t('Your email')}</span>
-            <input type="email" class="form-input mt-1 block w-full" bind:value={$form.email}>
-          </label>
-        </div>
-        <div class="flex-1 mt-6">
-          <label class="block">
-            <span class="text-gray-700">{$store.t('Your message')}</span>
-            <textarea class="form-input h-30 mt-1 block w-full" bind:value={$form.text}></textarea>
-          </label>
-        </div>
+      <div class="flex-1 text-size-lg p-12 spina">
+        <strong>{account.name}</strong><br>
+        {account.address}<br>
+        {account.postal_code} {account.city}<br>
+        <a href={spina.map_link?.content} target="_blank">Find on Map</a><br><br>
+        Tel: <a href="tel:{account.phone}">{account.phone}</a>
       </div>
-      <div class="flex mt-6">
-        <button class="btn btn-primary">{$store.t('Send')}</button>
+    </div>
+  </section>
+
+  <section class="staffs shaded mt-16">
+    <div class="container py-8">
+      <div class="spina">
+        {@html spina.staff_intro?.content}
       </div>
-    </form>
-  {/if}
+      <div class="md:grid grid-cols-2 xl:grid-cols-3 gap-4" >
+      {#each spina.staff?.content || [] as staff, i}
+      
+
+        {@const image = staff.parts[0]}
+        {@const overlay = staff.parts[1].content}
+        {@const text = staff.parts[2].content}
+        
+
+        <div class="staff mt-12">
+          <div class="image max-w-64 bg-light">
+            <img alt={image.alt} class="w-full object-cover"  src="/rails/active_storage/blobs/{image.signed_blob_id}/{image.filename}" />
+          </div>
+          <div class="spina mt-4">
+            {@html text}
+          </div>
+
+        </div>  
+    
+      {/each}
+    </div>
+    </div>
+  </section>
+
 </main>
 
 <style>
-  .alert {
-    margin-top: 1rem;
-  }
-  .alert-success {
-    background-color: #dff0df;
-    border-color: #d0e9c6;
-    color: #3c763d;
-    padding: 1rem;
-  }
-  
- h1 {
-  text-align: center;
-  letter-spacing: 0.3em;
+
+.staffs {
+  background-color: #d8d6cf;
+}
+h1 {
+  color: #948a6b;
+  margin-bottom: 0.1em;
+  font-size: 1.8rem;
+}
+h2 {
+  font-size: 1.4rem;
   margin-bottom: 3rem;
-  font-size: 2rem;
-  text-transform: uppercase;
 }
 
 </style>
