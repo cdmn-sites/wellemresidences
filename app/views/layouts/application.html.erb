@@ -10,6 +10,10 @@
       <link rel="icon" href="<%= main_app.url_for(current_account.content(:favicon)) %>">
     <% end %>
 
+    <script type="text/javascript">
+      window.theme = '<%= current_account.theme || "default" %>'
+    </script>
+
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
