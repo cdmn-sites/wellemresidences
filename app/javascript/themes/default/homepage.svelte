@@ -10,7 +10,7 @@
   import {fade,fly} from 'svelte/transition'
   export let spina
   export let room_types
-  // let details = room_types[6]
+  let details
 
   let searchLink = `https://direct-book.com/properties/intownresidencesdirect/?locale=${$store.locale}&items[0][infants]=0&currency=EUR&trackPage=yes`
   function max_people(room_type) {
