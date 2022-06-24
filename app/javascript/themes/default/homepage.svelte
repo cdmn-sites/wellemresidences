@@ -10,7 +10,7 @@
   export let room_types
 
   let searchLink = `https://direct-book.com/properties/intownresidencesdirect/?locale=${$store.locale}&items[0][infants]=0&currency=EUR&trackPage=yes`
-  function sleeps(room_type) {
+  function max_people(room_type) {
     return (~~room_type.amenities.queen_size_bed * 2) +( ~~room_type.amenities.single_bed) + (~~room_type.amenities.sofa_bed) + (~~room_type.amenities.king_size_bed * 2)
   }
   function lightbox(room_type) {
@@ -73,26 +73,52 @@
           <h3 class="text-golden uppercase">
             {room_type.name}
           </h3>
-          <div class="serif italic amenities relative min-h-8">
-            <div class="amenity">
-              <!-- <span class="i-material-symbols-person text-size-lg"></span> -->
-              <span class="text-size-sm">{$store.t('sleeps')} {sleeps(room_type)}</span>
-            </div>  | 
+          <div class="serif italic amenities relative min-h-8 text-size-xl flex-1">
+    
             {#each Object.entries(room_type.amenities) as [amenity, value], i}
-              <div class="amenity">
-                
-                <!-- {#if value > 1} -->
-                  <span class="text-size-sm">{value}  {$store.t(amenity)}</span>
-                <!-- {:else} -->
-                  <!-- <span class="text-size-sm">{$store.t(amenity)}</span> -->
-                <!-- {/if} -->
-              </div> {#if i < Object.entries(room_type.amenities).length -1} | {/if}
+              {#if value }
+                <div class="amenity">
+                  {#if amenity == 'queen_size_bed'}
+                    {#each Array(value) as _,i }
+                      <span class="i-teenyicons-bed-double-outline"></span>
+                    {/each}
+                  {/if}
+                  {#if amenity == 'king_size_bed'}
+                    {#each Array(value) as _,i }
+                      <span class="i-teenyicons-bed-double-outline"></span>
+                    {/each}
+                  {/if}
+                  {#if amenity == 'single_bed'}
+                    {#each Array(value) as _,i }
+                      <span class="i-teenyicons-bed-single-outline"></span>
+                    {/each}
+                  {/if}
+                  {#if amenity == 'bathtub'}
+                    {#each Array(value) as _,i }
+                    <span class="i-teenyicons-bath-outline"></span>
+                    {/each}
+                  {/if}
+                </div>
+              {/if}
             {/each}
+            <div class="amenity -ml-4">
+              <!-- <span class="i-material-symbols-person text-size-lg"></span> -->
+              {#each Array(max_people(room_type)) as _,i}
+              <span class="i-carbon-person -mr-2"></span>
+              {/each}
+              <!-- <span class="text-size-sm">{$store.t('max_people')} {max_people(room_type)}</span> -->
+            </div>
+            <div class="amenity">
+              <span class="i-simple-line-icons:size-fullscreen mr-1"></span> 
+              <span class="text-size-17px relative top-1px">
+                {room_type.qm || '0'}m<sup text-xs>2</sup>
+              </span>
+            </div>
           </div>
           <!-- <p class="flex-1 mb-4 leading-6">
             {room_type.description || ''}
           </p> -->
-          <a class="btn serif text-center uppercase" href="{searchLink}&roomTypeId={room_type.id}" target="_blank">
+          <a class="btn hover:bg-white serif text-center uppercase" href="{searchLink}&roomTypeId={room_type.id}" target="_blank">
             {$store.t('Check Availability')}
           </a>
         </div>
@@ -135,6 +161,9 @@
   .amenity {
     display: inline-block;
     padding: 0 0.2rem;
+    margin-right: 1.6rem;
+    white-space: nowrap;
+    margin-bottom: 1rem;
     /* border-right: 1px solid black; */
     /* flex-grow: 1;
     padding: 0.5rem 4px;
