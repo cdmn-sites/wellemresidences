@@ -64,8 +64,8 @@
 
       </div>
       {#each room_types as room_type}
-        <div on:click={() => lightbox(room_type)} class="room_type flex flex-col bg-light p-6 shadow-sm">
-          <div class="cursor-pointer overflow-hidden mb-6 shadow z-1 relative -m-2">
+        <div on:click={() => lightbox(room_type)} class="room_type flex flex-col bg-light p-4 shadow-sm">
+          <div class="cursor-pointer overflow-hidden mb-6 shadow z-1 relative">
             <!-- {#each room_type.images_prop as image} -->
               <div class="placeholder image" style="background-image:url({room_type.thumbnail_url})"></div>
             <!-- {/each} -->
@@ -74,41 +74,44 @@
             {room_type.name}
           </h3>
           <div class="serif italic amenities relative min-h-8 text-size-xl flex-1">
-    
-            {#each Object.entries(room_type.amenities) as [amenity, value], i}
-              {#if value }
-                <div class="amenity">
-                  {#if amenity == 'queen_size_bed'}
-                    {#each Array(value) as _,i }
-                      <span class="i-teenyicons-bed-double-outline"></span>
-                    {/each}
-                  {/if}
-                  {#if amenity == 'king_size_bed'}
-                    {#each Array(value) as _,i }
-                      <span class="i-teenyicons-bed-double-outline"></span>
-                    {/each}
-                  {/if}
-                  {#if amenity == 'single_bed'}
-                    {#each Array(value) as _,i }
-                      <span class="i-teenyicons-bed-single-outline"></span>
-                    {/each}
-                  {/if}
-                  {#if amenity == 'bathtub'}
-                    {#each Array(value) as _,i }
-                    <span class="i-teenyicons-bath-outline"></span>
-                    {/each}
-                  {/if}
-                </div>
-              {/if}
-            {/each}
-            <div class="amenity -ml-4">
+            {#if room_type.amenities.queen_size_bed}
+              <div class="amenity">
+                {#each Array(room_type.amenities.queen_size_bed) as _,i }
+                  <span class="i-teenyicons-bed-double-outline"></span>
+                {/each}
+              </div>
+            {/if}
+            {#if room_type.amenities.king_size_bed}
+              <div class="amenity">
+                {#each Array(room_type.amenities.king_size_bed) as _,i }
+                  <span class="i-teenyicons-bed-double-outline"></span>
+                {/each}
+              </div>
+            {/if}
+            {#if room_type.amenities.single_bed}
+              <div class="amenity">
+                {#each Array(room_type.amenities.single_bed) as _,i }
+                  <span class="i-teenyicons-bed-single-outline"></span>
+                {/each}
+              </div>
+            {/if}
+            {#if room_type.amenities.bathtub}
+              <div class="amenity ml-6">
+                {#each Array(room_type.amenities.bathtub) as _,i }
+                  <span class="i-teenyicons-bath-outline"></span>
+                {/each}
+              </div>
+            {/if}
+          
+            
+            <div class="amenity ml-5">
               <!-- <span class="i-material-symbols-person text-size-lg"></span> -->
               {#each Array(max_people(room_type)) as _,i}
               <span class="i-carbon-person -mr-2"></span>
               {/each}
               <!-- <span class="text-size-sm">{$store.t('max_people')} {max_people(room_type)}</span> -->
             </div>
-            <div class="amenity">
+            <div class="amenity ml-7">
               <span class="i-simple-line-icons:size-fullscreen mr-1"></span> 
               <span class="text-size-17px relative top-1px">
                 {room_type.qm || '0'}m<sup text-xs>2</sup>
@@ -160,8 +163,7 @@
   }
   .amenity {
     display: inline-block;
-    padding: 0 0.2rem;
-    margin-right: 1.6rem;
+
     white-space: nowrap;
     margin-bottom: 1rem;
     /* border-right: 1px solid black; */
