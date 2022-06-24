@@ -1,7 +1,6 @@
 
 <script>
   import store from '~/lib/store'
-  import DatesPanel from '~/components/datespanel.svelte'
   import { Splide, SplideSlide } from '@splidejs/svelte-splide';
   import '@splidejs/svelte-splide/css';
   import Paralax from '~/components/paralax.svelte'

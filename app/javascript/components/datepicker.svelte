@@ -262,7 +262,7 @@
     top: 0;
     left: 0;
     position: absolute;
-    background: #e2d6ca;
+    background: #d8d6cf;
     /* animation-name: zoom-in;
     animation-duration: 0.3s;
     animation-timing-function: ease-out; */
