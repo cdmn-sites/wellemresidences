@@ -57,7 +57,7 @@
   <div class="dates">
     <div class="options" on:click={() => showDatepickers = !showDatepickers}>
       <label class="!hidden !md:block">{$store.t('Checkin')} / {$store.t('Checkout')}</label>
-        <div class="btn">
+        <div class="btn min-w-68">
         {#if checkin && checkout}
           {formattedDate1} - {formattedDate2}
         {:else}
