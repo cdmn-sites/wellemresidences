@@ -20,6 +20,6 @@ module Cdmn
     # config.eager_load_paths << Rails.root.join("extras")
 
     config.action_mailer.smtp_settings = Rails.application.credentials.smtp
-    
+    config.active_storage.service_urls_expire_in = 24.hours
   end
 end
