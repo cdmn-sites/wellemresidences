@@ -87,7 +87,7 @@
 
 <div class="h-40px"></div>
 <div class="shade"></div>
-<div class="logo p-3" style="transform: translate(-50%, {-moveLogo/3.4}px) scale({1 - moveLogo / 500})">
+<div class="logo p-4.5" style="transform: translate(-50%, {-(moveLogo)/4.2 -16 }px) scale({1 - moveLogo / 500})">
   <img class="w-full" src="/rails/active_storage/blobs/{spina.logo.signed_blob_id}/{spina.logo.filename}" alt={account.name}>
 
 </div>
@@ -151,7 +151,7 @@
 <footer class="bottom mt-24 relative bg-cover bg-top" style="background-image:url('/rails/active_storage/blobs/{spina.footer_image.signed_blob_id}/{spina.footer_image.filename})">
   <div class="absolute w-full h-full bg-black/75 top-0 right-0"></div>
   {#if spina.footer_text?.content}
-    <div class="relative serif text-center text-white spina my-8">
+    <div class="relative serif text-center text-white spina mt-8 mb-26">
       {@html spina.footer_text?.content}
     </div>
   {/if}

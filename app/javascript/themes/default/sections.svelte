@@ -45,7 +45,7 @@
   
 {#each Object.entries(tabbedSections) as [group, sections]}
   {#if sections.length > 1}
-    <div class="container">
+    <div class="hidden lg:block container">
       <div class="tabbar uppercase">
         {#each sections as section, i}
           <div class="tab inline-block text-gray" class:active={selectedTabs[group] == i} on:click={() => selectedTabs[group] = i}>
@@ -62,7 +62,7 @@
     {@const text = section.parts[2].content}
     {@const style = section.parts[3]?.value}
     {@const color = section.parts[5]?.value}
-    <div class:!block={selectedTabs[group] == i} class="hidden" >
+    <div class:!block={selectedTabs[group] == i} class="lg:hidden" >
 
       {#if style == 'parallax'}
         <section relative class:odd={i % 2 == 1} class="container spina mb-20 lg:h-140 xl:h-180">

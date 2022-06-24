@@ -18,6 +18,9 @@ h1, h2, h3, h4, h5 {
   font-weight: 300;
   font-family: 'Lato', sans-serif;
 }
+.splide__pagination__page.is-active {
+  background: #948a6b !important;
+}
 .gap-8 {
   grid-gap: 2rem;
   gap: 2rem;
@@ -37,7 +40,7 @@ ul {
   font-family: 'Lato', sans-serif;
   text-transform: uppercase;
   letter-spacing: 0.3em;
-  line-height: 2em;
+  line-height: 1.6em;
   margin-bottom: 32px;
 }
 .spina h2 {

@@ -2,12 +2,15 @@
 <script>
   import store from '~/lib/store'
   import DatesPanel from '~/components/datespanel.svelte'
+  import { Splide, SplideSlide } from '@splidejs/svelte-splide';
+  import '@splidejs/svelte-splide/css';
   import Paralax from '~/components/paralax.svelte'
   import HeroImages from '~/components/hero_images.svelte'
   import glightbox from 'glightbox'
-
+  import {fade,fly} from 'svelte/transition'
   export let spina
   export let room_types
+  let details = room_types[6]
 
   let searchLink = `https://direct-book.com/properties/intownresidencesdirect/?locale=${$store.locale}&items[0][infants]=0&currency=EUR&trackPage=yes`
   function max_people(room_type) {
@@ -29,6 +32,39 @@
   }
 </script>
 
+{#if details}
+  <div class="w-full h-full fixed bg-black/80 z-20 top-0" transition:fade={{duration: 180}}></div>
+  <div class="flex  items-center justify-center h-full fixed w-full top-0 z-22 " on:click|self={() => details = null}>
+  <div class="z-21  bg-light md:bg-s p-4 w-full flex flex-col items-center" transition:fly={{y:50}}  on:click|self={() => details = null}>
+    <Splide aria-label="My Favorite Images" options={{
+      updateOnMove: true, height: 'max(400px, 50vh)', wheel: true, lazyLoad: 'sequencial', padding: '25%',
+      breakpoints: {
+        700: {
+          padding: '0'
+        }
+      }
+      }}>
+      {#each details.images_prop as image, i}
+        <SplideSlide>
+          <img class="w-full object-contain splide_image h-full" data-splide-lazy={image.url}>
+        </SplideSlide>
+      {/each}
+
+    </Splide>
+    <div class="bg-light p-6 mt-4 max-w-1200px">
+      <div class="text-golden uppercase">
+        <h2 class="!mb-3 !mt-0">{details.name}</h2>
+      </div>
+      <p mb-4 class="serif">
+        {details.description}
+      </p>
+      <a on:click|stopPropagation class="btn bg-gray/10 hover:bg-white serif w-full text-center uppercase" href="{searchLink}&roomTypeId={details.id}" target="_blank">
+        {$store.t('Check Availability')}
+      </a>
+    </div>
+  </div>
+</div>
+{/if}
 
 <!-- {#if spina.header_images?.length} -->
 <div class="h-400px md:h-500px lg:h-600px xl:h-650px">
@@ -64,8 +100,8 @@
 
       </div>
       {#each room_types as room_type}
-        <div on:click={() => lightbox(room_type)} class="room_type flex flex-col bg-light p-4 shadow-sm">
-          <div class="cursor-pointer overflow-hidden mb-6 shadow z-1 relative">
+        <div on:click={() => details = room_type} class="room_type flex flex-col bg-light p-4 shadow-sm">
+          <div class="cursor-pointer overflow-hidden mb-4 shadow z-1 relative">
             <!-- {#each room_type.images_prop as image} -->
               <div class="placeholder image" style="background-image:url({room_type.thumbnail_url})"></div>
             <!-- {/each} -->
@@ -95,6 +131,13 @@
                 {/each}
               </div>
             {/if}
+            <div class="amenity -ml-1">
+              <!-- <span class="i-material-symbols-person text-size-lg"></span> -->
+              {#each Array(max_people(room_type)) as _,i}
+              <span class="i-carbon-person -mr-2"></span>
+              {/each}
+              <!-- <span class="text-size-sm">{$store.t('max_people')} {max_people(room_type)}</span> -->
+            </div>
             {#if room_type.amenities.bathtub}
               <div class="amenity ml-6">
                 {#each Array(room_type.amenities.bathtub) as _,i }
@@ -104,13 +147,7 @@
             {/if}
           
             
-            <div class="amenity ml-5">
-              <!-- <span class="i-material-symbols-person text-size-lg"></span> -->
-              {#each Array(max_people(room_type)) as _,i}
-              <span class="i-carbon-person -mr-2"></span>
-              {/each}
-              <!-- <span class="text-size-sm">{$store.t('max_people')} {max_people(room_type)}</span> -->
-            </div>
+       
             <div class="amenity ml-7">
               <span class="i-simple-line-icons:size-fullscreen mr-1"></span> 
               <span class="text-size-17px relative top-1px">
@@ -121,7 +158,7 @@
           <!-- <p class="flex-1 mb-4 leading-6">
             {room_type.description || ''}
           </p> -->
-          <a class="btn hover:bg-white serif text-center uppercase" href="{searchLink}&roomTypeId={room_type.id}" target="_blank">
+          <a on:click|stopPropagation class="btn bg-gray/10 hover:bg-white serif text-center uppercase" href="{searchLink}&roomTypeId={room_type.id}" target="_blank">
             {$store.t('Check Availability')}
           </a>
         </div>
@@ -143,7 +180,13 @@
 </section>
 
 <style>
-  
+  .splide_image {
+    transform: scale(0.8);
+    transition: all 0.3s;
+  }
+  :global(.is-active > .splide_image) {
+    transform: scale(1) !important;
+  }
   .bg-golden {
     background-color: #d8d6cf;
   }
