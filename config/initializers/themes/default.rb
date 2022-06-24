@@ -25,6 +25,7 @@ Spina::Theme.register do |theme|
     {name: 'favicon', title: 'Favicon', hint: 'The icon that appears in the browser tab', part_type: "Spina::Parts::Image"},
     {name: 'tagline1', title: 'Tagline 1', part_type: "Spina::Parts::Line"},
     {name: 'tagline2', title: 'Tagline 2', part_type: "Spina::Parts::Line"},
+    {name: 'title', title: 'Title', part_type: "Spina::Parts::Line"},
     {name: 'welcome', title: 'Welcome', part_type: "Spina::Parts::Line"},
     {name: 'intro', title: 'Intro', part_type: "Spina::Parts::Text"},
     {name: 'header_images', title: 'Header Images', part_type: "Spina::Parts::ImageCollection"},
