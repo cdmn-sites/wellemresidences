@@ -30,7 +30,7 @@
   </section>
 
   <section class="bg-gray/20 ">
-    <div class="flex container">
+    <div class="md:flex container">
       <div class="flex-1 text-size-0">
       {#if spina.map}
         <a href={spina.map_link?.content} target="_blank">
@@ -63,8 +63,11 @@
         
 
         <div class="staff mt-12">
-          <div class="image max-w-64 bg-light">
+          <div class="image max-w-64 bg-light relative">
             <img alt={image.alt} class="w-full object-cover"  src="/rails/active_storage/blobs/{image.signed_blob_id}/{image.filename}" />
+            <div class="absolute w-full text-center top-75% bottom-0 p-3 bg-white/50 uppercase tracking-wide">
+              {overlay}
+            </div>
           </div>
           <div class="spina mt-4">
             {@html text}
