@@ -6,7 +6,7 @@
   import '@splidejs/svelte-splide/css';
   import Paralax from '~/components/paralax.svelte'
   import HeroImages from '~/components/hero_images.svelte'
-  import glightbox from 'glightbox'
+  // import glightbox from 'glightbox'
   import {fade,fly} from 'svelte/transition'
   export let spina
   export let room_types
@@ -16,26 +16,27 @@
   function max_people(room_type) {
     return (~~room_type.amenities.queen_size_bed * 2) +( ~~room_type.amenities.single_bed) + (~~room_type.amenities.sofa_bed) + (~~room_type.amenities.king_size_bed * 2)
   }
-  function lightbox(room_type) {
-    const gallery = glightbox({
-      elements: room_type.images_prop.map(image => ({
-        href: image.url,
-        // title: image.title,
-        // description: `<a class="btn text-center uppercase" href="${searchLink}&roomTypeId=${room_type.id}" target="_blank">
-        //     ${$store.t('Check Availability')}
-        //   </a>`,
-        type: 'image'
+  // function lightbox(room_type) {
+  //   const gallery = glightbox({
+  //     elements: room_type.images_prop.map(image => ({
+  //       href: image.url,
+  //       // title: image.title,
+  //       // description: `<a class="btn text-center uppercase" href="${searchLink}&roomTypeId=${room_type.id}" target="_blank">
+  //       //     ${$store.t('Check Availability')}
+  //       //   </a>`,
+  //       type: 'image'
 
-      })),
-    })
-    gallery.open()
-  }
+  //     })),
+  //   })
+  //   gallery.open()
+  // }
 </script>
 
 {#if details}
   <div class="w-full h-full fixed bg-black/80 z-20 top-0" transition:fade={{duration: 180}}></div>
   <div class="flex  items-center justify-center h-full fixed w-full top-0 z-22 " on:click|self={() => details = null}>
-  <div class="z-21  bg-light md:bg-s p-4 w-full flex flex-col items-center" transition:fly={{y:50}}  on:click|self={() => details = null}>
+    <div class="z-21  bg-light md:bg-s p-4 w-full flex flex-col items-center relative" transition:fly={{y:50}}  on:click|self={() => details = null}>
+    <div class="i-ep:close-bold absolute top-2 right-2 text-black text-2xl" on:click|self={() => details = null}></div>
     <Splide aria-label="My Favorite Images" options={{
       updateOnMove: true, height: 'max(400px, 50vh)', wheel: true, lazyLoad: 'sequencial', padding: '25%',
       breakpoints: {
@@ -55,7 +56,7 @@
       <div class="text-golden uppercase">
         <h2 class="!mb-3 !mt-0">{details.name}</h2>
       </div>
-      <p mb-4 class="serif">
+      <p mb-4 class="serif text-lg md:text-xl">
         {details.description}
       </p>
       <a on:click|stopPropagation class="btn bg-gray/10 hover:bg-white serif w-full text-center uppercase" href="{searchLink}&roomTypeId={details.id}" target="_blank">
