@@ -20,7 +20,10 @@ const translations = {
     'your_email': 'Ihre E-Mail',
     'your_message': 'Ihre Nachricht',
     'thank_you,_your_message_has_been_sent': 'Vielen Dank, Ihre Nachricht wurde gesendet',
-    'send': 'Abschicken'
+    'send': 'Abschicken',
+    'contact_us': 'Kontaktieren Sie uns',
+    'language': 'Sprache',
+    'information': 'Informationen'
   },
   en: {
     'sleeps': 'Sleeps',

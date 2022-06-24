@@ -167,43 +167,54 @@
       Tel: <a href="tel:{account.phone}">{account.phone}</a>
     </div>
   </div> -->
-  <div class="hidden md:block relative container mt-20">
+  <div class="hidden md:block relative container mt-4 serif">
     <div class="flex">
-      <ul class="flex-1">
-        <li>
-          <a href="/en">English</a>
-        </li>
-        <li>
-          <a href="/de">Deutsch</a>
-        </li>
-        <li>
-          <a href="/es">Español</a>
-        </li>
-      </ul>
-      <ul class="flex-1">
-        {#each leftMenu as menuItem}
-        <li>
-          <a use:inertia href={menuItem.path}>{menuItem.label}</a>
-        </li>
-        {/each}
-      </ul>
-      <ul class="flex-1">
-        {#each rightMenu as menuItem}
-        <li>
-          <a use:inertia href={menuItem.path}>{menuItem.label}</a>
-        </li>
-        {/each}
-      </ul>
       <div class="flex-1">
-        
+        <h4 mb-4 uppercase>
+          {$store.t('CONTACT US')}
+        </h4>
         {account.name}<br>
         {account.address}<br>
         {account.postal_code} {account.city}<br>
         <a href="https://www.google.com/maps/place/{account.address} {account.postal_code} {account.city}" target="_blank">Find on Map</a><br>
         Tel: <a href="tel:{account.phone}">{account.phone}</a>
       </div>
+      <div class="flex-1">
+        <h4 mb-4 uppercase>
+          {$store.t('INFORMATION')}
+        </h4>
+        {#each leftMenu as menuItem}
+        
+          <a use:inertia href={menuItem.path}>{menuItem.label}</a><br>
+        
+        {/each}
+        {#each rightMenu as menuItem}
+        
+          <a use:inertia href={menuItem.path}>{menuItem.label}</a><br>
+        
+        {/each}
+      </div>
+      <div class="flex-1">
+        <h4 mb-4 uppercase>
+          {$store.t('LANGUAGE')}
+        </h4>
+        
+          <a href="/en">English</a><br>
+        
+        
+          <a href="/de">Deutsch</a><br>
+        
+        
+          <a href="/es">Español</a>
+        
+      </div>
     </div>
   </div>
+  <div class="container relative">
+  <div class="copyright absolute right-4 text-sm">
+    &copy; 2022 Hyatt Corporation
+  </div>
+</div>
 
 
 </footer>
