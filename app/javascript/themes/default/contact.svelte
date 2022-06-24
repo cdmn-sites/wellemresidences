@@ -65,7 +65,7 @@
         <div class="staff mt-12">
           <div class="image bg-light relative">
             <img alt={image.alt} class="w-full object-cover"  src="/rails/active_storage/blobs/{image.signed_blob_id}/{image.filename}" />
-            <div class="absolute w-full text-center top-75% bottom-0 p-3 bg-light/75 uppercase tracking-wide">
+            <div class="absolute w-full text-center top-75% bottom-0 p-3 bg-white/75 uppercase tracking-wide">
               {overlay}
             </div>
           </div>
