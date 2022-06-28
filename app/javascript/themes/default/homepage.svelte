@@ -34,8 +34,8 @@
 {#if details}
   <div class="w-full h-full fixed bg-black/80 z-20 top-0" transition:fade={{duration: 180}}></div>
   <div class="flex  items-center justify-center h-full fixed w-full top-0 z-22 " on:click|self={() => details = null}>
-    <div class="z-21  bg-light md:bg-s p-4 w-full flex flex-col items-center relative" transition:fly={{y:50}}  on:click|self={() => details = null}>
-    <div class="i-ep:close-bold absolute top-2 right-2 text-black text-2xl" on:click|self={() => details = null}></div>
+    <div class="z-21  bg-light p-4 w-full flex max-h-screen flex-col items-center relative" transition:fly={{y:50}}  on:click|self={() => details = null}>
+    <div class="i-ep:close-bold cursor-pointer absolute z-21 top-2 right-2 text-black text-2xl" on:click|self={() => details = null}></div>
     <Splide aria-label="My Favorite Images" options={{
       updateOnMove: true, height: 'max(400px, 50vh)', wheel: true, lazyLoad: 'sequencial', padding: '25%',
       breakpoints: {
