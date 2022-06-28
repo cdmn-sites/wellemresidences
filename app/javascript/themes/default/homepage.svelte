@@ -87,7 +87,7 @@
 </section>
 
 
-<section mt-8 class="bg-golden py-12">
+<section class="bg-golden py-12 md:mt-8">
 
   <div class="container">
     <div class="room_types md:grid-cols-2 2xl:grid-cols-3">
