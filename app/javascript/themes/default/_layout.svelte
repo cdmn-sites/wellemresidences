@@ -147,14 +147,18 @@
 
 
 
-  
-<footer class="bottom mt-24 relative bg-cover bg-top" style="background-image:url('/rails/active_storage/blobs/{spina.footer_image.signed_blob_id}/{spina.footer_image.filename})">
-  <div class="absolute w-full h-full bg-black/75 top-0 right-0"></div>
-  {#if spina.footer_text?.content}
-    <div class="relative serif text-center text-white spina mt-8 mb-26">
+{#if spina.footer_text?.content}
+ <div class="bottom mt-24 relative bg-cover bg-top" style="background-image:url('/rails/active_storage/blobs/{spina.footer_image.signed_blob_id}/{spina.footer_image.filename})">
+    <div class="absolute w-full h-full bg-black/75 top-0 right-0"></div>
+    <div class="relative serif text-center text-white spina mt-8 pt-20 pb-26">
       {@html spina.footer_text?.content}
     </div>
-  {/if}
+  </div>
+{:else}
+<div class="mt-24"></div>
+{/if}
+  
+<footer class="bottom relative bg-cover bg-top">
 
 
   <!-- <div class="md:hidden relative container">
@@ -167,9 +171,9 @@
       Tel: <a href="tel:{account.phone}">{account.phone}</a>
     </div>
   </div> -->
-  <div class="hidden md:block relative container mt-4 serif">
-    <div class="flex">
-      <div class="flex-1">
+  <div class="relative container mt-4 serif">
+    <div class="md:flex">
+      <div class="flex-1 mb-5">
         <h4 mb-4 uppercase>
           {$store.t('CONTACT US')}
         </h4>
@@ -179,7 +183,7 @@
         <a href="https://www.google.com/maps/place/{account.address} {account.postal_code} {account.city}" target="_blank">Find on Map</a><br>
         Tel: <a href="tel:{account.phone}">{account.phone}</a>
       </div>
-      <div class="flex-1">
+      <div class="flex-1 mb-5">
         <h4 mb-4 uppercase>
           {$store.t('INFORMATION')}
         </h4>
@@ -194,7 +198,7 @@
         
         {/each}
       </div>
-      <div class="flex-1">
+      <div class="flex-1 mb-5">
         <h4 mb-4 uppercase>
           {$store.t('LANGUAGE')}
         </h4>
@@ -244,7 +248,7 @@
   footer {
 
     padding-bottom: 180px;
-    
+    background-color: rgb(119, 118, 115);
     color: white;
     line-height: 1.6rem;
     font-size: 18px;
