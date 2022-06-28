@@ -25,6 +25,12 @@ h1, h2, h3, h4, h5 {
   grid-gap: 2rem;
   gap: 2rem;
 }
+.pt-20 {
+  padding-top: 5rem;
+}
+.pb-26 {
+  padding-bottom: 6.5rem;
+}
 ul {
   list-style: none;
 }
