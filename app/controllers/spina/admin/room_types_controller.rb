@@ -17,6 +17,11 @@ module Spina::Admin
     def update
       I18n.locale = params[:locale]
       if @room_type.update(room_type_params)
+        params[:room_type][:images].each_with_index do |sid, i|
+          next unless sid.class == String && sid.present?
+          blob = ActiveStorage::Blob.find_signed(sid)
+          blob.attachments.update_all position: i
+        end
         # redirect_to spina.edit_admin_layout_path(locale: @locale), flash: {success: t('spina.layout.saved')}
         redirect_back fallback_location: spina.edit_admin_layout_path(locale: @locale), flash: {success: 'Room Type Saved'}
       else

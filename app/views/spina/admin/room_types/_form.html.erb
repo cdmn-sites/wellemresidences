@@ -84,14 +84,21 @@
             Images
           </label>
         </div>
-
-        <% @room_type.images.each do |i| %>
-          <div id="<%= i.signed_id %>" class="mb-4">
-            <%= hidden_field_tag 'room_type[images][]', i.signed_id %>
-            <%= image_tag main_app.url_for(i.variant(:thumb)) %>
-            <span class="cursor-pointer" onclick="javascript:document.getElementById('<%= i.signed_id %>').remove()">Remove</span>
-          </div>
-        <% end %>
+        <div class="images">
+          <% @room_type.images.each do |i| %>
+            <div id="<%= i.signed_id %>" class="img mb-4">
+              <%= hidden_field_tag 'room_type[images][]', i.signed_id %>
+              <%= image_tag main_app.url_for(i.variant(:thumb)) %>
+              <span class="cursor-pointer" onclick="javascript:document.getElementById('<%= i.signed_id %>').remove()">Remove</span>
+              <span class="up"> |
+                <span class="cursor-pointer" onclick="javascript:document.getElementById('<%= i.signed_id %>').parentElement.insertBefore(document.getElementById('<%= i.signed_id %>'), document.getElementById('<%= i.signed_id %>').previousElementSibling)">Up</span>
+              </span>
+              <span class="down"> |
+                <span class="cursor-pointer" onclick="javascript:document.getElementById('<%= i.signed_id %>').parentElement.insertBefore(document.getElementById('<%= i.signed_id %>'), document.getElementById('<%= i.signed_id %>').nextElementSibling.nextElementSibling)">Down</span>
+              </span>
+            </div>
+          <% end %>
+        </div>
         <div class="mt-4">
           Add Images:
           <%= f.file_field :images, multiple: true %>
@@ -111,6 +118,12 @@
   border: 1px solid #000;
   background-color: #000;
   color: #fff;
+}
+.img:last-of-type .down {
+  display: none;
+}
+.img:first-of-type .up {
+  display: none;
 }
 
 </style>
