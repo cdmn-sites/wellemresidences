@@ -32,7 +32,7 @@
   <div class="w-full h-full fixed bg-black/80 z-20 top-0" transition:fade={{duration: 180}}></div>
   <div class="flex items-center justify-center h-full fixed w-full top-0 z-22" on:click|self={() => details = null}>
     <div class="z-21 p-4 w-full flex h-screen flex-col items-center relative" transition:fly={{y:50}} on:click|self={() => details = null}>
-    <div class="i-ep:close cursor-pointer absolute z-21 top-2 right-2 text-white text-size-10" on:click|self={() => details = null}></div>
+    <div class="i-ep-close cursor-pointer absolute z-21 top-2 right-2 text-white text-size-10" on:click|self={() => details = null}></div>
     <div class="flex-1 flex items-center w-screen">
       <Splide aria-label="My Favorite Images" options={{
         updateOnMove: true, width: '100%', height: '100%', wheel: true, lazyLoad: 'sequencial', padding: '20%',
