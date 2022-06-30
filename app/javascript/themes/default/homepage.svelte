@@ -9,7 +9,7 @@
   import {fade,fly} from 'svelte/transition'
   export let spina
   export let room_types
-  let details
+  let details = room_types[4]
 
   let searchLink = `https://direct-book.com/properties/intownresidencesdirect/?locale=${$store.locale}&items[0][infants]=0&currency=EUR&trackPage=yes`
   function max_people(room_type) {
@@ -47,7 +47,7 @@
         }}>
         {#each details.images_prop as image, i}
           <SplideSlide>
-            <img on:click={() => lightbox(image.url)} class="w-full object-contain splide_image h-70vh" data-splide-lazy={image.url}>
+            <img on:click={() => lightbox(image.url)} class="w-full object-contain splide_image h-40vh md:h-70vh" data-splide-lazy={image.url}>
           </SplideSlide>
         {/each}
 

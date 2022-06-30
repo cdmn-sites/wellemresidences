@@ -181,12 +181,16 @@ input[type="text"],input[type="email"],input[type="password"] {
   height: 1em;
   font-size: 33px;
 }
-.h-70vh {
-  height: 70vh;
+.h-40vh {
+  height: 40vh;
 }
+
 @media (min-width: 768px)
  {
   .md\:mt-8 {
       margin-top: 2rem;
+  }
+  .md\:h-70vh {
+    height: 70vh;
   }
 }
