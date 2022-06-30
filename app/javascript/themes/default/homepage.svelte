@@ -9,7 +9,7 @@
   import {fade,fly} from 'svelte/transition'
   export let spina
   export let room_types
-  let details = room_types[4]
+  let details
 
   let searchLink = `https://direct-book.com/properties/intownresidencesdirect/?locale=${$store.locale}&items[0][infants]=0&currency=EUR&trackPage=yes`
   function max_people(room_type) {
@@ -57,7 +57,7 @@
       <div class="text-golden uppercase">
         <h2 class="!mb-3 !mt-0">{details.name}</h2>
       </div>
-      <p mb-4 class="serif text-lg md:text-xl">
+      <p mb-4 class="serif leading-5 md:text-xl">
         {details.description}
       </p>
       <a on:click|stopPropagation class="btn bg-gray/10 hover:bg-white serif w-full text-center uppercase" href="{searchLink}&roomTypeId={details.id}" target="_blank">
