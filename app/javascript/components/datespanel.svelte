@@ -93,13 +93,13 @@
     <div class="adults">
       <div class="options">
         <label>{$store.t('adults')}</label>
-        <div class="btn" on:click={() => numAdults--}>-</div> {numAdults} <div class="btn" on:click={() => numAdults++}>+</div>
+        <div class="btn mr-1" on:click={() => numAdults--}>-</div> {numAdults} <div class="ml-1 btn" on:click={() => numAdults++}>+</div>
       </div>
     </div>
     <div class="kids">
       <div class="options">
         <label>{$store.t('children')}</label>
-        <div class="btn" on:click={() => numChildren--}>-</div> {numChildren} <div class="btn" on:click={() => numChildren++}>+</div>
+        <div class="btn mr-1" on:click={() => numChildren--}>-</div> {numChildren} <div class="ml-1 btn" on:click={() => numChildren++}>+</div>
       </div>
     </div>
   </div>

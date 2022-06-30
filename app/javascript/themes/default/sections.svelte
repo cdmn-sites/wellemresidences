@@ -67,7 +67,7 @@
       {#if style == 'parallax'}
         <section relative class:odd={i % 2 == 1} class="container spina mb-20 lg:h-140 xl:h-180">
           {#if title}
-            <h3 class="uppercase mb-3 text-size-1.5rem md:text-size-1.8rem">{title}</h3>
+            <h3 class="uppercase mb-6 pt-4 text-size-1.5rem md:text-size-1.8rem">{title}</h3>
           {/if}
           {#if images?.length}
             <div class:right-0={i % 2 == 1} class="relative lg:absolute aspect-video lg:w-7/10  overflow-hidden">

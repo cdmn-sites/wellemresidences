@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_28_130104) do
+ActiveRecord::Schema[7.0].define(version: 2022_06_30_111455) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -60,6 +60,9 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_28_130104) do
     t.json "amenities"
     t.integer "position", default: 0
     t.float "qm"
+    t.integer "balconies"
+    t.integer "terraces"
+    t.integer "rooms"
   end
 
   create_table "spina_accounts", id: :serial, force: :cascade do |t|

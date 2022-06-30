@@ -5,7 +5,7 @@
   import '@splidejs/svelte-splide/css';
   import Paralax from '~/components/paralax.svelte'
   import HeroImages from '~/components/hero_images.svelte'
-  // import glightbox from 'glightbox'
+  import glightbox from 'glightbox'
   import {fade,fly} from 'svelte/transition'
   export let spina
   export let room_types
@@ -15,42 +15,44 @@
   function max_people(room_type) {
     return (~~room_type.amenities.queen_size_bed * 2) +( ~~room_type.amenities.single_bed) + (~~room_type.amenities.sofa_bed) + (~~room_type.amenities.king_size_bed * 2)
   }
-  // function lightbox(room_type) {
-  //   const gallery = glightbox({
-  //     elements: room_type.images_prop.map(image => ({
-  //       href: image.url,
-  //       // title: image.title,
-  //       // description: `<a class="btn text-center uppercase" href="${searchLink}&roomTypeId=${room_type.id}" target="_blank">
-  //       //     ${$store.t('Check Availability')}
-  //       //   </a>`,
-  //       type: 'image'
-
-  //     })),
-  //   })
-  //   gallery.open()
-  // }
+  
+  function lightbox(url) {
+    const gallery = glightbox({
+      elements: [{
+        href: url,
+        type: 'image'
+        }
+      ],
+    })
+    gallery.open()
+  }
 </script>
 
 {#if details}
   <div class="w-full h-full fixed bg-black/80 z-20 top-0" transition:fade={{duration: 180}}></div>
-  <div class="flex  items-center justify-center h-full fixed w-full top-0 z-22 " on:click|self={() => details = null}>
-    <div class="z-21  bg-light p-4 w-full flex max-h-screen flex-col items-center relative" transition:fly={{y:50}}  on:click|self={() => details = null}>
-    <div class="i-ep:close-bold cursor-pointer absolute z-21 top-2 right-2 text-black text-2xl" on:click|self={() => details = null}></div>
-    <Splide aria-label="My Favorite Images" options={{
-      updateOnMove: true, height: 'max(400px, 50vh)', wheel: true, lazyLoad: 'sequencial', padding: '25%',
-      breakpoints: {
-        700: {
-          padding: '0'
+  <div class="flex items-center justify-center h-full fixed w-full top-0 z-22" on:click|self={() => details = null}>
+    <div class="z-21 p-4 w-full flex h-screen flex-col items-center relative" transition:fly={{y:50}} on:click|self={() => details = null}>
+    <div class="i-ep:close cursor-pointer absolute z-21 top-2 right-2 text-white text-size-10" on:click|self={() => details = null}></div>
+    <div class="flex-1 flex items-center w-screen">
+      <Splide aria-label="My Favorite Images" options={{
+        updateOnMove: true, width: '100%', height: '100%', wheel: true, lazyLoad: 'sequencial', padding: '20%',
+        breakpoints: {
+          1000: {
+            padding: '0'
+          },
+          1300: {
+            padding: '10%'
+          }
         }
-      }
-      }}>
-      {#each details.images_prop as image, i}
-        <SplideSlide>
-          <img class="w-full object-contain splide_image h-full" data-splide-lazy={image.url}>
-        </SplideSlide>
-      {/each}
+        }}>
+        {#each details.images_prop as image, i}
+          <SplideSlide>
+            <img on:click={() => lightbox(image.url)} class="w-full object-contain splide_image h-70vh" data-splide-lazy={image.url}>
+          </SplideSlide>
+        {/each}
 
-    </Splide>
+      </Splide>
+    </div>
     <div class="bg-light p-6 mt-4 max-w-1200px">
       <div class="text-golden uppercase">
         <h2 class="!mb-3 !mt-0">{details.name}</h2>
@@ -184,8 +186,14 @@
     transform: scale(0.8);
     transition: all 0.3s;
   }
+  :global(.splide) {
+    width: 100vw;
+  }
   :global(.is-active > .splide_image) {
     transform: scale(1) !important;
+  }
+  :global(.splide__list) {
+    align-items: center;
   }
   .bg-golden {
     background-color: #d8d6cf;
