@@ -150,13 +150,25 @@
           
             
        
-            <div class="amenity ml-7">
+            <div class="amenity ml-7 mr-7">
               <span class="i-simple-line-icons:size-fullscreen mr-1"></span> 
               <span class="text-size-17px relative top-1px">
                 {room_type.qm || '0'}m<sup text-xs>2</sup>
               </span>
             </div>
+            {#if room_type.amenities.rooms}
+              <div class="amenity text-size-17px">
+                {room_type.amenities.rooms} {$store.t('rooms')}
+                {#if room_type.amenities.terraces}
+                  {$store.t('+ terrace')}
+                {/if}
+                {#if room_type.amenities.balconies}
+                  {$store.t('+ balcony')}
+                {/if}
+              </div>
+            {/if}
           </div>
+          
           <!-- <p class="flex-1 mb-4 leading-6">
             {room_type.description || ''}
           </p> -->
