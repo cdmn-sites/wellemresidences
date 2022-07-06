@@ -70,7 +70,7 @@
 
 <!-- {#if spina.header_images?.length} -->
 <div class="h-400px md:h-500px lg:h-600px xl:h-650px">
-  <HeroImages bottom images={spina.header_images.images} >
+  <HeroImages position="bottom" images={spina.header_images.images} >
     <div class="absolute w-full h-full bg-black/45"></div>
     <Paralax y={-50}>
     <div class="text-center text-size-2.5 md:text-size-3 px-12 lg:text-size-5 taglines text-white absolute w-full flex items-center flex-col justify-center h-full">
