@@ -2,10 +2,14 @@ import axios from 'axios'
 
 import { createInertiaApp } from '@inertiajs/inertia-svelte'
 import { InertiaProgress } from '@inertiajs/progress'
-
+import { Inertia } from '@inertiajs/inertia'
 import 'glightbox/dist/css/glightbox.min.css'
 
+// import ibe from '~/lib/ibe'
+
 import 'virtual:uno.css'
+
+// Inertia.on('navigate', () => ibe.go())
 
 const templates = import.meta.glob('../themes/**/*.svelte')
 

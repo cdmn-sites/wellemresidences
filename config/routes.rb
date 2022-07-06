@@ -14,6 +14,8 @@ Rails.application.routes.draw do
         resources :room_types
       end
     end
+    resources :room_types
+    resources :bookings
     mount Spina::Engine => '/'
   end
 end

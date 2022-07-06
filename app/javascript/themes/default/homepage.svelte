@@ -5,6 +5,8 @@
   import '@splidejs/svelte-splide/css';
   import Paralax from '~/components/paralax.svelte'
   import HeroImages from '~/components/hero_images.svelte'
+  import Amenities from '../../components/amenities.svelte';
+  import { inertia } from '@inertiajs/inertia-svelte'
   import glightbox from 'glightbox'
   import {fade,fly} from 'svelte/transition'
   export let spina
@@ -12,9 +14,7 @@
   let details
 
   let searchLink = `https://direct-book.com/properties/intownresidencesdirect/?locale=${$store.locale}&items[0][infants]=0&currency=EUR&trackPage=yes`
-  function max_people(room_type) {
-    return (~~room_type.amenities.queen_size_bed * 2) +( ~~room_type.amenities.single_bed) + (~~room_type.amenities.sofa_bed) + (~~room_type.amenities.king_size_bed * 2)
-  }
+
   
   function lightbox(url) {
     const gallery = glightbox({
@@ -103,7 +103,7 @@
       </div>
       {#each room_types as room_type}
         <div on:click={() => details = room_type} class="room_type flex flex-col bg-light p-4 shadow-sm">
-          <div class="cursor-pointer overflow-hidden mb-4 shadow z-1 relative">
+          <div href="/room_types/{room_type.id}" use:inertia class="cursor-pointer overflow-hidden mb-4 shadow z-1 relative">
             <!-- {#each room_type.images_prop as image} -->
               <div class="placeholder image" style="background-image:url({room_type.thumbnail_url})"></div>
             <!-- {/each} -->
@@ -111,63 +111,7 @@
           <h3 class="text-golden uppercase">
             {room_type.name}
           </h3>
-          <div class="serif italic amenities relative min-h-8 text-size-xl flex-1">
-            {#if room_type.amenities.queen_size_bed}
-              <div class="amenity">
-                {#each Array(room_type.amenities.queen_size_bed) as _,i }
-                  <span class="i-teenyicons-bed-double-outline"></span>
-                {/each}
-              </div>
-            {/if}
-            {#if room_type.amenities.king_size_bed}
-              <div class="amenity">
-                {#each Array(room_type.amenities.king_size_bed) as _,i }
-                  <span class="i-teenyicons-bed-double-outline"></span>
-                {/each}
-              </div>
-            {/if}
-            {#if room_type.amenities.single_bed}
-              <div class="amenity">
-                {#each Array(room_type.amenities.single_bed) as _,i }
-                  <span class="i-teenyicons-bed-single-outline"></span>
-                {/each}
-              </div>
-            {/if}
-            <div class="amenity -ml-1">
-              <!-- <span class="i-material-symbols-person text-size-lg"></span> -->
-              {#each Array(max_people(room_type)) as _,i}
-              <span class="i-carbon-person -mr-2"></span>
-              {/each}
-              <!-- <span class="text-size-sm">{$store.t('max_people')} {max_people(room_type)}</span> -->
-            </div>
-            {#if room_type.amenities.bathtub}
-              <div class="amenity ml-6">
-                {#each Array(room_type.amenities.bathtub) as _,i }
-                  <span class="i-teenyicons-bath-outline"></span>
-                {/each}
-              </div>
-            {/if}
-          
-            
-       
-            <div class="amenity ml-7 mr-7">
-              <span class="i-simple-line-icons:size-fullscreen mr-1"></span> 
-              <span class="text-size-17px relative top-1px">
-                {room_type.qm || '0'}m<sup text-xs>2</sup>
-              </span>
-            </div>
-            {#if room_type.amenities.rooms}
-              <div class="amenity text-size-17px">
-                {room_type.amenities.rooms} {$store.t('rooms')}
-                {#if room_type.amenities.terraces}
-                  {$store.t('+ terrace')}
-                {/if}
-                {#if room_type.amenities.balconies}
-                  {$store.t('+ balcony')}
-                {/if}
-              </div>
-            {/if}
-          </div>
+          <Amenities {room_type}></Amenities>
           
           <!-- <p class="flex-1 mb-4 leading-6">
             {room_type.description || ''}
@@ -214,31 +158,7 @@
     color: #948a6b;
   }
 
-  .amenities {
-    /* display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    text-align: center;
-    margin: 0 0 1rem;
-    align-items: center;
-    gap: 5px; */
-    margin-bottom: 1rem;
-  }
-  .amenity {
-    display: inline-block;
-
-    white-space: nowrap;
-    margin-bottom: 1rem;
-    /* border-right: 1px solid black; */
-    /* flex-grow: 1;
-    padding: 0.5rem 4px;
-    background-color: white; */
-
-    /* border: 1px solid black; */
-  }
-  .amenity:first-of-type {
-    padding-left: 0;
-  }
+ 
   h1 {
     font-size: 2.5em;
     margin-top: 4rem;

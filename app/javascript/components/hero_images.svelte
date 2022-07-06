@@ -2,6 +2,7 @@
   import Cycler from '~/components/cycler.svelte'
   export let images = []
   export let bottom = false
+  export let position = 'top'
   let scrollY
 </script>
 
@@ -11,7 +12,8 @@
 <div class="header_image relative h-full overflow-hidden">
   <Cycler let:current>
     {#each images as img, i}
-      <img alt={img.alt} class:active={current == i} class:bottom-0={bottom} class="cycle_image w-full min-w-700px absolute left-1/2" src="/rails/active_storage/blobs/{img.signed_blob_id}/{img.filename}" style="transform: translateX(-50%) translateY({scrollY/2}px) scale({1 + scrollY/5000}) " />
+      {@const src = img.url || `/rails/active_storage/blobs/${img.signed_blob_id}/${img.filename}`}
+      <img alt={img.alt} class:active={current == i} class:bottom-0={bottom} class="cycle_image w-full min-w-700px absolute left-1/2" {src} style="object-position:{position};transform: translateX(-50%) translateY({scrollY/2}px) scale({1 + scrollY/5000}) " />
     {/each}
   </Cycler>
   <div class="gradient" />
@@ -23,6 +25,9 @@
 <style>
   .cycle_image {
     opacity: 0;
+    height: 100%;
+    object-fit: cover;
+    
     transition: opacity 2s ease-in-out;
   }
   .cycle_image.active {
