@@ -30,7 +30,7 @@
     month1 = month1
   }
 
-  $: $store.searchlink = checkin && checkout ? `/bookings/new?locale=${$store.locale}&items[0][adults]=${numAdults}&items[0][children]=${numChildren}&items[0][infants]=0&currency=EUR&check_in_date=${checkin.getFullYear()}-${zeroPad(checkin.getMonth()+1,2)}-${zeroPad(checkin.getDate(),2)}&check_out_date=${checkout.getFullYear()}-${zeroPad(checkout.getMonth()+1,2)}-${zeroPad(checkout.getDate(),2)}&trackPage=yes` : `/bookings/new?locale=${$store.locale}&items[0][adults]=${numAdults}&items[0][children]=${numChildren}&items[0][infants]=0&currency=EUR&trackPage=yes`
+  $: $store.searchlink = checkin && checkout ? `/bookings/new?locale=${$store.locale}&number_adults=${numAdults}&number_children=${numChildren}&items[0][infants]=0&currency=EUR&check_in_date=${checkin.getFullYear()}-${zeroPad(checkin.getMonth()+1,2)}-${zeroPad(checkin.getDate(),2)}&check_out_date=${checkout.getFullYear()}-${zeroPad(checkout.getMonth()+1,2)}-${zeroPad(checkout.getDate(),2)}&trackPage=yes` : `/bookings/new?locale=${$store.locale}&inumber_adults=${numAdults}&number_children=${numChildren}&items[0][infants]=0&currency=EUR&trackPage=yes`
 
   $: formattedDate1 = formatDate(checkin)
   $: formattedDate2 = formatDate(checkout)
