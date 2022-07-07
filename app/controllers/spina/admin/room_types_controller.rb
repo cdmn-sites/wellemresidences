@@ -1,6 +1,6 @@
 module Spina::Admin
   class RoomTypesController < AdminController
-    before_action :set_room_type, only: [:edit, :update]
+    before_action :set_room_type, only: [:edit]
     before_action :set_locale
     
     admin_section :content
@@ -15,6 +15,12 @@ module Spina::Admin
     end
 
     def update
+      if params[:room_types]
+        for id, index in params[:room_types].each_with_index
+          RoomType.find(id).update position: index
+        end
+      end
+      @room_type = RoomType.find(params[:id])
       I18n.locale = params[:locale]
       if @room_type.update(room_type_params)
         params[:room_type][:images].each_with_index do |sid, i|

@@ -83,7 +83,7 @@
             </div>
           {/if}
           <Paralax y={-100}>
-            <div class:right-0={i % 2 == 0} class="serif relative -top-70px lg:text-size-lg xl:text-size-xl xl:w-12/10 lg:max-w-500px xl:max-w-700px shadow-2xl bg-light/90 p-6 lg:absolute lg:top-140px xl:top-300px">
+            <div class:right-0={i % 2 == 0} class="serif relative  text-justify -top-70px lg:text-size-lg xl:text-size-xl xl:w-12/10 lg:max-w-500px xl:max-w-700px shadow-2xl bg-light/90 p-6 lg:absolute lg:top-140px xl:top-300px">
               {@html text}
             </div>
           </Paralax>
@@ -152,7 +152,7 @@
                 {#if title}
                   <h3 class="uppercase mb-5 text-size-1.5rem md:text-size-1.8rem">{title}</h3>
                 {/if}
-                <div class="serif font-100">
+                <div class="serif font-100 text-justify">
                   {@html text}
                 </div>
               </div>

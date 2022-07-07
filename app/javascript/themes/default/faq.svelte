@@ -19,10 +19,12 @@
   {#each spina.faq.content as faq}
     <div class="flex flex-col mt-8">
       <div class="flex-1">
-        
+        <details>
+          <summary>
         <h2 class="text-2xl font-bold">{@html faq.parts[0].content}</h2>
+      </summary>
         <p class="text-lg text-gray-700 mt-3">{@html faq.parts[1].content}</p>
-        
+      </details>
       </div>
     </div>
   {:else}

@@ -1,8 +1,7 @@
 
 <script>
   import store from '~/lib/store'
-  import { Splide, SplideSlide } from '@splidejs/svelte-splide';
-  import '@splidejs/svelte-splide/css';
+
   import Paralax from '~/components/paralax.svelte'
   import HeroImages from '~/components/hero_images.svelte'
   import Amenities from '../../components/amenities.svelte';
@@ -11,24 +10,52 @@
   import {fade,fly} from 'svelte/transition'
   export let spina
   export let room_types
+  import flickity from 'flickity'
+
+  import { onMount } from 'svelte';
+
   let details
 
   let searchLink = `https://direct-book.com/properties/intownresidencesdirect/?locale=${$store.locale}&items[0][infants]=0&currency=EUR&trackPage=yes`
 
   
-  function lightbox(url) {
-    const gallery = glightbox({
-      elements: [{
-        href: url,
-        type: 'image'
-        }
-      ],
-    })
-    gallery.open()
+  onMount(function() {
+    const elems = document.querySelectorAll('.flickity')
+    for (let i = 0; i < elems.length; i++) {
+      const element = elems[i];
+      new flickity(element, {
+        // options
+        cellAlign: 'left',
+        bgLazyLoad: true,
+        contain: true
+      })
+      
+    }
+    glightbox()
+  })
+
+  let down = false
+  let moved = false
+  function stopPropagationIfMoved(ev) {
+    if (moved) ev.stopPropagation()
+  }
+  function pointerDown() {
+    down = true
+    moved = false
+  }
+  function pointerUp() {
+    setTimeout(function() {
+      down = false
+      moved = false
+
+    }, 10)
+  }
+  function pointerMove() {
+    if (down) moved = true
   }
 </script>
 
-{#if details}
+<!-- {#if details}
   <div class="w-full h-full fixed bg-black/80 z-20 top-0" transition:fade={{duration: 180}}></div>
   <div class="flex items-center justify-center h-full fixed w-full top-0 z-22" on:click|self={() => details = null}>
     <div class="z-21 p-4 w-full flex h-screen flex-col items-center relative" transition:fly={{y:50}} on:click|self={() => details = null}>
@@ -66,7 +93,7 @@
     </div>
   </div>
 </div>
-{/if}
+{/if} -->
 
 <!-- {#if spina.header_images?.length} -->
 <div class="h-400px md:h-500px lg:h-600px xl:h-650px">
@@ -96,29 +123,33 @@
       <div class="md:pl-10 md:pr-50 md:col-span-2 md:text-size-5 text-left bg-light p-6 leading-7.5">
         <h4 uppercase class="text-golden mb-2">{spina.page_title}</h4>
         <h3 uppercase>{@html spina.welcome?.content}</h3>
-        <p class="serif spina">
+        <p class="serif spina text-justify">
           {@html spina.intro?.content}
         </p>
 
       </div>
       {#each room_types as room_type}
-        <div on:click={() => details = room_type} class="room_type flex flex-col bg-light p-4 shadow-sm">
-          <div href="/room_types/{room_type.id}" use:inertia class="cursor-pointer overflow-hidden mb-4 shadow z-1 relative">
-            <!-- {#each room_type.images_prop as image} -->
-              <div class="placeholder image" style="background-image:url({room_type.thumbnail_url})"></div>
-            <!-- {/each} -->
+        <div  class="room_type flex flex-col bg-light p-4 shadow-sm">
+        <!-- <div class="room_type flex flex-col bg-light p-4 shadow-sm"> -->
+          <div class=" flickity aspect-video overflow-hidden mb-4 shadow z-1 relative">
+            {#each room_type.thumbnails as thumbnail, index}
+            <a on:pointermove={pointerMove} on:pointerdown={pointerDown} on:pointerup={pointerUp} on:click|capture|preventDefault={stopPropagationIfMoved} class="w-full h-full glightbox" href={room_type.images_prop[index].url}>
+              <div class="placeholder image w-full h-full bg-center bg-no-repeat" data-flickity-bg-lazyload={thumbnail.url}></div>
+            </a>
+            {/each}
           </div>
           <h3 class="text-golden uppercase">
             {room_type.name}
           </h3>
           <Amenities {room_type}></Amenities>
-          
+          <a class="mb-6 mt-2  text-lg underline " href="/room_types/{room_type.id}" use:inertia>{$store.t('More information')}</a>
           <!-- <p class="flex-1 mb-4 leading-6">
             {room_type.description || ''}
           </p> -->
-          <a on:click|stopPropagation class="btn bg-gray/10 hover:bg-white serif text-center uppercase" href="{searchLink}&roomTypeId={room_type.id}" target="_blank">
-            {$store.t('Check Availability')}
-          </a>
+        
+        <a on:click|stopPropagation class="btn bg-gray/10 hover:bg-white serif text-center uppercase" href="{searchLink}&roomTypeId={room_type.id}" target="_blank">
+          {$store.t('Check Availability')}
+        </a>
         </div>
       {/each}
     </div>
@@ -138,19 +169,6 @@
 </section>
 
 <style>
-  .splide_image {
-    transform: scale(0.8);
-    transition: all 0.3s;
-  }
-  :global(.splide) {
-    width: 100vw;
-  }
-  :global(.is-active > .splide_image) {
-    transform: scale(1) !important;
-  }
-  :global(.splide__list) {
-    align-items: center;
-  }
   .bg-golden {
     background-color: #d8d6cf;
   }
@@ -158,7 +176,7 @@
     color: #948a6b;
   }
 
- 
+  
   h1 {
     font-size: 2.5em;
     margin-top: 4rem;
@@ -192,7 +210,7 @@
     
     text-align: left;
   }
-  .room_type:hover .image {
+  .room_type .image:hover  {
     transform: scale(1.1);
   }
 

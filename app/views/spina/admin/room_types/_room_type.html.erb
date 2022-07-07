@@ -1,5 +1,6 @@
 <%#= turbo_frame_tag dom_id(room_type) do %>
-  <div class="flex items-center h-12 border-b border-gray-200 px-8 hover:bg-white group">
+  <div class="flex items-center h-12 border-b border-gray-200 px-8 hover:bg-white group room_type" id="<%= room_type.id %>">
+    <%= hidden_field_tag 'room_types[]', room_type.id %>
     <div class="w-8 mr-4 h-12 flex justify-center">
         <%# <%= room_type_tag thumbnail_url(room_type), class: "object-contain" %>
     </div>
@@ -8,16 +9,16 @@
       <%= link_to Rails.application.routes.url_helpers.edit_admin_room_type_path(room_type), class: "flex items-center" do %>
         <span class="truncate"><%= room_type.name %></span>
       <% end %>
+      <span class="up">&nbsp;|&nbsp;
+        <span class="cursor-pointer" onclick="javascript:document.getElementById('<%= room_type.id %>').parentElement.insertBefore(document.getElementById('<%= room_type.id %>'), document.getElementById('<%= room_type.id %>').previousElementSibling)">Up</span>
+      </span>
+      <span class="down">&nbsp;|&nbsp;
+        <span class="cursor-pointer" onclick="javascript:document.getElementById('<%= room_type.id %>').parentElement.insertBefore(document.getElementById('<%= room_type.id %>'), document.getElementById('<%= room_type.id %>').nextElementSibling.nextElementSibling)">Down</span>
+      </span>
     
-      <div class="absolute h-full opacity-0 group-hover:opacity-100 flex items-center right-0 pr-3 top-0">
-
-      </div>
-    </div>
-    
-    
-    <div class="flex items-center ml-2">
       
-
     </div>
+    
+    
   </div>
 <%# end %>

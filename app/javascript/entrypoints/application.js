@@ -4,6 +4,8 @@ import { createInertiaApp } from '@inertiajs/inertia-svelte'
 import { InertiaProgress } from '@inertiajs/progress'
 import { Inertia } from '@inertiajs/inertia'
 import 'glightbox/dist/css/glightbox.min.css'
+import 'flickity-bg-lazyload'
+import 'flickity/dist/flickity.min.css'
 
 // import ibe from '~/lib/ibe'
 

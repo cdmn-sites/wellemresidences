@@ -27,15 +27,21 @@
       {/each}
     </div>
   {/if}
-  <div class="amenity -ml-1">
+  <div class="amenity -ml-1 mr-4">
     <!-- <span class="i-material-symbols-person text-size-lg"></span> -->
     {#each Array(max_people(room_type)) as _,i}
     <span class="i-carbon-person -mr-2"></span>
     {/each}
     <!-- <span class="text-size-sm">{$store.t('max_people')} {max_people(room_type)}</span> -->
+  </div>|
+  <div class="amenity ml-3 mr-3">
+    <span class="i-simple-line-icons:size-fullscreen mr-1"></span> 
+    <span class="text-size-17px relative top-1px">
+      {room_type.qm || '0'}m<sup text-xs>2</sup>
+    </span>
   </div>
   {#if room_type.amenities.bathtub}
-    <div class="amenity ml-6">
+    |<div class="amenity ml-3 mr-2">
       {#each Array(room_type.amenities.bathtub) as _,i }
         <span class="i-teenyicons-bath-outline"></span>
       {/each}
@@ -43,24 +49,17 @@
   {/if}
 
   
+    {#if room_type.amenities.terraces}
+      | <div class="amenity text-size-17px ml-2">
+        {$store.t('terrace')}
+      </div>
 
-  <div class="amenity ml-7 mr-7">
-    <span class="i-simple-line-icons:size-fullscreen mr-1"></span> 
-    <span class="text-size-17px relative top-1px">
-      {room_type.qm || '0'}m<sup text-xs>2</sup>
-    </span>
-  </div>
-  {#if room_type.amenities.rooms}
-    <div class="amenity text-size-17px">
-      {room_type.amenities.rooms} {$store.t('rooms')}
-      {#if room_type.amenities.terraces}
-        {$store.t('+ terrace')}
-      {/if}
-      {#if room_type.amenities.balconies}
-        {$store.t('+ balcony')}
-      {/if}
-    </div>
-  {/if}
+    {/if}
+    {#if room_type.amenities.balconies}
+      | <div class="amenity text-size-17px ml-2">
+        {$store.t('balcony')}
+      </div>
+    {/if}
 </div>
 
 <style>
@@ -72,13 +71,13 @@
     margin: 0 0 1rem;
     align-items: center;
     gap: 5px; */
-    margin-bottom: 1rem;
+    /* margin-bottom: 1rem; */
   }
   .amenity {
     display: inline-block;
 
     white-space: nowrap;
-    margin-bottom: 1rem;
+    /* margin-bottom: 1rem; */
     /* border-right: 1px solid black; */
     /* flex-grow: 1;
     padding: 0.5rem 4px;

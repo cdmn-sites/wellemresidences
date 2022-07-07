@@ -1,8 +1,10 @@
 class RoomType < ApplicationRecord
   translates :description
 
+  default_scope -> { order('position asc')}
+
   has_many_attached :images do |attachment|
-    attachment.variant :thumb, resize_to_limit: [600,600]
+    attachment.variant :thumb, resize_to_limit: [700,500]
     attachment.variant :preview, resize_to_limit: [1920,1080]
   end
 
@@ -16,5 +18,9 @@ class RoomType < ApplicationRecord
 
   def images_prop
     images.attached? && images.map { |image| {url: image.variant(:preview).processed.url} }
+  end
+
+  def thumbnails
+    images.attached? && images.map { |image| {url: image.variant(:thumb).processed.url} }
   end
 end

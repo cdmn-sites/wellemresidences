@@ -34,7 +34,20 @@
 <% end %>
 
 <div class="my-8 border-t border-gray-200">
+  <%= form_tag main_app.admin_room_type_path(:all), method: "PUT" do %>
+    <%= render @room_types %>
 
-   <%= render @room_types %>
+    <button style="margin-left: 4rem;margin-top:2rem;" class=" btn btn-primary">Save order</button>
+  <% end %>
   
 </div>
+
+<style>
+.room_type:last-of-type .down {
+  display: none;
+}
+.room_type:first-of-type .up {
+  display: none;
+}
+
+</style>

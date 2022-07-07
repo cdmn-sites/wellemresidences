@@ -23,7 +23,8 @@ const translations = {
     'send': 'Abschicken',
     'contact_us': 'Kontaktieren Sie uns',
     'language': 'Sprache',
-    'information': 'Informationen'
+    'information': 'Informationen',
+    'more_information': 'Mehr informationen'
   },
   en: {
     'sleeps': 'Sleeps',
@@ -49,6 +50,7 @@ const translations = {
     'your_email': 'Su correo electrónico',
     'your_message': 'Su mensaje',
     'thank_you,_your_message_has_been_sent': 'Gracias, su mensaje ha sido enviado',
+    
   }
 }
 const t = function(key) {
