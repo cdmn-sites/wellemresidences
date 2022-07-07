@@ -2,6 +2,7 @@
   import DatePicker from '~/components/datepicker.svelte'
   import { slide } from 'svelte/transition'
   import store from '~/lib/store'
+  import {inertia} from '@inertiajs/inertia-svelte'
 
   let showDatepickers
   let today = new Date()
@@ -29,8 +30,7 @@
     month1 = month1
   }
 
-  export let searchLink
-  $: searchLink = checkin && checkout ? `https://direct-book.com/properties/intownresidencesdirect/?locale=${$store.locale}&items[0][adults]=${numAdults}&items[0][children]=${numChildren}&items[0][infants]=0&currency=EUR&checkInDate=${checkin.getFullYear()}-${zeroPad(checkin.getMonth()+1,2)}-${zeroPad(checkin.getDate(),2)}&checkOutDate=${checkout.getFullYear()}-${zeroPad(checkout.getMonth()+1,2)}-${zeroPad(checkout.getDate(),2)}&trackPage=yes` : `https://direct-book.com/properties/intownresidencesdirect/?locale=${$store.locale}&items[0][adults]=${numAdults}&items[0][children]=${numChildren}&items[0][infants]=0&currency=EUR&trackPage=yes`
+  $: $store.searchlink = checkin && checkout ? `/bookings/new?locale=${$store.locale}&items[0][adults]=${numAdults}&items[0][children]=${numChildren}&items[0][infants]=0&currency=EUR&check_in_date=${checkin.getFullYear()}-${zeroPad(checkin.getMonth()+1,2)}-${zeroPad(checkin.getDate(),2)}&check_out_date=${checkout.getFullYear()}-${zeroPad(checkout.getMonth()+1,2)}-${zeroPad(checkout.getDate(),2)}&trackPage=yes` : `/bookings/new?locale=${$store.locale}&items[0][adults]=${numAdults}&items[0][children]=${numChildren}&items[0][infants]=0&currency=EUR&trackPage=yes`
 
   $: formattedDate1 = formatDate(checkin)
   $: formattedDate2 = formatDate(checkout)
@@ -106,7 +106,7 @@
   <div class="search">
     <div class="options">
       {#if checkin && checkout}
-        <a href={searchLink} target="_blank" class="btn primary">{$store.t('Check Availability')}</a>
+        <a href="{$store.searchlink}&room_type={$store.room_type}" use:inertia target="_blank" class="btn primary">{$store.t('Check Availability')}</a>
       {:else}
         <div class="btn disabled" >{$store.t('Check Availability')}</div>
       {/if}

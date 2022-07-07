@@ -10,9 +10,9 @@
   import flickity from 'flickity'
   
   import { Inertia } from '@inertiajs/inertia';
-  let searchLink = `https://direct-book.com/properties/intownresidencesdirect/?locale=${$store.locale}&items[0][infants]=0&currency=EUR&trackPage=yes`
   
   function init() {
+    $store.room_type = room_type.id
     const elems = document.querySelectorAll('.flickity')
     for (let i = 0; i < elems.length; i++) {
       const element = elems[i];
@@ -62,7 +62,7 @@
 {/if}
 
 <main class="container relative">
-  <a on:click|stopPropagation class="btn hidden md:inline-block absolute top-0 right-24px bg-gray/10 hover:bg-white serif text-center uppercase" href="{searchLink}&roomTypeId={room_type.id}" target="_blank">
+  <a on:click|stopPropagation class="btn hidden md:inline-block absolute top-0 right-24px bg-gray/10 hover:bg-white serif text-center uppercase" href="{$store.searchlink}&room_type={room_type.id}" target="_blank">
     {$store.t('Check Availability')}
   </a>
   

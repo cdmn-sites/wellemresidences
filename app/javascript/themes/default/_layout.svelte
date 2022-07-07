@@ -6,6 +6,8 @@
   import store from '~/lib/store'
   import glightbox from 'glightbox'
 
+  export let hidelayout
+
   export let account
   export let spina
   export let header_menu
@@ -39,7 +41,7 @@
   Inertia.on('navigate', updateBar)
   Inertia.on('navigate', glightbox)
 
-  let searchLink = `https://direct-book.com/properties/intownresidencesdirect/?locale=${$store.locale}&items[0][infants]=0&currency=EUR&trackPage=yes`
+  
   let placed
   let datespanel
   Inertia.on('navigate', function() {
@@ -48,7 +50,7 @@
       target.appendChild(datespanel)
       placed = true
     }
-    else {
+    else if (datespanel) {
       document.body.appendChild(datespanel)
       placed = false
     }
@@ -64,10 +66,12 @@
   {/if}
 </svelte:head>
 
+{#if !hidelayout}
 <div class="datespanel" bg-light class:placed bind:this={datespanel}>
   <!-- <div id="avantio-form" class="horizontal"></div>{@html avantioHtml}     -->
-  <DatesPanel bind:searchLink/>
+  <DatesPanel />
 </div>
+{/if}
 
 <header>
   <div class="hidden md:block active_bar" bind:this={bar}></div>
@@ -87,10 +91,15 @@
 
 <div class="h-40px"></div>
 <div class="shade"></div>
-<div class="logo p-4.5" style="transform: translate(-50%, {-(moveLogo)/4.2 -16 }px) scale({1 - moveLogo / 500})">
-  <img class="w-full" src="/rails/active_storage/blobs/{spina.logo.signed_blob_id}/{spina.logo.filename}" alt={account.name}>
-
-</div>
+{#if hidelayout}
+  <div class="logo p-4.5" style="transform: translate(-50%, -70px) scale(0.5)">
+    <img class="w-full" src="/rails/active_storage/blobs/{spina.logo.signed_blob_id}/{spina.logo.filename}" alt={account.name}>
+  </div>
+{:else}
+  <div class="logo p-4.5" style="transform: translate(-50%, {-(moveLogo)/4.2 -16 }px) scale({1 - moveLogo / 500})">
+    <img class="w-full" src="/rails/active_storage/blobs/{spina.logo.signed_blob_id}/{spina.logo.filename}" alt={account.name}>
+  </div>
+{/if}
 
 <div  class:menuOpen class="md:hidden menu_toggle" on:click={() => menuOpen = !menuOpen}>
   <div class="hamburger-icon" id="icon">

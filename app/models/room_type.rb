@@ -1,5 +1,5 @@
 class RoomType < ApplicationRecord
-  translates :description
+  translates :description, :details, :kitchen, :laundry, :bathroom, :entertainment, :communication, :other
 
   default_scope -> { order('position asc')}
 

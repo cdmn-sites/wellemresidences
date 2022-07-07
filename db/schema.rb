@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_06_30_111455) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_07_181339) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -49,6 +49,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_30_111455) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "description"
+    t.text "details"
+    t.text "kitchen"
+    t.text "laundry"
+    t.text "bathroom"
+    t.text "entertainment"
+    t.text "communication"
+    t.text "other"
     t.index ["locale"], name: "index_room_type_translations_on_locale"
     t.index ["room_type_id"], name: "index_room_type_translations_on_room_type_id"
   end
@@ -63,6 +70,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_06_30_111455) do
     t.integer "balconies"
     t.integer "terraces"
     t.integer "rooms"
+    t.text "details"
+    t.text "kitchen"
+    t.text "laundry"
+    t.text "bathroom"
+    t.text "entertainment"
+    t.text "communication"
+    t.text "other"
   end
 
   create_table "spina_accounts", id: :serial, force: :cascade do |t|

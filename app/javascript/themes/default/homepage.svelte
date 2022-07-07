@@ -15,9 +15,6 @@
   import { onMount } from 'svelte';
 
   let details
-
-  let searchLink = `https://direct-book.com/properties/intownresidencesdirect/?locale=${$store.locale}&items[0][infants]=0&currency=EUR&trackPage=yes`
-
   
   onMount(function() {
     const elems = document.querySelectorAll('.flickity')
@@ -147,7 +144,7 @@
             {room_type.description || ''}
           </p> -->
         
-        <a on:click|stopPropagation class="btn bg-gray/10 hover:bg-white serif text-center uppercase" href="{searchLink}&roomTypeId={room_type.id}" target="_blank">
+        <a on:click|stopPropagation class="btn bg-gray/10 hover:bg-white serif text-center uppercase" href="{$store.searchlink}&room_type={room_type.id}" target="_blank">
           {$store.t('Check Availability')}
         </a>
         </div>
