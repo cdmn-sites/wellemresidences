@@ -201,3 +201,6 @@ input[type="text"],input[type="email"],input[type="password"] {
 .flickity-button-icon {
   fill: white !important;
 }
+.flickity-button:focus {
+  outline: none !important;
+}
