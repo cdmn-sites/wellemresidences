@@ -66,12 +66,12 @@
   {/if}
 </svelte:head>
 
-{#if !hidelayout}
-<div class="datespanel" bg-light class:placed bind:this={datespanel}>
+
+<div class="datespanel" bg-light class:placed bind:this={datespanel} class:!hidden={hidelayout} >
   <!-- <div id="avantio-form" class="horizontal"></div>{@html avantioHtml}     -->
   <DatesPanel />
 </div>
-{/if}
+
 
 <header>
   <div class="hidden md:block active_bar" bind:this={bar}></div>
@@ -92,13 +92,13 @@
 <div class="h-40px"></div>
 <div class="shade"></div>
 {#if hidelayout}
-  <div class="logo p-4.5" style="transform: translate(-50%, -70px) scale(0.5)">
+  <a href="/{$store.locale}" use:inertia class="logo p-4.5" style="transform: translate(-50%, -70px) scale(0.5)">
     <img class="w-full" src="/rails/active_storage/blobs/{spina.logo.signed_blob_id}/{spina.logo.filename}" alt={account.name}>
-  </div>
+  </a>
 {:else}
-  <div class="logo p-4.5" style="transform: translate(-50%, {-(moveLogo)/4.2 -16 }px) scale({1 - moveLogo / 500})">
+  <a href="/{$store.locale}" use:inertia class="logo p-4.5" style="transform: translate(-50%, {-(moveLogo)/4.2 -16 }px) scale({1 - moveLogo / 500})">
     <img class="w-full" src="/rails/active_storage/blobs/{spina.logo.signed_blob_id}/{spina.logo.filename}" alt={account.name}>
-  </div>
+  </a>
 {/if}
 
 <div  class:menuOpen class="md:hidden menu_toggle" on:click={() => menuOpen = !menuOpen}>

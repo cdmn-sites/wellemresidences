@@ -9,7 +9,9 @@ import { onMount } from 'svelte';
 </script>
 
 
-  <div class="ibe" data-widget="embed"></div>
+  <div class="ibe min-h-500px" data-widget="embed">
+
+  </div>
 
 <style>
   :global(iframe) {

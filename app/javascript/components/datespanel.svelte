@@ -106,7 +106,7 @@
   <div class="search">
     <div class="options">
       {#if checkin && checkout}
-        <a href="{$store.searchlink}&room_type={$store.room_type}" use:inertia target="_blank" class="btn primary">{$store.t('Check Availability')}</a>
+        <a  use:inertia href="{$store.searchlink}{$store.room_type ? `&room_type=${$store.room_type}` : ''}" use:inertia target="_blank" class="btn primary">{$store.t('Check Availability')}</a>
       {:else}
         <div class="btn disabled" >{$store.t('Check Availability')}</div>
       {/if}
