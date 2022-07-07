@@ -30,7 +30,7 @@ Spina::Theme.register do |theme|
     {name: 'intro', title: 'Intro', part_type: "Spina::Parts::Text"},
     {name: 'header_images', title: 'Header Images', part_type: "Spina::Parts::ImageCollection"},
     {name: 'text',  title: "Text", part_type: "Spina::Parts::Text"},
-    {name: 'question',  title: "Question", part_type: "Spina::Parts::Text"},
+    {name: 'question',  title: "Question", part_type: "Spina::Parts::Line"},
     {name: 'answer',  title: "Answer", part_type: "Spina::Parts::Text"},
     {name: 'footer_text',  title: "Footer Text", part_type: "Spina::Parts::Text"},
     {name: 'room_amenities',  title: "Room Amenities", part_type: "Spina::Parts::Text"},
