@@ -203,4 +203,5 @@ input[type="text"],input[type="email"],input[type="password"] {
 }
 .flickity-button:focus {
   outline: none !important;
+  box-shadow: none !important;
 }
