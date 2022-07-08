@@ -62,7 +62,7 @@
 {/if}
 
 <main class="container relative">
-  <a on:click|stopPropagation class="btn hidden md:inline-block absolute top-0 right-24px bg-gray/10 hover:bg-white serif text-center uppercase" href="{$store.searchlink}&room_type={room_type.id}" target="_blank">
+  <a on:click|stopPropagation class="btn hidden md:inline-block absolute top-0 right-24px bg-gray/10 hover:bg-white serif text-center uppercase" href="{$store.searchlink}&room_type={room_type.id}" use:inertia>
     {$store.t('Check Availability')}
   </a>
   

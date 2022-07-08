@@ -144,7 +144,7 @@
             {room_type.description || ''}
           </p> -->
         
-        <a on:click|stopPropagation class="btn bg-gray/10 hover:bg-white serif text-center uppercase" href="{$store.searchlink}&room_type={room_type.id}" target="_blank">
+        <a on:click|stopPropagation class="btn bg-gray/10 hover:bg-white serif text-center uppercase" href="{$store.searchlink}&room_type={room_type.id}" use:inertia>
           {$store.t('Check Availability')}
         </a>
         </div>
