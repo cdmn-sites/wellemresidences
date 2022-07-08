@@ -71,7 +71,7 @@
     {$store.t('Check Availability')}
   </a>
   <div class="mt-12">
-    <a class="relative group" href="/room_types/" use:inertia>
+    <a class="relative group" href="/" use:inertia>
       <span class="i-gg-chevron-left absolute right-100% text-size-1.7rem -top-0.5 text-gray/30 group-hover:text-black transition-all group-hover:right-105%"></span>
       {$store.t('All Categories')}
     </a>
@@ -143,7 +143,7 @@
   </div>
 
   <div class="mt-12">
-    <a class="relative group" href="/room_types/"  use:inertia>
+    <a class="relative group" href="/"  use:inertia>
       <span class="i-gg-chevron-left absolute right-100% text-size-1.7rem -top-0.5 text-gray/30 group-hover:text-black transition-all group-hover:right-105%"></span>
       {$store.t('Back to Overview')}
     </a>
