@@ -1,5 +1,4 @@
 <%= render Spina::UserInterface::HeaderComponent.new do |header| %>
-  
   <% header.navigation do %>
     <nav class="-mb-3 mt-4">
       <ul class="inline-flex w-auto rounded-md bg-white">
@@ -7,118 +6,145 @@
     </nav>
   <% end %>
 <% end %>
+
+<style type="text/css">   @import url("https://cdnjs.cloudflare.com/ajax/libs/trix/1.1.1/trix.css"); </style> 
+
+
 <div class="p-4 md:p-8">
+  <div class="locales uppercase mb-4">
+    <% ['main', 'images', 'details'].each do |tab| %>  
+      <%= link_to tab.capitalize, main_app.edit_admin_room_type_path(locale: @locale, tab: tab), class: ('active' if params[:tab] == tab) %>
+    <% end %>
+  </div>
   <%= form_with model: @room_type, url: main_app.admin_room_type_path(@room_type), id: dom_id(@room_type) do |f| %>
     <%= hidden_field_tag :locale, @locale %>
     <div class="locales uppercase">
     <% ['en', 'de', 'es'].each do |locale| %>
     
-      <%= link_to locale, main_app.edit_admin_room_type_path(locale: locale), class: ('active' if @locale.to_s == locale.to_s) %>
+      <%= link_to locale, main_app.edit_admin_room_type_path(locale: locale, tab: params[:tab]), class: ('active' if @locale.to_s == locale.to_s) %>
     <% end %>
     </div>
+    
     <% I18n.with_locale(@locale) do %>
-      <div class="col-span-2 mt-6">
-        <div class="col-span-1">
-          <label class="block text-sm font-medium leading-5 text-gray-700 flex items-center">
-            <%= Spina::Page.human_attribute_name(:name) %>
-          </label>
-        </div>
-
-        <%= f.text_field :name, class: 'form-input block w-full sm:text-sm sm:leading-5' %>
-      </div>
-
-      <div class="col-span-2">
-        <div class="col-span-1">
-          <label class="mt-4 block text-sm font-medium leading-5 text-gray-700 flex items-center">
-            Description <%= @locale %>
-          </label>
-        </div>
-
-        <%= f.text_area :description, class: 'form-input block w-full sm:text-sm sm:leading-5' %>
-      </div>
-
-      <div class="col-span-2">
-        <div class="col-span-1">
-          <label class="mt-4 block text-sm font-medium leading-5 text-gray-700 flex items-center">
-            Square Meters
-          </label>
-        </div>
-
-        <%= f.text_field :qm, class: 'form-input  sm:text-sm sm:leading-5' %>
-      </div>
-
-      <div class="col-span-2">
-        <div class="col-span-1">
-          <label class="mt-4 block text-sm font-medium leading-5 text-gray-700 flex items-center">
-            Amenities
-          </label>
-        </div>
-        <%= f.fields :amenities, model: OpenStruct.new(f.object.amenities) do |field| %>
-          <label class="text-sm font-medium inline-block text-gray-500 w-60">
-          Single Bed: 
-          </label>
-          <%= field.text_field 'single_bed', class: 'form-input sm:text-sm sm:leading-5' %><br>
+      <% if params[:tab] == 'details' %>
           
-          <label class="text-sm font-medium inline-block text-gray-500 w-60">
-          Queen Size Bed: 
-          </label>
-          <%= field.text_field 'queen_size_bed', class: 'form-input sm:text-sm sm:leading-5' %><br>
-          
-          <label class="text-sm font-medium inline-block text-gray-500 w-60">
-          King Size Bed: 
-          </label>
-          <%= field.text_field 'king_size_bed', class: 'form-input sm:text-sm sm:leading-5' %><br>
-
-          <label class="text-sm font-medium inline-block text-gray-500 w-60">
-          Bathtub:
-          </label>
-          <%= field.text_field 'bathtub', class: 'form-input sm:text-sm sm:leading-5' %><br>
-          
-          <label class="text-sm font-medium inline-block text-gray-500 w-60">
-          Balconies:
-          </label>
-          <%= field.text_field 'balconies', class: 'form-input sm:text-sm sm:leading-5' %><br>
-          
-          <label class="text-sm font-medium inline-block text-gray-500 w-60">
-          Terraces:
-          </label>
-          <%= field.text_field 'terraces', class: 'form-input sm:text-sm sm:leading-5' %><br>
-          
-          <label class="text-sm font-medium inline-block text-gray-500 w-60">
-          Rooms:
-          </label>
-          <%= field.text_field 'rooms', class: 'form-input sm:text-sm sm:leading-5' %><br>
-        <% end %>
-        
-        <%#= f.text_area :qm, class: 'form-input block w-full sm:text-sm sm:leading-5' %>
-      </div>
-      <%= submit_tag 'Save Room Type', class: 'btn mt-4 btn-primary' %>
-      <div class="col-span-2">
-        <div class="col-span-1">
-          <label class="mt-4 block text-sm font-medium leading-5 text-gray-700 flex items-center">
-            Images
-          </label>
-        </div>
-        <div class="images">
-          <% @room_type.images.each do |i| %>
-            <div id="<%= i.signed_id %>" class="img mb-4">
-              <%= hidden_field_tag 'room_type[images][]', i.signed_id %>
-              <%= image_tag main_app.url_for(i.variant(:thumb)) %>
-              <span class="cursor-pointer" onclick="javascript:document.getElementById('<%= i.signed_id %>').remove()">Remove</span>
-              <span class="up"> |
-                <span class="cursor-pointer" onclick="javascript:document.getElementById('<%= i.signed_id %>').parentElement.insertBefore(document.getElementById('<%= i.signed_id %>'), document.getElementById('<%= i.signed_id %>').previousElementSibling)">Up</span>
-              </span>
-              <span class="down"> |
-                <span class="cursor-pointer" onclick="javascript:document.getElementById('<%= i.signed_id %>').parentElement.insertBefore(document.getElementById('<%= i.signed_id %>'), document.getElementById('<%= i.signed_id %>').nextElementSibling.nextElementSibling)">Down</span>
-              </span>
+        <% ['details', 'kitchen', 'laundry', 'bathroom', 'entertainment', 'communication', 'other'].each do |field| %>
+          <div class="col-span-2">
+            <div class="col-span-1">
+              <label class="mt-4 block text-sm font-medium leading-5 text-gray-700 flex items-center">
+                <%= field %> <%= @locale %>
+              </label>
             </div>
-          <% end %>
+            <%= f.rich_text_area field, class: 'prose prose-sm focus:outline-none max-w-3xl xl:border-r border-dashed border-gray-200 pr-3' %>
+          </div>
+        <% end %>
+      <% elsif params[:tab] == 'images' %>
+        <div class="col-span-2">
+          <div class="col-span-1">
+            <label class="mt-4 block text-sm font-medium leading-5 text-gray-700 flex items-center">
+              Images
+            </label>
+          </div>
+          <div class="images">
+            <% @room_type.images.each do |i| %>
+              <div id="<%= i.signed_id %>" class="img mb-4">
+                <%= hidden_field_tag 'room_type[images][]', i.signed_id %>
+                <%= image_tag main_app.url_for(i.variant(:thumb)) %>
+                <span class="cursor-pointer" onclick="javascript:document.getElementById('<%= i.signed_id %>').remove()">Remove</span>
+                <span class="up"> |
+                  <span class="cursor-pointer" onclick="javascript:document.getElementById('<%= i.signed_id %>').parentElement.insertBefore(document.getElementById('<%= i.signed_id %>'), document.getElementById('<%= i.signed_id %>').previousElementSibling)">Up</span>
+                </span>
+                <span class="down"> |
+                  <span class="cursor-pointer" onclick="javascript:document.getElementById('<%= i.signed_id %>').parentElement.insertBefore(document.getElementById('<%= i.signed_id %>'), document.getElementById('<%= i.signed_id %>').nextElementSibling.nextElementSibling)">Down</span>
+                </span>
+              </div>
+            <% end %>
+          </div>
         </div>
+        
+        
         <div class="mt-4">
           Add Images:
           <%= f.file_field :images, multiple: true %>
         </div>
-      </div>
+      <% else %>
+        <div class="col-span-2 mt-6">
+          <div class="col-span-1">
+            <label class="block text-sm font-medium leading-5 text-gray-700 flex items-center">
+              <%= Spina::Page.human_attribute_name(:name) %>
+            </label>
+          </div>
+
+          <%= f.text_field :name, class: 'form-input block w-full sm:text-sm sm:leading-5' %>
+        </div>
+
+        <div class="col-span-2">
+          <div class="col-span-1">
+            <label class="mt-4 block text-sm font-medium leading-5 text-gray-700 flex items-center">
+              Description <%= @locale %>
+            </label>
+          </div>
+
+          <%= f.text_area :description, class: 'form-input block w-full sm:text-sm sm:leading-5' %>
+        </div>
+
+        <div class="col-span-2">
+          <div class="col-span-1">
+            <label class="mt-4 block text-sm font-medium leading-5 text-gray-700 flex items-center">
+              Square Meters
+            </label>
+          </div>
+
+          <%= f.text_field :qm, class: 'form-input  sm:text-sm sm:leading-5' %>
+        </div>
+
+        <div class="col-span-2">
+          <div class="col-span-1">
+            <label class="mt-4 block text-sm font-medium leading-5 text-gray-700 flex items-center">
+              Amenities
+            </label>
+          </div>
+          <%= f.fields :amenities, model: OpenStruct.new(f.object.amenities) do |field| %>
+            <label class="text-sm font-medium inline-block text-gray-500 w-60">
+            Single Bed: 
+            </label>
+            <%= field.text_field 'single_bed', class: 'form-input sm:text-sm sm:leading-5' %><br>
+            
+            <label class="text-sm font-medium inline-block text-gray-500 w-60">
+            Queen Size Bed: 
+            </label>
+            <%= field.text_field 'queen_size_bed', class: 'form-input sm:text-sm sm:leading-5' %><br>
+            
+            <label class="text-sm font-medium inline-block text-gray-500 w-60">
+            King Size Bed: 
+            </label>
+            <%= field.text_field 'king_size_bed', class: 'form-input sm:text-sm sm:leading-5' %><br>
+
+            <label class="text-sm font-medium inline-block text-gray-500 w-60">
+            Bathtub:
+            </label>
+            <%= field.text_field 'bathtub', class: 'form-input sm:text-sm sm:leading-5' %><br>
+            
+            <label class="text-sm font-medium inline-block text-gray-500 w-60">
+            Balconies:
+            </label>
+            <%= field.text_field 'balconies', class: 'form-input sm:text-sm sm:leading-5' %><br>
+            
+            <label class="text-sm font-medium inline-block text-gray-500 w-60">
+            Terraces:
+            </label>
+            <%= field.text_field 'terraces', class: 'form-input sm:text-sm sm:leading-5' %><br>
+            
+            <label class="text-sm font-medium inline-block text-gray-500 w-60">
+            Rooms:
+            </label>
+            <%= field.text_field 'rooms', class: 'form-input sm:text-sm sm:leading-5' %><br>
+          <% end %>
+          
+          <%#= f.text_area :qm, class: 'form-input block w-full sm:text-sm sm:leading-5' %>
+
+        </div>
+      <% end %>
     <% end %>
     <%= submit_tag 'Save Room Type', class: 'btn mt-4 btn-primary' %>
   <% end %>

@@ -80,6 +80,25 @@
     </div>
   {/key}
 
+
+  {#if room_type.details}
+  <div class="details spina mt-18">
+    <h2>Details</h2>
+    {@html room_type.details}
+  </div>
+  {/if}
+  <div class="flex gap-10 mt-18 flex-wrap">
+    {#each ['kitchen', 'laundry', 'bathroom', 'entertainment', 'communication', 'other'] as cat}
+    {#if room_type[cat]}
+      <div class="type spina flex-1">
+        <h2 class="uppercase">{$store.t(cat)}</h2>
+        {@html room_type[cat]}
+      </div>
+      {/if}
+    {/each}
+
+  </div>
+
   <div class="flex justify-between mt-24">
     
       {#if prev_room_type}
@@ -108,6 +127,9 @@
 </main>
 
 <style>
+  :global(.spina h1) {
+    color: #948a6b;
+  }
   .bg-golden {
     background-color: #d8d6cf;
   }
