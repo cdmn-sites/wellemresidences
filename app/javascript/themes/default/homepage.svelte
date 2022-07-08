@@ -130,8 +130,9 @@
         <!-- <div class="room_type flex flex-col bg-light p-4 shadow-sm"> -->
           <div class=" flickity aspect-video overflow-hidden mb-4 shadow z-1 relative">
             {#each room_type.thumbnails as thumbnail, index}
+           
             <a on:pointermove={pointerMove} on:pointerdown={pointerDown} on:pointerup={pointerUp} on:click|capture|preventDefault={stopPropagationIfMoved} class="w-full h-full glightbox" href={room_type.images_prop[index].url}>
-              <div class="placeholder image w-full h-full bg-center bg-no-repeat" data-flickity-bg-lazyload={thumbnail.url}></div>
+              <div class="placeholder image w-full h-full bg-cover bg-center bg-no-repeat" class:bg-contain={thumbnail.h > thumbnail.w} data-flickity-bg-lazyload={thumbnail.url}></div>
             </a>
             {/each}
           </div>

@@ -4,7 +4,7 @@ class RoomType < ApplicationRecord
   default_scope -> { order('position asc')}
 
   has_many_attached :images do |attachment|
-    attachment.variant :thumb, resize_to_limit: [700,500]
+    attachment.variant :thumb, resize_to_limit: [700,394]
     attachment.variant :preview, resize_to_limit: [1920,1080]
   end
 
@@ -21,6 +21,14 @@ class RoomType < ApplicationRecord
   end
 
   def thumbnails
-    images.attached? && images.map { |image| {url: image.variant(:thumb).processed.url} }
+    images.attached? && images.map { |image|
+      image.analyze unless image.metadata['width']
+      processed = image.variant(:thumb).processed
+      {
+        url: processed.url,
+        w: image.metadata['width'],
+        h: image.metadata['height']
+      } 
+    }
   end
 end
