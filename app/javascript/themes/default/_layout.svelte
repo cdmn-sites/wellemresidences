@@ -67,8 +67,9 @@
   {/if}
 </svelte:head>
 
+
 {#if showDatepickers}
-<div transition:fade={{duration: 150}} class="fixed w-full h-screen top-0 left-0 bg-black/30 z-16" on:click={() => showDatepickers = false}/>
+<div transition:fade={{duration: 150}} class="md:hidden fixed w-full h-screen top-0 left-0 bg-black/30 z-15" on:click={() => showDatepickers = false}/>
 {/if}
 
 <div class="datespanel" bg-light class:placed bind:this={datespanel} class:!hidden={hidelayout} >
@@ -90,7 +91,7 @@
       <img class="w-full" src="/rails/active_storage/blobs/{spina.logo.signed_blob_id}/{spina.logo.filename}" alt={account.name}>
     </a>
   {/if}
-  <div class="tel fixed z-15">
+  <div class="tel fixed z-20">
     <span class="i-gg-phone"></span>
     <a href="tel:{account.phone}">{account.phone}</a> 
   </div>
