@@ -74,7 +74,7 @@
     <div class=" flickity overflow-hidden mb-4 z-1 relative">
       {#each room_type.thumbnails as thumbnail, index}
         <a on:pointermove={pointerMove} on:pointerdown={pointerDown} on:pointerup={pointerUp} on:click|capture|preventDefault={stopPropagationIfMoved} class="mr-3 w-full md:w-1/2 2xl:w-1/3 aspect-video block glightbox" href={room_type.images_prop[index].url}>
-          <div class="placeholder image w-full h-full bg-center bg-no-repeat" style="background-image:url({thumbnail.url})"></div>
+          <div class="placeholder image w-full h-full bg-center bg-no-repeat" class:bg-contain={thumbnail.h > thumbnail.w} style="background-image:url({thumbnail.url})"></div>
         </a>
       {/each}
     </div>

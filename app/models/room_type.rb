@@ -3,9 +3,15 @@ class RoomType < ApplicationRecord
 
   default_scope -> { order('position asc')}
 
+  after_save :clear_cache
+
   has_many_attached :images do |attachment|
     attachment.variant :thumb, resize_to_limit: [700,394]
     attachment.variant :preview, resize_to_limit: [1920,1080]
+  end
+
+  def clear_cache
+    Rails.cache.clear('room_types_prop')
   end
 
   def thumbnail_url

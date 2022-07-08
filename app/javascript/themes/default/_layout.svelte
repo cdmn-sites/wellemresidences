@@ -240,6 +240,9 @@
     /* border-top: 4px solid rgb(158, 132, 76); */
     /* font-weight: bold; */
   }
+  :global(body) {
+  overflow-x: hidden;
+  }
   .mobile .active {
     border-left: 4px solid rgb(158, 132, 76);
     padding-left: 3px; 
