@@ -84,15 +84,17 @@
       <img class="w-full" src="/rails/active_storage/blobs/{spina.logo.signed_blob_id}/{spina.logo.filename}" alt={account.name}>
     </a>
   {:else}
-    <a href="/{$store.locale}" use:inertia class="hidden md:block logo p-4.5" style="transform: translate(-50%, {-(moveLogo)/4.2 -8 }px) scale({1 - moveLogo / 500})">
+    <a href="/{$store.locale}" use:inertia class="hidden md:block logo !p-4.5" style="transform: translate(-50%, {-(moveLogo)/4.2 -8 }px) scale({1 - moveLogo / 500})">
       <img class="w-full" src="/rails/active_storage/blobs/{spina.logo.signed_blob_id}/{spina.logo.filename}" alt={account.name}>
     </a>
-    <a href="/{$store.locale}" use:inertia class="md:hidden logo p-8.5" style="transform: translate(-50%, {-(moveLogo)/6  }px) scale({1 - moveLogo / 400})">
+    <a href="/{$store.locale}" use:inertia class="md:hidden logo !p-4.5" style="transform: translate(-50%, {-(moveLogo)/6  }px) scale({1 - moveLogo / 400})">
       <img class="w-full" src="/rails/active_storage/blobs/{spina.logo.signed_blob_id}/{spina.logo.filename}" alt={account.name}>
     </a>
   {/if}
-  <div class="tel fixed z-20">
-    <span class="i-gg-phone relative text-xl -top-2px left-6px"></span>
+  <div class="tel fixed z-20 top-10px">
+    <img class="align-middle h-34px relative -top-2px" src="/rails/active_storage/blobs/{spina.favicon.signed_blob_id}/{spina.favicon.filename}" alt={account.name}>
+    
+    <span class="i-gg-phone relative text-xl -top-2px ml-20px -mr-10px"></span>
     <a href="tel:{account.phone}">{account.phone}</a> 
   </div>
   <div class="hidden lg:block active_bar" bind:this={bar}></div>
