@@ -92,7 +92,7 @@
     </a>
   {/if}
   <div class="tel fixed z-20">
-    <span class="i-gg-phone"></span>
+    <span class="i-gg-phone relative text-xl -top-2px left-6px"></span>
     <a href="tel:{account.phone}">{account.phone}</a> 
   </div>
   <div class="hidden lg:block active_bar" bind:this={bar}></div>
