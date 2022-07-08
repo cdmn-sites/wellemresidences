@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_07_07_181339) do
+ActiveRecord::Schema[7.0].define(version: 2022_07_08_133753) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -66,7 +66,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_07_07_181339) do
     t.string "description"
     t.json "amenities"
     t.integer "position", default: 0
-    t.float "qm"
+    t.string "qm"
     t.integer "balconies"
     t.integer "terraces"
     t.integer "rooms"

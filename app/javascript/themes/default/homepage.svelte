@@ -15,17 +15,19 @@
   import { onMount } from 'svelte';
 
   let details
-  
+  let flicks = []
   onMount(function() {
     const elems = document.querySelectorAll('.flickity')
+    flicks = []
     for (let i = 0; i < elems.length; i++) {
       const element = elems[i];
-      new flickity(element, {
+      flicks.push(new flickity(element, {
         // options
         cellAlign: 'left',
         bgLazyLoad: true,
-        contain: true
-      })
+        contain: true,
+        wrapAround: true
+      }))
       
     }
     glightbox()
@@ -125,17 +127,25 @@
         </p>
 
       </div>
-      {#each room_types as room_type}
+      {#each room_types as room_type, i}
         <div  class="room_type flex flex-col bg-light p-4 shadow-sm">
         <!-- <div class="room_type flex flex-col bg-light p-4 shadow-sm"> -->
-          <div class=" flickity aspect-video overflow-hidden mb-4 shadow z-1 relative">
+          <div class=" flickity aspect-video overflow-hidden mb-4 shadow z-1 relative" on:mouseenter={() => {flicks[i].next(); flicks[i].playPlayer()}} on:blur on:mouseleave|self={() => flicks[i].pausePlayer()}>
             {#each room_type.thumbnails as thumbnail, index}
-           
-            <a on:pointermove={pointerMove} on:pointerdown={pointerDown} on:pointerup={pointerUp} on:click|capture|preventDefault={stopPropagationIfMoved} class="w-full h-full glightbox" href={room_type.images_prop[index].url}>
-              <div class="placeholder image w-full h-full bg-cover bg-center bg-no-repeat" class:bg-contain={thumbnail.h > thumbnail.w} data-flickity-bg-lazyload={thumbnail.url}></div>
-            </a>
+              {#if thumbnail.h < thumbnail.w}
+                <a data-gallery={room_type.id} on:pointermove={pointerMove} on:pointerdown={pointerDown} on:pointerup={pointerUp} on:click|capture|preventDefault={stopPropagationIfMoved} class="w-full h-full glightbox" href={room_type.images_prop[index].url}>
+                  <div class="placeholder image w-full h-full bg-cover bg-center bg-no-repeat"  data-flickity-bg-lazyload={thumbnail.url}></div>
+                </a>
+              {/if}
             {/each}
           </div>
+          <div class="hidden">
+          {#each room_type.thumbnails as thumbnail, index}
+            {#if thumbnail.h > thumbnail.w}
+              <a class="w-full h-full glightbox" data-gallery={room_type.id}  href={room_type.images_prop[index].url}> </a>
+            {/if}
+          {/each}
+        </div>
           <h3 class="text-golden uppercase">
             {room_type.name}
           </h3>

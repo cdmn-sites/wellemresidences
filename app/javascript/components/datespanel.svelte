@@ -4,7 +4,7 @@
   import store from '~/lib/store'
   import {inertia} from '@inertiajs/inertia-svelte'
 
-  let showDatepickers
+  export let showDatepickers
   let today = new Date()
   let checkin = new Date(today)
   checkin.setDate(checkin.getDate() + 7)
@@ -53,7 +53,7 @@
   
 </script>
 
-<div class="booking">
+<div class="booking relative">
   <div class="dates">
     <div class="options" on:click={() => showDatepickers = !showDatepickers}>
       <label class="!hidden !md:block">{$store.t('Checkin')} / {$store.t('Checkout')}</label>
@@ -73,6 +73,7 @@
     </div>
   </div>
   {#if showDatepickers}
+    
     <div class="!md:hidden mobile overflow-hidden">
       <div class="nav">
         <div class="prev btn left-0" on:click={prevMonth}>

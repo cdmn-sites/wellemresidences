@@ -11,7 +11,13 @@
     middle: 0,
     bottom: 0
   }
+  
   $: if (spina.sections?.content) {
+    selectedTabs = {
+      top: 0,
+      middle: 0,
+      bottom: 0
+    }
     tabbedSections = {}
     for (let i = 0; i < spina.sections.content.length; i++) {
       const section = spina.sections.content[i]
@@ -25,7 +31,7 @@
 {#if spina.header_images?.images?.length}
   <div class="h-300px md:h-430px mb-20">
     {#key spina.page_title}
-      <HeroImages height={200} images={spina.header_images.images}/>
+      <HeroImages position="center" height={200} images={spina.header_images.images}/>
     {/key}
   </div>
 {:else}

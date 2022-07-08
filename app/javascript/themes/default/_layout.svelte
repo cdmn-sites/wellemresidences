@@ -1,16 +1,17 @@
 <script>
   import { inertia, page } from '@inertiajs/inertia-svelte'
   import { Inertia } from '@inertiajs/inertia'
-  import { tick } from 'svelte'
+  
   import DatesPanel from '../../components/datespanel.svelte';
   import store from '~/lib/store'
   import glightbox from 'glightbox'
-
+  import { fade } from 'svelte/transition'
   export let hidelayout
 
   export let account
   export let spina
   export let header_menu
+  let showDatepickers
   
   const leftMenu = header_menu.slice(0, Math.floor(header_menu.length / 2))
   const rightMenu = header_menu.slice(Math.floor(header_menu.length / 2))
@@ -66,42 +67,54 @@
   {/if}
 </svelte:head>
 
+{#if showDatepickers}
+<div transition:fade={{duration: 150}} class="fixed w-full h-screen top-0 left-0 bg-black/30 z-16" on:click={() => showDatepickers = false}/>
+{/if}
 
 <div class="datespanel" bg-light class:placed bind:this={datespanel} class:!hidden={hidelayout} >
   <!-- <div id="avantio-form" class="horizontal"></div>{@html avantioHtml}     -->
-  <DatesPanel />
+  <DatesPanel bind:showDatepickers/>
 </div>
 
 
-<header>
-  <div class="hidden md:block active_bar" bind:this={bar}></div>
-  <div class="hidden md:flex desktop_menu justify-between">
+<header >
+  {#if hidelayout}
+    <a href="/{$store.locale}" use:inertia class="logo p-4.5" style="transform: translate(-50%, -70px) scale(0.5)">
+      <img class="w-full" src="/rails/active_storage/blobs/{spina.logo.signed_blob_id}/{spina.logo.filename}" alt={account.name}>
+    </a>
+  {:else}
+    <a href="/{$store.locale}" use:inertia class="hidden md:block logo p-4.5" style="transform: translate(-50%, {-(moveLogo)/4.2 -8 }px) scale({1 - moveLogo / 500})">
+      <img class="w-full" src="/rails/active_storage/blobs/{spina.logo.signed_blob_id}/{spina.logo.filename}" alt={account.name}>
+    </a>
+    <a href="/{$store.locale}" use:inertia class="md:hidden logo p-8.5" style="transform: translate(-50%, {-(moveLogo)/6  }px) scale({1 - moveLogo / 400})">
+      <img class="w-full" src="/rails/active_storage/blobs/{spina.logo.signed_blob_id}/{spina.logo.filename}" alt={account.name}>
+    </a>
+  {/if}
+  <div class="tel fixed z-15">
+    <span class="i-gg-phone"></span>
+    <a href="tel:{account.phone}">{account.phone}</a> 
+  </div>
+  <div class="hidden lg:block active_bar" bind:this={bar}></div>
+  <div class="hidden lg:flex desktop_menu justify-between pr-12 2xl:pr-0 z-15 relative">
     <div class="left_menu uppercase">
+    </div>
+    <div class="right_menu uppercase">
       {#each leftMenu as menuItem}
         <a use:inertia class:active={$page.url == menuItem.path} href={menuItem.path}>{menuItem.label}</a>
       {/each}
-    </div>
-    <div class="right_menu uppercase">
-      {#each rightMenu as menuItem}
-        <a use:inertia class:active={$page.url == menuItem.path} href={menuItem.path}>{menuItem.label}</a>
-      {/each}
+      <div class="hidden 2xl:inline-block">
+        {#each rightMenu as menuItem}
+          <a use:inertia class:active={$page.url == menuItem.path} href={menuItem.path}>{menuItem.label}</a>
+        {/each}
+      </div>
     </div>
   </div>
 </header>
 
-<div class="h-40px"></div>
+<div class="h-38px"></div>
 <div class="shade"></div>
-{#if hidelayout}
-  <a href="/{$store.locale}" use:inertia class="logo p-4.5" style="transform: translate(-50%, -70px) scale(0.5)">
-    <img class="w-full" src="/rails/active_storage/blobs/{spina.logo.signed_blob_id}/{spina.logo.filename}" alt={account.name}>
-  </a>
-{:else}
-  <a href="/{$store.locale}" use:inertia class="logo p-4.5" style="transform: translate(-50%, {-(moveLogo)/4.2 -16 }px) scale({1 - moveLogo / 500})">
-    <img class="w-full" src="/rails/active_storage/blobs/{spina.logo.signed_blob_id}/{spina.logo.filename}" alt={account.name}>
-  </a>
-{/if}
 
-<div  class:menuOpen class="md:hidden menu_toggle" on:click={() => menuOpen = !menuOpen}>
+<div class:menuOpen class="2xl:hidden menu_toggle" on:click={() => menuOpen = !menuOpen}>
   <div class="hamburger-icon" id="icon">
     <div class="icon-1" id="a"></div>
     <div class="icon-2" id="b"></div>
@@ -118,23 +131,23 @@
       </li>
     {/each}
   </ul>
-  <ul class=" uppercase mt-6">
+  <ul class="uppercase mt-6">
     
-      {#if $store.locale != 'en'}
-        <li>
-          <a href="/en">English</a>
-        </li>
-      {/if}
-      {#if $store.locale != 'de'}
-        <li>
-          <a href="/de">Deutsch</a>
-        </li>
-      {/if}
-      {#if $store.locale != 'es'}
-        <li>
-          <a href="/es">Español</a>
-        </li>
-      {/if}
+    {#if $store.locale != 'en'}
+      <li>
+        <a href="/en">English</a>
+      </li>
+    {/if}
+    {#if $store.locale != 'de'}
+      <li>
+        <a href="/de">Deutsch</a>
+      </li>
+    {/if}
+    {#if $store.locale != 'es'}
+      <li>
+        <a href="/es">Español</a>
+      </li>
+    {/if}
     
   </ul>
 
@@ -152,8 +165,6 @@
 </nav>
 
 <slot />
-
-
 
 
 {#if spina.footer_text?.content}
@@ -253,7 +264,8 @@
     background: rgb(158, 132, 76);
     /* top: 48px; */
     box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
-    top: 47px;
+    top: 40px;
+    z-index: 15;
     position: absolute;
     transition: all 0.3s ease-in-out;
   }
@@ -422,7 +434,7 @@
     text-align: center;
     text-transform: uppercase;
     box-shadow: 0px -4px 20px rgba(0, 0, 0, 0.35);
-    z-index: 5;
+    z-index: 20;
   }
   @media (min-width: 768px) {
     .datespanel.placed {

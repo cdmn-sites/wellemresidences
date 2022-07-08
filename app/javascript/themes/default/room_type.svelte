@@ -61,31 +61,48 @@
   <div class="h-200px"></div>
 {/if}
 
+<svelte:head>
+  <title>{room_type.name} - The Wellem Residences</title>
+  <meta name="description" content="{room_type.description}">
+</svelte:head>
+
 <main class="container relative">
   <a on:click|stopPropagation class="btn hidden md:inline-block absolute top-0 right-24px bg-gray/10 hover:bg-white serif text-center uppercase" href="{$store.searchlink}&room_type={room_type.id}" use:inertia>
     {$store.t('Check Availability')}
   </a>
-  
-  <h1 class="mb-4 text-golden">{room_type.name}</h1>
+  <div class="mt-12">
+    <a class="relative group" href="/room_types/" use:inertia>
+      <span class="i-gg-chevron-left absolute right-100% text-size-1.7rem -top-0.5 text-gray/30 group-hover:text-black transition-all group-hover:right-105%"></span>
+      {$store.t('All Categories')}
+    </a>
+  </div>
+  <h1 class="mt-4 mb-4 text-golden text-size-2.4rem">{room_type.name}</h1>
   <Amenities {room_type}></Amenities>
   <p class="mb-12 mt-10 spina text-lg">{room_type.description || ''}</p>
   
   {#key room_type.id}
     <div class=" flickity overflow-hidden mb-4 z-1 relative">
       {#each room_type.thumbnails as thumbnail, index}
+      {#if thumbnail.h <= thumbnail.w}
         <a on:pointermove={pointerMove} on:pointerdown={pointerDown} on:pointerup={pointerUp} on:click|capture|preventDefault={stopPropagationIfMoved} class="mr-3 w-full md:w-1/2 2xl:w-1/3 aspect-video block glightbox" href={room_type.images_prop[index].url}>
-          <div class="placeholder image w-full h-full bg-center bg-no-repeat" class:bg-contain={thumbnail.h > thumbnail.w} style="background-image:url({thumbnail.url})"></div>
+          <div class="placeholder image w-full h-full bg-center bg-no-repeat" style="background-image:url('{thumbnail.url}')"></div>
         </a>
+        {/if}
       {/each}
     </div>
+    {#each room_type.thumbnails as thumbnail, index}
+    {#if thumbnail.h > thumbnail.w}
+      <a class="hidden glightbox" href={room_type.images_prop[index].url}></a>
+      {/if}
+    {/each}
   {/key}
 
 
   {#if room_type.details}
-  <div class="details spina mt-18">
-    <h2>Details</h2>
-    {@html room_type.details}
-  </div>
+    <div class="details spina mt-18">
+      <h2>Details</h2>
+      {@html room_type.details}
+    </div>
   {/if}
   <div class="flex gap-10 mt-18 flex-wrap">
     {#each ['kitchen', 'laundry', 'bathroom', 'entertainment', 'communication', 'other'] as cat}
@@ -101,28 +118,35 @@
 
   <div class="flex justify-between mt-24">
     
-      {#if prev_room_type}
-        <a class="block prev relative group left-5 md:left-0" href="/room_types/{prev_room_type.id}" use:inertia={{preserveScroll:true}}>
-          <span class="i-gg-chevron-left absolute right-100% text-size-2.7rem text-gray/30 group-hover:text-black transition-all group-hover:right-105%"></span>
-          {$store.t('Previous Category')}<br>
-          <span class="text-golden md:text-xl">
-            {prev_room_type.name}
-          </span>
-        </a>
-      {:else}
-        <div></div>
-      {/if}
+    {#if prev_room_type}
+      <a class="block prev relative group left-5 md:left-0" href="/room_types/{prev_room_type.id}" use:inertia={{preserveScroll:true}}>
+        <span class="i-gg-chevron-left absolute right-100% text-size-2.7rem text-gray/30 group-hover:text-black transition-all group-hover:right-105%"></span>
+        {$store.t('Previous Category')}<br>
+        <span class="text-golden md:text-xl">
+          {prev_room_type.name}
+        </span>
+      </a>
+    {:else}
+      <div></div>
+    {/if}
+  
+    {#if next_room_type}
+      <a class="block prev relative group right-5 md:right-0 text-right" href="/room_types/{next_room_type.id}" use:inertia={{preserveScroll:true}}>
+        <span class="i-gg-chevron-right absolute left-100% text-size-2.7rem text-gray/30 group-hover:text-black transition-all group-hover:left-105%"></span>
+        {$store.t('Next Category')}<br>
+        <span class="text-golden md:text-xl">
+          {next_room_type.name}
+        </span>
+      </a>
+    {/if}
     
-      {#if next_room_type}
-        <a class="block prev relative group right-5 md:right-0 text-right" href="/room_types/{next_room_type.id}" use:inertia={{preserveScroll:true}}>
-          <span class="i-gg-chevron-right absolute left-100% text-size-2.7rem text-gray/30 group-hover:text-black transition-all group-hover:left-105%"></span>
-          {$store.t('Next Category')}<br>
-          <span class="text-golden md:text-xl">
-            {next_room_type.name}
-          </span>
-        </a>
-      {/if}
-    
+  </div>
+
+  <div class="mt-12">
+    <a class="relative group" href="/room_types/"  use:inertia>
+      <span class="i-gg-chevron-left absolute right-100% text-size-1.7rem -top-0.5 text-gray/30 group-hover:text-black transition-all group-hover:right-105%"></span>
+      {$store.t('Back to Overview')}
+    </a>
   </div>
 </main>
 
