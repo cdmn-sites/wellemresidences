@@ -10,19 +10,23 @@ class Spina::PagesController < Spina::ApplicationController
     elsif page.link_url.present?
       redirect_to Spina::Current.page.link_url and return
     end
-
-    render inertia: page.view_template
+    
+    render inertia: page.view_template, props: {
+      locale_paths: Hash[page.translations.map{|t| [t.locale, t.materialized_path]}],
+    }
   end
-
+  
   def homepage
     render inertia: page.view_template, props: {
+      locale_paths: Hash[page.translations.map{|t| [t.locale, t.materialized_path]}],
       room_types: Rails.cache.fetch("room_types_prop", expires_in: 12.hours) do
         RoomType.with_attached_images.as_json(methods: [:images_prop, :thumbnail_url, :thumbnails])
       end
     }
   end
-
+  
   private
+  
     def merge_page_content
       for part in page.json_attributes['en_content']
         spina_content[part.attributes['name']] = part.attributes

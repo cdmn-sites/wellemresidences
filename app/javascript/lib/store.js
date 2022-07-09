@@ -24,7 +24,9 @@ const translations = {
     'contact_us': 'Kontaktieren Sie uns',
     'language': 'Sprache',
     'information': 'Informationen',
-    'more_information': 'Mehr informationen'
+    'more_information': 'Mehr informationen',
+    'all_categories': 'Alle Kategorien',
+    'back_to_overview': 'Zurück zur Übersicht'
   },
   en: {
     'sleeps': 'Sleeps',

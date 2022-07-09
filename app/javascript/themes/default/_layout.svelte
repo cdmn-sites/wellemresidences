@@ -5,12 +5,14 @@
   import DatesPanel from '../../components/datespanel.svelte';
   import store from '~/lib/store'
   import glightbox from 'glightbox'
-  import { fade } from 'svelte/transition'
+  import { fade,slide } from 'svelte/transition'
   export let hidelayout
 
   export let account
   export let spina
   export let header_menu
+  export let locale_paths = {}
+
   let showDatepickers
   
   const leftMenu = header_menu.slice(0, Math.floor(header_menu.length / 2))
@@ -20,7 +22,7 @@
   let scrollY
 
   $: moveLogo = Math.min(scrollY, 240)
-
+  let changeLangOpen = false
   
   let bar
 
@@ -91,9 +93,32 @@
       <img class="w-full" src="/rails/active_storage/blobs/{spina.logo.signed_blob_id}/{spina.logo.filename}" alt={account.name}>
     </a>
   {/if}
-  <div class="tel fixed z-20 top-10px">
-    <img class="align-middle h-34px relative -top-2px" src="/rails/active_storage/blobs/{spina.favicon.signed_blob_id}/{spina.favicon.filename}" alt={account.name}>
-    
+  <div class="tel fixed z-20 top-10px left-0">
+    <a href="/{$store.locale}" use:inertia>
+      <img class="align-middle h-34px relative -top-2px" src="/rails/active_storage/blobs/{spina.favicon.signed_blob_id}/{spina.favicon.filename}" alt={account.name}>
+    </a>
+    <span class="ml-2 cursor-pointer uppercase" on:click={() => changeLangOpen = !changeLangOpen}>
+      {$store.locale}
+    </span>
+    {#if changeLangOpen}
+      <div class="change_lang fixed ml-8 bg-light p-4 uppercase shadow" transition:slide={{duration: 100}}>
+        {#if $store.locale != 'en'}
+       
+          <a class="block " href={locale_paths?.en || '?locale=en'}>English</a>
+        
+      {/if}
+      {#if $store.locale != 'de'}
+     
+          <a class="block " href={locale_paths?.de || '?locale=de'}>Deutsch</a>
+       
+      {/if}
+      {#if $store.locale != 'es'}
+ 
+          <a class="block " href={locale_paths?.es || '?locale=es'}>Español</a>
+     
+      {/if}
+    </div>
+    {/if}
     <span class="i-gg-phone relative text-xl -top-2px ml-20px -mr-10px"></span>
     <a href="tel:{account.phone}">{account.phone}</a> 
   </div>
@@ -138,17 +163,17 @@
     
     {#if $store.locale != 'en'}
       <li>
-        <a href="/en">English</a>
+        <a href={locale_paths?.en || '?locale=en'}>English</a>
       </li>
     {/if}
     {#if $store.locale != 'de'}
       <li>
-        <a href="/de">Deutsch</a>
+        <a href={locale_paths?.de || '?locale=de'}>Deutsch</a>
       </li>
     {/if}
     {#if $store.locale != 'es'}
       <li>
-        <a href="/es">Español</a>
+        <a href={locale_paths?.es || '?locale=es'}>Español</a>
       </li>
     {/if}
     
@@ -425,6 +450,12 @@
    
     opacity: 1;
   }
+}
+.change_lang a {
+  border-left: 3px solid transparent;
+}
+.change_lang a:hover {
+  border-left: 3px solid rgb(158, 132, 76);
 }
 .datespanel {
     position: fixed;
