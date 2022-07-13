@@ -1,5 +1,12 @@
 # The Wellem Residences
 
-[Ruby on Rails](https://www.rubyonrails.org), [SpinaCMS](https://spinacms.com), [Inertia](https://inertiajs.com) and [Svelte](https://svelte.dev)
-
 https://thewellemresidences.com
+
+## Stack
+
+ - [Ruby on Rails](https://www.rubyonrails.org)
+ - [Svelte](https://svelte.dev)
+ - [Inertia](https://inertiajs.com)
+ - [SpinaCMS](https://spinacms.com)
+ 
+ 
