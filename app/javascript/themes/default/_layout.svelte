@@ -209,7 +209,7 @@
 
 
 {#if spina.footer_text?.content}
- <div class="bottom mt-24 relative bg-cover bg-top" style="background-image:url('/images/{spina.footer_image.signed_blob_id})">
+ <div class="bottom mt-24 relative bg-cover bg-top" style="background-image:url('/images/{spina.footer_image?.signed_blob_id}')">
     <div class="absolute w-full h-full bg-black/75 top-0 right-0"></div>
     <div class="relative serif text-center text-white spina mt-8 pt-20 pb-26">
       {@html spina.footer_text?.content}
