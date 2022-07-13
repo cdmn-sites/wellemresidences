@@ -97,7 +97,31 @@
     {/each}
   {/key}
 
-
+  <div class="flex justify-between mt-24">
+    
+    {#if prev_room_type}
+      <a class="block prev relative group left-5 md:left-0" href="/room_types/{prev_room_type.id}" use:inertia>
+        <span class="i-gg-chevron-left absolute right-100% text-size-2.7rem text-gray/30 group-hover:text-black transition-all group-hover:right-105%"></span>
+        {$store.t('Previous Category')}<br>
+        <span class="text-golden md:text-xl">
+          {prev_room_type.name}
+        </span>
+      </a>
+    {:else}
+      <div></div>
+    {/if}
+  
+    {#if next_room_type}
+      <a class="block prev relative group right-5 md:right-0 text-right" href="/room_types/{next_room_type.id}" use:inertia>
+        <span class="i-gg-chevron-right absolute left-100% text-size-2.7rem text-gray/30 group-hover:text-black transition-all group-hover:left-105%"></span>
+        {$store.t('Next Category')}<br>
+        <span class="text-golden md:text-xl">
+          {next_room_type.name}
+        </span>
+      </a>
+    {/if}
+    
+  </div>
   {#if room_type.details}
     <div class="details spina mt-18">
       <h2>Details</h2>
@@ -116,31 +140,7 @@
 
   </div>
 
-  <div class="flex justify-between mt-24">
-    
-    {#if prev_room_type}
-      <a class="block prev relative group left-5 md:left-0" href="/room_types/{prev_room_type.id}" use:inertia={{preserveScroll:true}}>
-        <span class="i-gg-chevron-left absolute right-100% text-size-2.7rem text-gray/30 group-hover:text-black transition-all group-hover:right-105%"></span>
-        {$store.t('Previous Category')}<br>
-        <span class="text-golden md:text-xl">
-          {prev_room_type.name}
-        </span>
-      </a>
-    {:else}
-      <div></div>
-    {/if}
-  
-    {#if next_room_type}
-      <a class="block prev relative group right-5 md:right-0 text-right" href="/room_types/{next_room_type.id}" use:inertia={{preserveScroll:true}}>
-        <span class="i-gg-chevron-right absolute left-100% text-size-2.7rem text-gray/30 group-hover:text-black transition-all group-hover:left-105%"></span>
-        {$store.t('Next Category')}<br>
-        <span class="text-golden md:text-xl">
-          {next_room_type.name}
-        </span>
-      </a>
-    {/if}
-    
-  </div>
+
 
   <div class="mt-12">
     <a class="relative group" href="/"  use:inertia>

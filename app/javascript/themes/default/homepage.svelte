@@ -5,6 +5,7 @@
   import Paralax from '~/components/paralax.svelte'
   import HeroImages from '~/components/hero_images.svelte'
   import Amenities from '../../components/amenities.svelte';
+  import TabbedSections from '~/components/tabbed_sections.svelte';
   import { inertia } from '@inertiajs/inertia-svelte'
   import glightbox from 'glightbox'
   import {fade,fly} from 'svelte/transition'
@@ -52,6 +53,17 @@
   function pointerMove() {
     if (down) moved = true
   }
+
+  let tabbedSections = {}
+  $: if (spina.sections?.content) {
+    tabbedSections = {}
+    for (let i = 0; i < spina.sections.content.length; i++) {
+      const section = spina.sections.content[i]
+      const group = section.parts[4]?.value || 'top'
+      tabbedSections[group] ||= []
+      tabbedSections[group].push(section)
+    }
+  }
 </script>
 
 <!-- {#if details}
@@ -96,7 +108,7 @@
 
 <!-- {#if spina.header_images?.length} -->
 <div class="h-400px md:h-500px lg:h-600px xl:h-650px">
-  <HeroImages position="bottom" images={spina.header_images.images} >
+  <HeroImages position={spina.header_position?.value || "bottom"} images={spina.header_images.images} >
     <div class="absolute w-full h-full bg-black/45"></div>
     <Paralax y={-50}>
     <div class="text-center text-size-2.5 md:text-size-3 px-12 lg:text-size-5 taglines text-white absolute w-full flex items-center flex-col justify-center h-full">
@@ -110,12 +122,16 @@
 </div>
 <!-- {/if} -->
 
-<section relative md:h-24 z-15 id="datespanel">
+<section relative md:mb-8 md:h-24 id="datespanel">
 
 </section>
 
+{#if tabbedSections['top']}
+  <TabbedSections group="top" sections={tabbedSections['top']} />
+{/if}
 
-<section class="bg-golden py-12 md:mt-8">
+
+<section class="bg-golden py-12">
 
   <div class="container">
     <div class="room_types md:grid-cols-2 2xl:grid-cols-3">
@@ -164,17 +180,9 @@
   </div>
 </section>
 
-<section class="container">
-  <div class="md:flex spina text-left xl:text-size-4.5">
-    <div class="flex-1  my-16">
-      {@html spina.room_amenities?.content}
-    </div>
-    <div class="flex-1  my-16">
-      {@html spina.bath_amenities?.content}
-    </div>
-  </div>
-
-</section>
+{#if tabbedSections['bottom']}
+  <TabbedSections group="bottom" sections={tabbedSections['bottom']} />
+{/if}
 
 <style>
   .bg-golden {

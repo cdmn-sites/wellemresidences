@@ -43,6 +43,7 @@ Spina::Theme.register do |theme|
     {name: 'map_link', title: 'Map Link', part_type: "Spina::Parts::Line"},
     {name: 'footer_image', title: 'Footer Image', part_type: "Spina::Parts::Image"},
     {name: 'group', title: 'Group', hint: 'which tab group should this section be in', part_type: "Spina::Parts::Option", options: ['top', 'middle', 'bottom']},
+    {name: 'header_position', title: 'Header position', part_type: "Spina::Parts::Option", options: ['top', 'center', 'bottom']},
     {name: 'color', title: 'Background', part_type: "Spina::Parts::Option", options: ['default', 'shaded']},
     {
       name: "style",
@@ -67,8 +68,7 @@ Spina::Theme.register do |theme|
       title: "Staff",
       parts: %w(image_text image text),
       part_type: "Spina::Parts::Repeater"
-    },
-    
+    }
   ]
   
   # View templates
@@ -77,10 +77,10 @@ Spina::Theme.register do |theme|
   # You define which parts you want to enable for every view template
   # by referencing them from the theme.parts configuration above.
   theme.view_templates = [
-    {name: 'homepage', title: 'with Accomodations', parts: %w(header_images tagline1 tagline2 welcome intro room_amenities bath_amenities)},
-    {name: 'sections', title: 'with Sections', parts: %w(header_images tagline1 tagline2 sections footer_text)},
-    {name: 'faq', title: 'with FAQ', parts: %w(header_images tagline1 tagline2 faq)},
-    {name: 'contact', title: 'with Staff', parts: %w(header_images tagline1 tagline2 map map_link staff_intro staff)}
+    {name: 'homepage', title: 'with Accomodations', parts: %w(header_images header_position tagline1 tagline2 welcome intro sections)},
+    {name: 'sections', title: 'with Sections', parts: %w(header_images header_position tagline1 tagline2 sections footer_text)},
+    {name: 'faq', title: 'with FAQ', parts: %w(header_images header_position tagline1 tagline2 faq)},
+    {name: 'contact', title: 'with Staff', parts: %w(header_images header_position tagline1 tagline2 map map_link staff_intro staff)}
   ]
   
   # Custom pages

@@ -8,22 +8,23 @@
 <div class="serif italic amenities relative min-h-8 text-size-xl flex-1">
   {#if room_type.amenities.queen_size_bed}
     <div class="amenity">
-      {#each Array(room_type.amenities.queen_size_bed) as _,i }
-        <span class="i-teenyicons-bed-double-outline"></span>
+      {#each Array(parseInt(room_type.amenities.queen_size_bed)) as _,i }
+        <span class="i-teenyicons-bed-double-outline mr-1"></span>
       {/each}
     </div>
   {/if}
   {#if room_type.amenities.king_size_bed}
     <div class="amenity">
-      {#each Array(room_type.amenities.king_size_bed) as _,i }
-        <span class="i-teenyicons-bed-double-outline"></span>
+      {#each Array(parseInt(room_type.amenities.king_size_bed)) as _,i }
+      
+        <span class="i-teenyicons-bed-double-outline mr-1"></span>
       {/each}
     </div>
   {/if}
   {#if room_type.amenities.single_bed}
     <div class="amenity">
-      {#each Array(room_type.amenities.single_bed) as _,i }
-        <span class="i-teenyicons-bed-single-outline"></span>
+      {#each Array(parseInt(room_type.amenities.single_bed)) as _,i }
+        <span class="i-teenyicons-bed-single-outline mr-1"></span>
       {/each}
     </div>
   {/if}

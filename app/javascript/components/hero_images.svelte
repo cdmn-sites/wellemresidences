@@ -12,7 +12,7 @@
 <div class="header_image relative h-full overflow-hidden">
   <Cycler let:current>
     {#each images as img, i}
-      {@const src = img.url || `/rails/active_storage/blobs/${img.signed_blob_id}/${img.filename}`}
+      {@const src = img.url || `/images/${img.signed_blob_id}`}
       <img alt={img.alt} class:active={current == i} class:bottom-0={bottom} class="cycle_image w-full min-w-700px absolute left-1/2" {src} style="object-position:{position};transform: translateX(-50%) translateY({scrollY/2}px) scale({1 + scrollY/5000}) " />
     {/each}
   </Cycler>

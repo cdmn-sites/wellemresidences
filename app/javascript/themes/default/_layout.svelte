@@ -40,7 +40,7 @@
     bar.style.display = 'block'
     menuOpen = false
   }
-
+  setInterval(updateBar, 1000)
   Inertia.on('navigate', updateBar)
   Inertia.on('navigate', glightbox)
 
@@ -74,28 +74,41 @@
 <div transition:fade={{duration: 150}} class="md:hidden fixed w-full h-screen top-0 left-0 bg-black/30 z-15" on:click={() => showDatepickers = false}/>
 {/if}
 
-<div class="datespanel" bg-light class:placed bind:this={datespanel} class:!hidden={hidelayout} >
+<div class="datespanel z-15 md:z-5" bg-light class:placed bind:this={datespanel} class:!hidden={hidelayout} >
   <!-- <div id="avantio-form" class="horizontal"></div>{@html avantioHtml}     -->
   <DatesPanel bind:showDatepickers/>
 </div>
 
 
-<header >
+{#if hidelayout}
+<a href="/{$store.locale}" use:inertia class="logo shadow-lg p-4.5 !z-9" style="transform: translate(-50%, -70px) scale(0.5)">
+  <img class="w-full" src="/images/{spina.logo.signed_blob_id}" alt={account.name}>
+</a>
+{:else}
+<a href="/{$store.locale}" use:inertia class="hidden shadow-lg md:block logo !p-4.5 !z-9" style="transform: translate(-50%, {-(moveLogo)/4.2 -8 }px) scale({1 - moveLogo / 500})">
+  <img class="w-full" src="/images/{spina.logo.signed_blob_id}" alt={account.name}>
+</a>
+<a href="/{$store.locale}" use:inertia class="md:hidden shadow-lg logo !p-4.5 !z-9" style="transform: translate(-50%, {-(moveLogo)/6  }px) scale({1 - moveLogo / 400})">
+  <img class="w-full" src="/images/{spina.logo.signed_blob_id}" alt={account.name}>
+</a>
+{/if}
+
+<header shadow>
   {#if hidelayout}
     <a href="/{$store.locale}" use:inertia class="logo p-4.5" style="transform: translate(-50%, -70px) scale(0.5)">
-      <img class="w-full" src="/rails/active_storage/blobs/{spina.logo.signed_blob_id}/{spina.logo.filename}" alt={account.name}>
+      <img class="w-full" src="/images/{spina.logo.signed_blob_id}" alt={account.name}>
     </a>
   {:else}
     <a href="/{$store.locale}" use:inertia class="hidden md:block logo !p-4.5" style="transform: translate(-50%, {-(moveLogo)/4.2 -8 }px) scale({1 - moveLogo / 500})">
-      <img class="w-full" src="/rails/active_storage/blobs/{spina.logo.signed_blob_id}/{spina.logo.filename}" alt={account.name}>
+      <img class="w-full" src="/images/{spina.logo.signed_blob_id}" alt={account.name}>
     </a>
     <a href="/{$store.locale}" use:inertia class="md:hidden logo !p-4.5" style="transform: translate(-50%, {-(moveLogo)/6  }px) scale({1 - moveLogo / 400})">
-      <img class="w-full" src="/rails/active_storage/blobs/{spina.logo.signed_blob_id}/{spina.logo.filename}" alt={account.name}>
+      <img class="w-full" src="/images/{spina.logo.signed_blob_id}" alt={account.name}>
     </a>
   {/if}
   <div class="tel fixed z-20 top-10px left-0">
     <a href="/{$store.locale}" use:inertia>
-      <img class="align-middle h-34px relative -top-2px" src="/rails/active_storage/blobs/{spina.favicon.signed_blob_id}/{spina.favicon.filename}" alt={account.name}>
+      <img class="align-middle h-34px relative -top-2px" src="/images/{spina.favicon.signed_blob_id}" alt={account.name}>
     </a>
     <span class="ml-2 cursor-pointer uppercase" on:click={() => changeLangOpen = !changeLangOpen}>
       {$store.locale}
@@ -127,10 +140,10 @@
     <div class="left_menu uppercase">
     </div>
     <div class="right_menu uppercase">
-      {#each leftMenu as menuItem}
-        <a use:inertia class:active={$page.url == menuItem.path} href={menuItem.path}>{menuItem.label}</a>
-      {/each}
       <div class="hidden 2xl:inline-block">
+        {#each leftMenu as menuItem}
+          <a use:inertia class:active={$page.url == menuItem.path} href={menuItem.path}>{menuItem.label}</a>
+        {/each}
         {#each rightMenu as menuItem}
           <a use:inertia class:active={$page.url == menuItem.path} href={menuItem.path}>{menuItem.label}</a>
         {/each}
@@ -196,7 +209,7 @@
 
 
 {#if spina.footer_text?.content}
- <div class="bottom mt-24 relative bg-cover bg-top" style="background-image:url('/rails/active_storage/blobs/{spina.footer_image.signed_blob_id}/{spina.footer_image.filename})">
+ <div class="bottom mt-24 relative bg-cover bg-top" style="background-image:url('/images/{spina.footer_image.signed_blob_id})">
     <div class="absolute w-full h-full bg-black/75 top-0 right-0"></div>
     <div class="relative serif text-center text-white spina mt-8 pt-20 pb-26">
       {@html spina.footer_text?.content}
@@ -264,7 +277,7 @@
   </div>
   <div class="container relative">
   <div class="copyright absolute right-4 text-sm">
-    &copy; 2022 Hyatt Corporation
+    &copy; 2022 InTown Hospitality GmbH
   </div>
 </div>
 
@@ -468,7 +481,6 @@
     text-align: center;
     text-transform: uppercase;
     box-shadow: 0px -4px 20px rgba(0, 0, 0, 0.35);
-    z-index: 20;
   }
   @media (min-width: 768px) {
     .datespanel.placed {
