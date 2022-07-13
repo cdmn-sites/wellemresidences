@@ -3,6 +3,7 @@
   import { slide } from 'svelte/transition'
   import store from '~/lib/store'
   import {inertia} from '@inertiajs/inertia-svelte'
+import { Inertia } from '@inertiajs/inertia';
 
   export let showDatepickers
   let today = new Date()
@@ -19,6 +20,10 @@
     if (format == 'time') options = {hour: 'numeric', minute: '2-digit'}
     return new Intl.DateTimeFormat('de', options).format(value) 
   }
+
+  Inertia.on('navigate', function() {
+    showDatepickers = false
+  })
 
   const zeroPad = (num, places) => String(num).padStart(places, '0')
   export function prevMonth() {
