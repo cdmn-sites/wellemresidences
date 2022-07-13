@@ -47,7 +47,7 @@
                 <Cycler let:current>
                   {#each images as img, i}
                   
-                    <img alt={img.alt} class:active={current == i} class="lg:absolute object-cover w-full h-full cycle_image" src="/images/{img.signed_blob_id}" />
+                    <img alt={img.alt} class:active={current == i} class="lg:absolute object-cover w-full h-full cycle_image" src="/images/{img.signed_blob_id}/{img.filename}" />
                   
                   {/each}
                 </Cycler>
@@ -67,27 +67,27 @@
           {/if}
           <div class="md:grid gap-4 grid-cols-2 xl:grid-cols-3">
             {#if images[0]}
-              <img alt={images[0].alt} data-gallery="section{i}"  class="glightbox object-cover w-full h-full" src="/images/{images[0].signed_blob_id}" />
+              <img alt={images[0].alt} data-gallery="section{i}"  class="glightbox object-cover w-full h-full" src="/images/{images[0].signed_blob_id}/{images[0].filename}" />
             {/if}
             {#if text}
-            <div class="spina serif py-5 md:py-0 text-justify  leading-6 tracking-wide lg:text-size-4.5 2xl:text-size-lg 2xl:leading-7">
+            <div class="spina serif py-5 md:py-0 text-justify  leading-7 tracking-wide lg:text-size-4.5 2xl:text-size-lg 2xl:leading-7">
               {@html text}
             </div>
             {/if}
             {#if images[1]}
-              <img alt={images[1].alt} data-gallery="section{i}"  class="glightbox object-cover w-full h-full" src="/images/{images[1].signed_blob_id}" />
+              <img alt={images[1].alt} data-gallery="section{i}"  class="glightbox object-cover w-full h-full" src="/images/{images[1].signed_blob_id}/{images[1].filename}" />
             {/if}
             {#if images[2]}
-              <img alt={images[2].alt} data-gallery="section{i}"  class="glightbox hidden md:block object-cover w-full h-full" src="/images/{images[2].signed_blob_id}" />
+              <img alt={images[2].alt} data-gallery="section{i}"  class="glightbox hidden md:block object-cover w-full h-full" src="/images/{images[2].signed_blob_id}/{images[2].filename}" />
             {/if}
             {#if images[3]}
-              <img alt={images[3].alt} data-gallery="section{i}"  class="glightbox hidden md:block object-cover w-full h-full" src="/images/{images[3].signed_blob_id}" />
+              <img alt={images[3].alt} data-gallery="section{i}"  class="glightbox hidden md:block object-cover w-full h-full" src="/images/{images[3].signed_blob_id}/{images[3].filename}" />
             {/if}
             {#if images[4]}
-              <img alt={images[4].alt} data-gallery="section{i}"  class="glightbox hidden md:block object-cover w-full h-full" src="/images/{images[4].signed_blob_id}" />
+              <img alt={images[4].alt} data-gallery="section{i}"  class="glightbox hidden md:block object-cover w-full h-full" src="/images/{images[4].signed_blob_id}/{images[4].filename}" />
             {/if}
             {#if images[5]}
-              <img alt={images[5].alt} data-gallery="section{i}"  class="glightbox hidden md:block object-cover w-full h-full" src="/images/{images[5].signed_blob_id}" />
+              <img alt={images[5].alt} data-gallery="section{i}"  class="glightbox hidden md:block object-cover w-full h-full" src="/images/{images[5].signed_blob_id}/{images[5].filename}" />
             {/if}
           </div>
         </section>
@@ -99,8 +99,8 @@
                 <div class="overflow-hidden aspect-video w-full text-size-0 relative">
                   <Cycler let:current>
                     {#each images as img, j}
-                      <a href="/images/{img.signed_blob_id}" class="glightbox" data-gallery="section-{i}">
-                        <img alt={img.alt} class:active={current == j} class="w-full absolute cycle_image" src="/images/{img.signed_blob_id}" />
+                      <a href="/images/{img.signed_blob_id}/{img.filename}" class="glightbox" data-gallery="section-{i}">
+                        <img alt={img.alt} class:active={current == j} class="w-full absolute cycle_image" src="/images/{img.signed_blob_id}/{img.filename}" />
                       </a>
                     {/each}
                   </Cycler>
@@ -110,8 +110,8 @@
               <div class="flex-1">
                 <div class="overflow-hidden w-full text-size-0 relative">
                   {#each images as img, j}
-                    <a href="/images/{img.signed_blob_id}" class="glightbox" data-gallery="section-{i}">
-                      <img alt={img.alt} class="w-full active cycle_image" src="/images/{img.signed_blob_id}" />
+                    <a href="/images/{img.signed_blob_id}/{img.filename}" class="glightbox" data-gallery="section-{i}">
+                      <img alt={img.alt} class="w-full active cycle_image" src="/images/{img.signed_blob_id}/{img.filename}" />
                     </a>
                   {/each}
                 

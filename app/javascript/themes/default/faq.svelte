@@ -23,7 +23,7 @@
           <summary class="text-2xl font-bold cursor-pointer">
             {faq.parts[0].content}
           </summary>
-          <div class="text-lg text-gray-700 mt-3">{@html faq.parts[1].content}</div>
+          <div class="text-lg text-gray-700 mt-3 spina serif nice text-xl">{@html faq.parts[1].content}</div>
       </details>
       </div>
     </div>

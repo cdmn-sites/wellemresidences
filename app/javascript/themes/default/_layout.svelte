@@ -11,6 +11,7 @@
   export let account
   export let spina
   export let header_menu
+  export let footer_menu
   export let locale_paths = {}
 
   let showDatepickers
@@ -79,36 +80,35 @@
   <DatesPanel bind:showDatepickers/>
 </div>
 
-
 {#if hidelayout}
 <a href="/{$store.locale}" use:inertia class="logo shadow-lg p-4.5 !z-9" style="transform: translate(-50%, -70px) scale(0.5)">
-  <img class="w-full" src="/images/{spina.logo.signed_blob_id}" alt={account.name}>
+  <img class="w-full" src="/images/{spina.logo.signed_blob_id}/{spina.logo.filename}" alt={account.name}>
 </a>
 {:else}
 <a href="/{$store.locale}" use:inertia class="hidden shadow-lg md:block logo !p-4.5 !z-9" style="transform: translate(-50%, {-(moveLogo)/4.2 -8 }px) scale({1 - moveLogo / 500})">
-  <img class="w-full" src="/images/{spina.logo.signed_blob_id}" alt={account.name}>
+  <img class="w-full" src="/images/{spina.logo.signed_blob_id}/{spina.logo.filename}" alt={account.name}>
 </a>
 <a href="/{$store.locale}" use:inertia class="md:hidden shadow-lg logo !p-4.5 !z-9" style="transform: translate(-50%, {-(moveLogo)/6  }px) scale({1 - moveLogo / 400})">
-  <img class="w-full" src="/images/{spina.logo.signed_blob_id}" alt={account.name}>
+  <img class="w-full" src="/images/{spina.logo.signed_blob_id}/{spina.logo.filename}" alt={account.name}>
 </a>
 {/if}
 
 <header shadow>
   {#if hidelayout}
     <a href="/{$store.locale}" use:inertia class="logo p-4.5" style="transform: translate(-50%, -70px) scale(0.5)">
-      <img class="w-full" src="/images/{spina.logo.signed_blob_id}" alt={account.name}>
+      <img class="w-full" src="/images/{spina.logo.signed_blob_id}/{spina.logo.filename}" alt={account.name}>
     </a>
   {:else}
     <a href="/{$store.locale}" use:inertia class="hidden md:block logo !p-4.5" style="transform: translate(-50%, {-(moveLogo)/4.2 -8 }px) scale({1 - moveLogo / 500})">
-      <img class="w-full" src="/images/{spina.logo.signed_blob_id}" alt={account.name}>
+      <img class="w-full" src="/images/{spina.logo.signed_blob_id}/{spina.logo.filename}" alt={account.name}>
     </a>
     <a href="/{$store.locale}" use:inertia class="md:hidden logo !p-4.5" style="transform: translate(-50%, {-(moveLogo)/6  }px) scale({1 - moveLogo / 400})">
-      <img class="w-full" src="/images/{spina.logo.signed_blob_id}" alt={account.name}>
+      <img class="w-full" src="/images/{spina.logo.signed_blob_id}/{spina.logo.filename}" alt={account.name}>
     </a>
   {/if}
   <div class="tel fixed z-20 top-10px left-0">
     <a href="/{$store.locale}" use:inertia>
-      <img class="align-middle h-34px relative -top-2px" src="/images/{spina.favicon.signed_blob_id}" alt={account.name}>
+      <img class="align-middle h-34px relative -top-2px" src="/images/{spina.favicon.signed_blob_id}/{spina.favicon.filename}" alt={account.name}>
     </a>
     <span class="ml-2 cursor-pointer uppercase" on:click={() => changeLangOpen = !changeLangOpen}>
       {$store.locale}
@@ -276,8 +276,13 @@
     </div>
   </div>
   <div class="container relative">
-  <div class="copyright absolute right-4 text-sm">
-    &copy; 2022 InTown Hospitality GmbH
+  <div class="copyright absolute right-4 text-sm text-right">
+    &copy; 2022 InTown Hospitality GmbH <br>
+    {#each footer_menu as menuItem}
+    
+      <a use:inertia href={menuItem.path}>{menuItem.label}</a>
+    
+    {/each}
   </div>
 </div>
 

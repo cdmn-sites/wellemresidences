@@ -7,7 +7,7 @@ Rails.application.routes.draw do
     end
   end
   
-  resources :images
+  get '/images/:id(/:filename)', to: 'images#show'
 
   constraints AccountDomain do
     resources :forms

@@ -34,7 +34,7 @@
       <div class="flex-1 text-size-0">
       {#if spina.map}
         <a href={spina.map_link?.content} target="_blank">
-          <img alt={spina.map.alt} class="w-full" src="/images/{spina.map.signed_blob_id}" />
+          <img alt={spina.map.alt} class="w-full" src="/images/{spina.map.signed_blob_id}/{spina.map.filename}" />
         </a>
       {/if}
     </div>
@@ -64,7 +64,7 @@
 
         <div class="staff mt-12">
           <div class="image bg-light relative text-size-0">
-            <img alt={image.alt} class="w-full object-cover"  src="/images/{image.signed_blob_id}" />
+            <img alt={image.alt} class="w-full object-cover"  src="/images/{image.signed_blob_id}/{image.filename}" />
             <div class="absolute w-full text-center text-size-lg top-75% bottom-0 p-3 bg-white/75 uppercase tracking-wide">
               {overlay}
             </div>
