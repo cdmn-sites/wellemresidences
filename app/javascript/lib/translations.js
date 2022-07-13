@@ -26,7 +26,7 @@ export default {
     'next_category': 'Nächste Kategorie',
     'previous_category': 'Vorherige Kategorie',
     'kitchen': 'Küche',
-    'laundry': 'Hauswirtschaftsraum',
+    'laundry': 'Waschküche',
     'bathroom': 'Badezimmer',
     'entertainment': 'Unterhaltung',
     'communication': 'Kommunikation',

@@ -122,17 +122,11 @@
     {/if}
     
   </div>
-  {#if room_type.details}
-    <div class="details spina mt-18">
-      <h2>Details</h2>
-      {@html room_type.details}
-    </div>
-  {/if}
   <div class="flex gap-10 mt-18 flex-wrap">
-    {#each ['kitchen', 'laundry', 'bathroom', 'entertainment', 'communication', 'other'] as cat}
+    {#each ['details', 'kitchen', 'laundry', 'bathroom', 'entertainment', 'communication', 'other'] as cat}
     {#if room_type[cat]}
       <div class="type spina flex-1">
-        <h2 class="uppercase">{$store.t(cat)}</h2>
+        <h2 class="uppercase !tracking-0.2 text-size-20px">{$store.t(cat)}</h2>
         {@html room_type[cat]}
       </div>
       {/if}
