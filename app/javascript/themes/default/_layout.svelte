@@ -261,6 +261,12 @@
       </div>
       <div class="flex-1 mb-5">
         <h4 mb-4 uppercase>
+          {$store.t('Partners')}
+        </h4>
+        {@html spina.partner_links?.content}
+      </div>
+      <div class="flex-1 mb-5">
+        <h4 mb-4 uppercase>
           {$store.t('LANGUAGE')}
         </h4>
         
