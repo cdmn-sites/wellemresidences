@@ -39,12 +39,14 @@
     bar.style.left = `${rect.left}px`
     bar.style.width = `${rect.width}px`
     bar.style.display = 'block'
-    menuOpen = false
   }
   setInterval(updateBar, 1000)
-  Inertia.on('navigate', updateBar)
-  Inertia.on('navigate', glightbox)
-
+  Inertia.on('navigate', function() {
+    updateBar()
+    menuOpen = false
+    glightbox()
+  })
+  
   
   let placed
   let datespanel
