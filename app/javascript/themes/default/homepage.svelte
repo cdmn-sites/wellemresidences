@@ -27,7 +27,8 @@
         cellAlign: 'left',
         bgLazyLoad: true,
         contain: true,
-        wrapAround: true
+        wrapAround: true,
+        pageDots: false
       }))
       
     }
@@ -227,7 +228,7 @@
     text-align: left;
   }
   .room_type .image:hover  {
-    transform: scale(1.1);
+    /* transform: scale(1.1); */
   }
 
 

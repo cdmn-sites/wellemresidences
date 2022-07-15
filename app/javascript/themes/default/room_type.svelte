@@ -20,7 +20,8 @@
         // options
         cellAlign: 'left',
         bgLazyLoad: true,
-        contain: true
+        contain: true,
+        pageDots: false
       })
       
     }
