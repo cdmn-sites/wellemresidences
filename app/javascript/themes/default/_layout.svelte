@@ -112,9 +112,11 @@
     <a href="/{$store.locale}" use:inertia>
       <img class="align-middle h-34px relative -top-2px" src="/images/{spina.favicon.signed_blob_id}/{spina.favicon.filename}" alt={account.name}>
     </a>
-    <span class="ml-2 cursor-pointer uppercase" on:click={() => changeLangOpen = !changeLangOpen}>
-      {$store.locale}
-    </span>
+    {#if !hidelayout}
+      <span class="ml-2 cursor-pointer uppercase" on:click={() => changeLangOpen = !changeLangOpen}>
+        {$store.locale}
+      </span>
+    {/if}
     {#if changeLangOpen}
       <div class="change_lang fixed ml-8 bg-light p-4 uppercase shadow" transition:slide={{duration: 100}}>
         {#if $store.locale != 'en'}
