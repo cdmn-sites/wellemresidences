@@ -98,7 +98,20 @@
     {/each}
   {/key}
 
-  <div class="flex justify-between mt-24">
+  
+  <div class="flex gap-10 mt-18 flex-wrap">
+    {#each ['details', 'kitchen', 'laundry', 'bathroom', 'entertainment', 'communication', 'other'] as cat}
+    {#if room_type[cat]}
+      <div class="type spina flex-1">
+        <h2 class="uppercase !tracking-0.2 text-size-20px">{$store.t(cat)}</h2>
+        {@html room_type[cat]}
+      </div>
+      {/if}
+    {/each}
+
+  </div>
+
+  <div class="flex justify-between mt-18">
     
     {#if prev_room_type}
       <a class="block prev relative group left-5 md:left-0" href="/room_types/{prev_room_type.id}" use:inertia>
@@ -123,18 +136,6 @@
     {/if}
     
   </div>
-  <div class="flex gap-10 mt-18 flex-wrap">
-    {#each ['details', 'kitchen', 'laundry', 'bathroom', 'entertainment', 'communication', 'other'] as cat}
-    {#if room_type[cat]}
-      <div class="type spina flex-1">
-        <h2 class="uppercase !tracking-0.2 text-size-20px">{$store.t(cat)}</h2>
-        {@html room_type[cat]}
-      </div>
-      {/if}
-    {/each}
-
-  </div>
-
 
 
   <div class="mt-12">
