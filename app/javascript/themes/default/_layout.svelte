@@ -510,4 +510,5 @@
       min-width: 700px;
     }
   }
+  
 </style>

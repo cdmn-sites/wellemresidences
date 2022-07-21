@@ -58,7 +58,8 @@ import { Inertia } from '@inertiajs/inertia';
   
 </script>
 
-<div class="booking relative">
+<div class="booking relative max-w-1000px mx-auto">
+  
   <div class="dates">
     <div class="options" on:click={() => showDatepickers = !showDatepickers}>
       <label class="!hidden !md:block">{$store.t('Checkin')} / {$store.t('Checkout')}</label>
@@ -78,7 +79,7 @@ import { Inertia } from '@inertiajs/inertia';
     </div>
   </div>
   {#if showDatepickers}
-    
+  <span class="i-gg-close absolute text-xl cursor-pointer top-0 right-0" on:click={() => showDatepickers = false}></span>
     <div class="!md:hidden mobile overflow-hidden">
       <div class="nav">
         <div class="prev btn left-0" on:click={prevMonth}>
