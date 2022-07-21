@@ -70,16 +70,15 @@ import { Inertia } from '@inertiajs/inertia';
           {$store.t('Select dates')}
         {/if}
         {#if showDatepickers}
-        <span class="i-gg-chevron-down"></span>
+          <span class="i-gg-chevron-down"></span>
         {:else}
-        <span class="i-gg-chevron-up"></span>
-
+          <span class="i-gg-chevron-up"></span>
         {/if}
       </div>
     </div>
   </div>
   {#if showDatepickers}
-  <span class="i-gg-close absolute text-xl cursor-pointer top-0 right-0" on:click={() => showDatepickers = false}></span>
+  <span class="i-gg-close hidden md:block absolute text-xl cursor-pointer top-0 right-0" on:click={() => showDatepickers = false}></span>
     <div class="!md:hidden mobile overflow-hidden">
       <div class="nav">
         <div class="prev btn left-0" on:click={prevMonth}>
