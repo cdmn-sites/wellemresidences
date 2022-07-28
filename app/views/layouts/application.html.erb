@@ -2,9 +2,12 @@
 <html lang="<%= I18n.locale %>">
   <head>
     <title><%= @page.try(:seo_title) || Current.account.name %></title>
+    <meta property="og:image" content="https://www.thewellemresidences.com/share.jpg"/>
+
     <% if @page.try(:description) %>
       <meta name="description" content="<%= @page.description %>">
     <% end%>
+
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <% if current_account.content(:favicon) %>
       <link rel="icon" href="<%= main_app.url_for(current_account.content(:favicon)) %>">
